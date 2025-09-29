@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Script al principio simple</title>
+
+    <!-- Script al principio 
+     
+    
+             Un caso típico es definir una variable global de configuración antes de que cargue el resto de la página.
+    
+    
+    
+    -->
+    <script>
+        // Configuración global de idioma
+        window.config = {
+            idioma: "es" // Español
+        };
+        console.log("Configuración de idioma cargada:", window.config.idioma);
+    </script>
+</head>
+<body>
+    <h1 id="titulo">Cargando...</h1>
+    <p id="mensaje"></p>
+
+    <script>
+        // Usar la configuración antes definida
+        if (window.config.idioma === "es") {
+            document.getElementById("titulo").innerText = "Bienvenido a mi página";
+            document.getElementById("mensaje").innerText = "Esta página está en español.";
+        } else {
+            document.getElementById("titulo").innerText = "Welcome to my page";
+            document.getElementById("mensaje").innerText = "This page is in English.";
+        }
+    </script>
+</body>
+</html>
