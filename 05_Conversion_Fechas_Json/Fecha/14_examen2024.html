@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Gráficas con chart.js | By Parzibyte</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    //https://www.chartjs.org/docs/latest/samples/subtitle/basic.html
+    
+      </head>
+<body>
+
+<canvas id="myBarChart" width="400" height="200"></canvas>
+
+<script>
+
+    // Ejemplo de uso del programa
+    let fechaInicio = new Date('2024-01-01'); // Fecha de inicio en formato ISO
+const totalPrestamoInicial = 10000; // Monto del préstamo en USD
+const tasaInteresAnual = 5; // Tasa de interés anual en %
+const numMeses = 36; // Plazo del préstamo en meses
+const edadCliente = 18; // Edad del cliente
+const edadJubilacion = 65;
+let pagoMensual=0;
+    
+  // Función para calcular el pago mensual según la fórmula de amortización
+
+    const porcentajeInteresMensual = tasaInteresAnual / 100 / 12;
+    // 1. Cálculo del pago mensual
+    pagoMensual = (totalPrestamoInicial * porcentajeInteresMensual) / (1 - Math.pow((1 + porcentajeInteresMensual), -numMeses));
+    console.log(`fechaInicio : ${fechaInicio}`);
+    // 2. Cálculo de la fecha de finalización del préstamo
+    let fecha =fechaInicio.getMonth() + numMeses;
+    console.log(`Fecha + n meses: ${fecha}`);
+    let fechaFinPrestamo =fechaInicio.setMonth(fecha); 
+    console.log(`fechaFinPrestamo : ${fechaFinPrestamo}`);
+  
+    const fechaFinFormateada = new Intl.DateTimeFormat('es-ES').format(fechaFinPrestamo);
+        
+    console.log(`fechaFinFormateada : ${fechaFinFormateada}`);
+
+    // 3. Verificar si el cliente supera la edad de jubilación antes de que termine el préstamo
+    let edadAlFinalizar = edadCliente + numMeses / 12;
+    if (edadAlFinalizar > edadJubilacion) {
+        console.log('El crédito no puede ser aprobado, ya que el cliente superará la edad de jubilación antes de finalizar el préstamo.');
+        throw new Error(`Crédito rechazado: El cliente superará los ${edadJubilacion} años al finalizar el préstamo.`);
+    }
+
+    // 4. Cálculo del saldo restante e intereses pagados mes a mes
+    let saldo = totalPrestamoInicial;
+    let totalInteresesPagados = 0;
+    let saldosPendientes = [];
+    let meses =[];
+
+    for (let i = 1; i <= numMeses; i++) {
+        let pagoInteresMensual = saldo * porcentajeInteresMensual;
+        let pagoCapital = pagoMensual - pagoInteresMensual;
+        saldo -= pagoCapital;
+        saldosPendientes.push(saldo.toFixed(2));
+        meses.push(i);
+        
+        totalInteresesPagados += pagoInteresMensual;
+    }
+
+    // 5. Salidas en la consola
+    console.log(`Fecha de finalización del préstamo: ${fechaFinFormateada}`);
+    console.log(`Pago mensual: ${pagoMensual.toFixed(2)} Euros`);
+    console.log(`Total pagado al final del préstamo: ${(pagoMensual * numMeses).toFixed(2)} Euros`);
+    console.log(`Intereses totales pagados: ${totalInteresesPagados.toFixed(2)} Euros`);
+
+    const ctx = document.getElementById('myBarChart');
+        
+        const myBarChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: meses, // Etiquetas para el eje X
+            datasets: [{
+              label: 'Product A',
+              data: saldosPendientes, // Datos para el primer producto
+              backgroundColor: 'rgba(75, 192, 192, 0.2)', // Color de fondo de las barras
+              borderColor: 'rgba(75, 192, 192, 1)', // Color de borde de las barras
+              borderWidth: 1 // Grosor del borde
+            }
+        ]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true // Asegura que el eje Y comience en 0
+              }
+            }
+          }
+        });
+
+</script>
+
+</body>
+</html>

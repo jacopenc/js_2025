@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráficas con chart.js | By Parzibyte</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <h1>Ejemplo 1 - Gráfica de barra</h1>
+    <canvas id="myBubbleChart" width="400" height="200"></canvas>
+
+
+    <script>
+        const ctx = document.getElementById('myBubbleChart').getContext('2d');
+        
+        const myBubbleChart = new Chart(ctx, {
+          type: 'bubble', // Tipo de gráfico: "bubble"
+          data: {
+            datasets: [{
+              label: 'Product A',
+              data: [
+                { x: 10, y: 20, r: 15 }, // x: posición en el eje X, y: posición en el eje Y, r: radio de la burbuja
+                { x: 15, y: 10, r: 10 },
+              ],
+              backgroundColor: 'rgba(255, 99, 132, 0.2)', // Color de la burbuja
+              borderColor: 'rgba(255, 99, 132, 1)', // Color del borde
+              borderWidth: 1
+            }, {
+              label: 'Product B',
+              data: [
+                { x: 25, y: 15, r: 25 },
+                { x: 30, y: 20, r: 30 },
+                { x: 35, y: 25, r: 18 }
+              ],
+              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+              borderColor: 'rgba(54, 162, 235, 1)',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              x: {
+                beginAtZero: true // Asegura que el eje X comience en 0
+              },
+              y: {
+                beginAtZero: true // Asegura que el eje Y comience en 0
+              }
+            }
+          }
+        });
+      </script>
+  
+</body>
+
+</html>

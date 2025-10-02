@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        const nombre = "Ramona Acosta";
+        console.log("substring(1,3) son: " + nombre.substring(1,3)); //am extracts a part of a string
+        console.log("nombre.substring(2) son: " + nombre.substring(2)); //mona Acosta extracts a part of a string
+        
+        console.log("substr(1,3) son: " + nombre.substr(1,3)); //am extracts a part of a string
+        console.log("nombre.substr(2) son: " + nombre.substr(2)); //mona Acosta extracts a part of a string
+       
+        console.log("nombre.slice(1,3) son: " + nombre.slice(1,3)); //am
+        console.log("nombre.slice(2) son: " + nombre.slice(2)); //mona Acosta extracts a part of a string.
+        console.log("Las dos últimas letras: " + nombre.slice(-2)); //ta
+
+        console.log("La palabra tiene " + nombre.length + " letras"); // 6
+        console.log("La palabra en mayúsculas es: " + nombre.toUpperCase()); // RAMONA ACOSTA
+        console.log("La palabra en minúsculas es: " + nombre.toLowerCase()); // ramona acosta
+        console.log("La posición de la primera 'a' de la palabra es: " + nombre.indexOf("a")); // 1
+        console.log("La posición de la última 'a' de la palabra es: "  + nombre.lastIndexOf("a")); // 5
+        console.log("charAt(0): " + nombre.charAt(0)); // R
+        console.log("nombre[0]: " + nombre[0]); // R
+        console.log("at(0) " + nombre.at(0)); // R
+        console.log("charCodeAt(0) " + nombre.charCodeAt(0)); // 82 Get the Unicode
+        console.log("codePointAt(0) " + nombre.codePointAt(0)); // 82 Get the Unicode
+        console.log("concat " + nombre.concat(" Santana")); // Ramona Acosta Santana
+        console.log("endsWith " + nombre.endsWith("Acosta")); // true
+        console.log("fromCharCode " + String.fromCharCode(65)); // A
+        console.log("includes " + nombre.includes("Acosta")); // true
+        console.log("indexOf " + nombre.indexOf("Acosta")); // 7 Find the first occurrence
+        console.log("lastIndexOf " + nombre.lastIndexOf("Acosta")); //Search for the last occurrence 
+        console.log("length " + nombre.length); // 
+        let text1 = "ab";
+        let text2 = "cd";
+        let result = text1.localeCompare(text2);//method returns sort order -1, 1, or 0 (for before, after, or equal).
+        console.log("padEnd " + nombre.padEnd(4,"x")); //Add 4 x xxxx toEnd
+        console.log("padStart " + nombre.padStart(4,"0")); //Add 0 x xxxx tostart
+        console.log("repeat " + nombre.repeat(2)); // repeat text
+        console.log("replace " + nombre.replace("Ramona","Jose")); // replace text
+        let position = nombre.search("Ramona");
+        console.log("search " + position); // method returns the index (position) of the first match.-1 if no match is found
+        
+        const myArray = nombre.split(" ");//rompe cadena por espacio
+        let word = myArray[1];
+        console.log("split: " + word); //Ramona
+        console.log("starWith: " +nombre.startsWith("Ramona")); //true
+
+        let text = "       Hola caracola        ";
+       result = text.trim();
+       console.log("trim: " + result); //removes whitespace from both sides of a string.
+       result = text.trimEnd();
+       console.log("trimEnd: " + result); //removes whitespace from the end of a string
+       result = text.trimStart();
+       console.log("trimStart: " + result); //removes whitespace from the beginning of a string.
+    </script>
+</head>
+<body>
+   
+</body>
+</html>

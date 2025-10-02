@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráficas con chart.js | By Parzibyte</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <h1>Ejemplo 1 - Gráfica de barra</h1>
+    <canvas id="myBarChart" width="400" height="200"></canvas>
+
+
+    <script>
+        const ctx = document.getElementById('myHorizontalBarChart').getContext('2d');
+        
+        const myHorizontalBarChart = new Chart(ctx, {
+          type: 'bar', // Tipo de gráfico es "bar"
+          data: {
+            labels: ['January', 'February', 'March', 'April', 'May'], // Etiquetas en el eje Y
+            datasets: [{
+              label: 'Sales',
+              data: [12, 19, 3, 5, 2], // Valores para cada etiqueta
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            indexAxis: 'y', // Configuración para que las barras sean horizontales
+            scales: {
+              x: {
+                beginAtZero: true // Asegura que el eje X comience en 0
+              }
+            }
+          }
+        });
+      </script>
+  
+</body>
+
+</html>
