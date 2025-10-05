@@ -6,32 +6,117 @@
     <title>Document</title>
     <script type="text/javascript">
 
-        const mascota = "perro";
-        
-        switch (mascota) {
-        case "lagarto":
-            console.log("Tengo un lagarto");
-            break;
-        case "perro":
-            console.log("Tengo un perro");
-            break;
-        case "gato":
-            console.log("Tengo un gato");
-            break;
-        case "serpiente":
-            console.log("Tengo una serpiente");
-            break;
-        case "loro":
-            console.log("Tengo un loro");
-            break;
-        default:
-            console.log("No tengo mascota");
-            break;
-        }
+      console.log("=== Ejemplo completo de switch ===\n");
+
+// ---------------------------
+// 1. Switch con enteros
+// ---------------------------
+let opcion = 3;
+switch(opcion) {
+  case 1:
+    console.log("Entero: Opción 1 seleccionada");
+    break;
+  case 2:
+    console.log("Entero: Opción 2 seleccionada");
+    break;
+  case 3:
+    console.log("Entero: Opción 3 seleccionada");
+    break;
+  default:
+    console.log("Entero: Opción no válida");
+}
+
+// ---------------------------
+// 2. Switch con strings
+// ---------------------------
+let color = "verde";
+switch(color) {
+  case "rojo":
+    console.log("String: Color rojo");
+    break;
+  case "verde":
+    console.log("String: Color verde");
+    break;
+  case "azul":
+    console.log("String: Color azul");
+    break;
+  default:
+    console.log("String: Color desconocido");
+}
+
+// ---------------------------
+// 3. Switch con rangos (switch(true))
+// ---------------------------
+let edad = 25;
+switch(true) {
+  case (edad < 13):
+    console.log("Rango: Niño");
+    break;
+  case (edad >= 13 && edad < 20):
+    console.log("Rango: Adolescente");
+    break;
+  case (edad >= 20 && edad < 65):
+    console.log("Rango: Adulto");
+    break;
+  default:
+    console.log("Rango: Adulto mayor");
+}
+
+// ---------------------------
+// 4. Switch con booleanos
+// ---------------------------
+let esEstudiante = true;
+switch(esEstudiante) {
+  case true:
+    console.log("Booleano: Es estudiante");
+    break;
+  case false:
+    console.log("Booleano: No es estudiante");
+    break;
+}
+
+// ---------------------------
+// 5. Switch anidado
+// ---------------------------
+let categoria = "A";
+let nivel = 2;
+
+switch(categoria) {
+  case "A":
+    switch(nivel) {
+      case 1: console.log("Anidado: Nivel A1"); break;
+      case 2: console.log("Anidado: Nivel A2"); break;
+      default: console.log("Anidado: Nivel A desconocido");
+    }
+    break;
+  case "B":
+    console.log("Anidado: Categoría B");
+    break;
+  default:
+    console.log("Anidado: Categoría desconocida");
+}
+
+// ---------------------------
+// 6. Switch con múltiples valores en un caso
+// ---------------------------
+let fruta = "manzana";
+
+switch(fruta) {
+  case "manzana":
+  case "pera":
+  case "banana":
+    console.log("Múltiples valores: Fruta común");
+    break;
+  case "kiwi":
+  case "mango":
+    console.log("Múltiples valores: Fruta exótica");
+    break;
+  default:
+    console.log("Múltiples valores: Fruta desconocida");
+}
+
     
         </script>
-</head>
-<body>
     
 </body>
 </html>
