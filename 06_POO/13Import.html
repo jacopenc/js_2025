@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tareas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        input {
+            margin: 5px;
+        }
+        button {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Lista de Tareas</h1>
+
+<div>
+    <input type="text" id="tareaInput" placeholder="Nueva tarea">
+    <button id="agregarBtn">Agregar Tarea</button>
+</div>
+
+<div>
+    <input type="number" id="indiceInput" placeholder="Índice de tarea a eliminar">
+    <button id="eliminarBtn">Eliminar Tarea</button>
+</div>
+
+<h2>Tareas:</h2>
+<div id="listaTareas"></div>
+
+<script type="module" src="./js/13Import_Main_A.js"></script>
+</body>
+</html>
