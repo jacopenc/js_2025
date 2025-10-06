@@ -61,7 +61,7 @@ const resultado = procesarNumeros([1, 2, 3, 4, 5, 6]);
 console.log("Resultado final:", resultado); // [4, 8, 12]
 
 
-//En  Objetos cuidado EJEMPLO ERROR
+//En  Objetos cuidado EJEMPLO ERROR, el método no lleva dos puntos
 
 const persona = {
   nombre: "Jose Acosta",
