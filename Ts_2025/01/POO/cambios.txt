@@ -1,0 +1,42 @@
+Cambiar tsconfig.json
+Al compilar y después ejecutar dará error:
+
+"use strict"; Object.defineProperty(exports, "__esModule", { value: true });
+ // main.ts var Empleado_1 = require("./Empleado");
+  var btn = document.getElementById('crearEmpleado'); 
+  var output = document.getElementById('output'); 
+  btn.addEventListener('click', function () { var empleado = new Empleado_1.Empleado("Ana", 28, "Desarrolladora"); 
+output.textContent = empleado.presentarse(); });
+
+¿Cuál es el problema?
+
+El navegador no entiende require() ni module.exports, ya que son parte del sistema de módulos CommonJS (usado en Node.js), no del navegador.
+
+Tu código compilado contiene esto:
+
+var Empleado_1 = require("./Empleado");
+
+
+Eso está bien para Node.js, pero no funciona en HTML con <script>.
+
+
+Solución: Compilar con módulos ES6 (usando import y export que sí entiende el navegador)
+
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "ES6",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "rootDir": "./",
+    "strict": true
+  }
+}
+Aplicar 
+tsc main.ts --module ES6 --target ES6 --outDir dist
+
+
+
+
+
+tsc main.ts --module ES6 --target ES6 --outDir dist
