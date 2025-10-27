@@ -1,9 +1,0 @@
-let a = 8;
-        let b = 5;
-
-        let suma = a + b;
-        let resta = a - b;
-
-        console.log("Suma: " + suma);
-        console.log("Resta: " + resta);
-
