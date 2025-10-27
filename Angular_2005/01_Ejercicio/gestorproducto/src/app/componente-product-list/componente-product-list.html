@@ -1,0 +1,12 @@
+<p>componente-product-list works!</p>
+<h2>Lista de Productos</h2>
+
+<ul>
+  @for (p of productos; track p.id) {
+    <li>
+      <h3>{{ p.nombre }} — ${{ p.precio }}</h3>
+      <app-componente-categoria-detail [categoria]="p.categoria"></app-componente-categoria-detail>
+      <hr />
+    </li>
+  }
+</ul>
