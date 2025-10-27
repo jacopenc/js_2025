@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Script al principio</title>
+    <script>
+        console.log("Script al principio ejecutado");
+        document.getElementById("mensaje").innerText = "Hola desde script al principio";
+    </script>
+</head>
+<body>
+    
+<!--
+    El script se ejecuta antes de que el contenido HTML esté completamente cargado.
+
+    Esto puede causar errores si el script intenta acceder a elementos que aún no existen.
+
+                    Ejemplo: El document.getElementById("mensaje") devolverá null porque el <h1> aún no está cargado → Error.
+-->
+
+
+
+
+
+    <h1 id="mensaje">Cargando...</h1>
+</body>
+</html>

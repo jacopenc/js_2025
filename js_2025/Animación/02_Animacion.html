@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anime.js - Escalar Elemento</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+</head>
+<body>
+  <div id="box2" style="width:100px; height:100px; background-color: #e74c3c;"></div>
+
+  <script>
+    anime({
+      targets: '#box2', // El elemento que se animará
+      scale: [1, 1.5],  // Cambiar de escala 1 (tamaño original) a 1.5 (50% más grande)
+      duration: 1000,   // Duración de 1 segundo
+      easing: 'easeInOutQuad'
+    });
+  </script>
+</body>
+</html>

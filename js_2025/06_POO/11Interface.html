@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interfaz de Vehículos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            margin-bottom: 20px;
+        }
+        button {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Interfaz de Vehículos</h1>
+
+<div class="container">
+    <h2>Selecciona un Vehículo</h2>
+    <select id="vehicleSelect">
+        <option value="Coche">Coche</option>
+        <option value="Bicicleta">Bicicleta</option>
+    </select>
+    <button id="startBtn">Iniciar</button>
+    <button id="stopBtn">Detener</button>
+    <button id="describeBtn">Describir</button>
+</div>
+
+<div class="resultado">
+    <h2>Resultado:</h2>
+    <div id="resultadoTexto"></div>
+</div>
+
+<script src="js/11Interface.js".js"></script>
+</body>
+</html>

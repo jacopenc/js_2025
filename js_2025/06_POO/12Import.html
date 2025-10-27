@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo de Módulos en JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            margin-bottom: 20px;
+        }
+        button {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Ejemplo de Importación de Módulos en JavaScript</h1>
+
+<div class="container">
+    <h2>Calculadora Simple</h2>
+    <input type="number" id="numero1" placeholder="Número 1">
+    <input type="number" id="numero2" placeholder="Número 2">
+    <div>
+        <button id="sumarBtn">Sumar</button>
+        <button id="restarBtn">Restar</button>
+        <button id="multiplicarBtn">Multiplicar</button>
+        <button id="dividirBtn">Dividir</button>
+    </div>
+    <h3>Resultado:</h3>
+    <div id="resultadoTexto"></div>
+</div>
+
+<script type="module">
+    // Importar funciones del módulo math.js
+    import { sumar, restar, multiplicar, dividir } from './js/12Import.js';
+
+    // Obtener elementos del DOM
+    const resultadoTexto = document.getElementById('resultadoTexto');
+    const numero1 = document.getElementById('numero1');
+    const numero2 = document.getElementById('numero2');
+
+    // Manejo de eventos para los botones
+    document.getElementById('sumarBtn').addEventListener('click', () => {
+        const result = sumar(Number(numero1.value), Number(numero2.value));
+        resultadoTexto.innerText = `Resultado: ${result}`;
+    });
+
+    document.getElementById('restarBtn').addEventListener('click', () => {
+        const result = restar(Number(numero1.value), Number(numero2.value));
+        resultadoTexto.innerText = `Resultado: ${result}`;
+    });
+
+    document.getElementById('multiplicarBtn').addEventListener('click', () => {
+        const result = multiplicar(Number(numero1.value), Number(numero2.value));
+        resultadoTexto.innerText = `Resultado: ${result}`;
+    });
+
+    document.getElementById('dividirBtn').addEventListener('click', () => {
+        try {
+            const result = dividir(Number(numero1.value), Number(numero2.value));
+            resultadoTexto.innerText = `Resultado: ${result}`;
+        } catch (error) {
+            resultadoTexto.innerText = error.message;
+        }
+    });
+</script>
+
+</body>
+</html>

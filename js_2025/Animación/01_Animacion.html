@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anime.js - Mover Elemento</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+</head>
+<body>
+  <div id="box1" style="width:100px; height:100px; background-color: #3498db;"></div>
+
+  <script>
+    anime({
+      targets: '#box1', // El elemento que se animará
+      translateX: 250,  // Moverlo 250 píxeles a la derecha
+      duration: 1000,   // Duración de 1 segundo
+      easing: 'easeInOutQuad' // Tipo de aceleración suave
+    });
+  </script>
+</body>
+</html>

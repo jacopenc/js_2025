@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráficas con chart.js | By Parzibyte</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+//https://www.chartjs.org/docs/latest/samples/subtitle/basic.html
+
+  </head>
+
+<body>
+    <h1>Ejemplo 1 - Gráfica de barra</h1>
+    <canvas id="myBarChart" width="400" height="200"></canvas>
+
+
+    <script>
+        const ctx = document.getElementById('myBarChart');
+        
+        const myBarChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['January', 'February', 'March', 'April', 'May'], // Etiquetas para el eje X
+            datasets: [{
+              label: 'Product A',
+              data: [12, 19, 3, 5, 2], // Datos para el primer producto
+              backgroundColor: 'rgba(75, 192, 192, 0.2)', // Color de fondo de las barras
+              borderColor: 'rgba(75, 192, 192, 1)', // Color de borde de las barras
+              borderWidth: 1 // Grosor del borde
+            }, {
+              label: 'Product B',
+              data: [7, 11, 5, 8, 13], // Datos para el segundo producto
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+              borderColor: 'rgba(255, 99, 132, 1)',
+              borderWidth: 1
+            }, {
+              label: 'Product C',
+              data: [5, 14, 8, 7, 10], // Datos para el tercer producto
+              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+              borderColor: 'rgba(54, 162, 235, 1)',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true // Asegura que el eje Y comience en 0
+              }
+            }
+          }
+        });
+      </script>
+  
+</body>
+
+</html>

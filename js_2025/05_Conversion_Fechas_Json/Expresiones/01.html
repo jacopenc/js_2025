@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ejemplo RegExp</title>
+</head>
+<body>
+    <h1>Ejemplo RegExp en JavaScript</h1>
+    <script>
+        // 1. Crear una expresión regular para buscar "hola"
+        let patron = /hola/;
+
+        console.log(patron.test("hola mundo")); // true
+        console.log(patron.test("adiós mundo")); // false
+
+        // 2. Crear expresión regular con RegExp()
+        let patron2 = new RegExp("mundo", "i"); // "i" = insensible a mayúsculas
+        console.log(patron2.test("Hola Mundo")); // true
+
+        // 3. Usar match() con RegExp
+        let texto = "Hoy es un buen día";
+        let patron3 = /buen/;
+        console.log(texto.match(patron3)); // ["buen"] Devuelve un array con la coincidencia encontrada (y más información).
+
+     
+            //Solo devuelve la primera coincidencia, porque no usamos la bandera g.))
+
+            let texto1 = "Hoy es un buen día y un buen momento";
+            let patron1 = /buen/;
+            console.log(texto1.match(patron1)); // ["buen"]
+
+
+
+        let patronG = /buen/g; 
+        console.log(texto1.match(patronG)); // ["buen", "buen"]
+
+
+
+        // 4. Reemplazar usando RegExp
+        let texto3 = "Me gusta JavaScript";
+        let nuevoTexto = texto3.replace(/JavaScript/, "HTML");
+        console.log(nuevoTexto); // "Me gusta HTML"
+    </script>
+</body>
+</html>

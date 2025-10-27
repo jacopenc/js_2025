@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anime.js - Cambiar Color</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+</head>
+<body>
+  <div id="box3" style="width:100px; height:100px; background-color: #2ecc71;"></div>
+
+  <script>
+    anime({
+      targets: '#box3',  // El elemento que se animará
+      backgroundColor: '#8e44ad', // Cambiar el color de fondo a morado
+      duration: 1500,    // Duración de 1.5 segundos
+      easing: 'linear'
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráficas con chart.js | By Parzibyte</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <h1>Ejemplo 1 - Gráfica de barra</h1>
+    <canvas id="myComboChart" width="400" height="200"></canvas>
+
+
+    <script>
+        const ctx = document.getElementById('myComboChart').getContext('2d');
+        
+        const myComboChart = new Chart(ctx, {
+          type: 'bar', // Tipo base es 'bar' para que las barras sean la referencia principal
+          data: {
+            labels: ['January', 'February', 'March', 'April', 'May'], // Etiquetas en el eje X
+            datasets: [
+              {
+                label: 'Sales (Bar)',
+                data: [12, 19, 3, 5, 2], // Datos para el gráfico de barras
+                backgroundColor: 'rgba(75, 192, 192, 0.2)', // Color de fondo de las barras
+                borderColor: 'rgba(75, 192, 192, 1)', // Color del borde de las barras
+                borderWidth: 1, // Ancho del borde de las barras
+                type: 'bar' // Especificamos que este conjunto de datos es de barras
+              },
+              {
+                label: 'Revenue (Line)',
+                data: [15, 25, 10, 8, 12], // Datos para el gráfico de líneas
+                borderColor: 'rgba(255, 99, 132, 1)', // Color de la línea
+                backgroundColor: 'rgba(255, 99, 132, 0.2)', // Color de fondo debajo de la línea
+                type: 'line', // Especificamos que este conjunto de datos es de línea
+                fill: false, // Evita que se rellene el área debajo de la línea
+                tension: 0.3 // Hace la línea más curva
+              }
+            ]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true // Asegura que el eje Y comience en 0
+              }
+            }
+          }
+        });
+      </script>
+  
+</body>
+
+</html>
