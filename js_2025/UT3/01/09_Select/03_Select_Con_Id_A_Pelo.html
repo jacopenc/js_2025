@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Dinámico con ID Extra</title>
+</head>
+<body>
+
+<h1>Ejemplo de Select Dinámico con ID Extra</h1>
+
+<div id="selectContainer"></div>
+
+<script>
+  // Array de objetos con id y nombre
+   const opciones = [
+    { id: 101, nombre: "Las Palmas de Gran Canaria" },
+    { id: 102, nombre: "Santa Cruz de Tenerife" },
+    { id: 103, nombre: "San Cristóbal de La Laguna" },
+    { id: 104, nombre: "Arrecife" },
+    { id: 105, nombre: "Puerto de la Cruz" }
+  ];
+
+  // Crear el select
+  const select = document.createElement("select");
+  select.id = "selectCiudad";
+
+  // Añadir opción extra al inicio con id -1
+  const opcionExtra = document.createElement("option");
+  opcionExtra.value = -1;
+  opcionExtra.textContent = "Seleccione una ciudad";
+  opcionExtra.id = "option_-1";
+  select.appendChild(opcionExtra);
+
+  // Crear las opciones usando el array de objetos
+  opciones.forEach(function(opcion) {
+    const option = document.createElement("option");
+    option.value = opcion.id;
+    option.textContent = opcion.nombre;
+    option.id = "option_" + opcion.id;
+    select.appendChild(option);
+  });
+
+  // Insertar el select en el contenedor
+  document.getElementById("selectContainer").appendChild(select);
+</script>
+
+</body>
+</html>

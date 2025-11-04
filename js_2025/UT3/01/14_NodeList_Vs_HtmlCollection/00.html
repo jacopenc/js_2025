@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>HTMLCollection vs NodeList: Demo sin eventos</title>
+  <style>
+    .item {
+      padding: 5px;
+      margin: 2px;
+      border: 1px solid #333;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+<!--
+  Diferencias entre HTMLCollection y NodeList:
+
+  1. HTMLCollection:
+     - Colección en vivo (live): si el DOM cambia, la colección se actualiza automáticamente.
+     - Se obtiene mediante métodos como getElementsByClassName o getElementsByTagName.
+     - No tiene forEach directamente, se recorre con for o se convierte a array con Array.from().
+
+  2. NodeList:
+     - Colección estática (static) cuando se obtiene con querySelectorAll.
+     - Se obtiene mediante querySelectorAll o childNodes.
+     - Se puede recorrer directamente con forEach.
+     - No se actualiza automáticamente si se añaden o eliminan elementos en el DOM (excepto NodeList en vivo como childNodes).
+-->
+<h2>Elementos Iniciales</h2>
+<div class="item">Elemento 1</div>
+<div class="item">Elemento 2</div>
+
+<script>
+  // HTMLCollection: en vivo
+  const coleccionHTML = document.getElementsByClassName("item");
+  console.log("HTMLCollection inicial:", coleccionHTML);
+
+  // NodeList: estático
+  const listaNodos = document.querySelectorAll(".item");
+  console.log("NodeList inicial:", listaNodos);
+
+  // Recorrer NodeList con forEach directamente
+  listaNodos.forEach(el => console.log("NodeList forEach:", el.textContent));
+
+  // Recorrer HTMLCollection con bucle for
+  for (let i = 0; i < coleccionHTML.length; i++) {
+    console.log("HTMLCollection for:", coleccionHTML[i].textContent);
+  }
+
+  // Convertir HTMLCollection a Array para usar map
+  const arrayHTML = Array.from(coleccionHTML);
+  console.log("ArrayHTML con map:", arrayHTML.map(el => el.textContent));
+
+  // Agregar nuevos elementos uno por uno
+  const nuevo1 = document.createElement("div");
+  nuevo1.className = "item";
+  nuevo1.textContent = "Elemento 3";
+  document.body.appendChild(nuevo1);
+
+  const nuevo2 = document.createElement("div");
+  nuevo2.className = "item";
+  nuevo2.textContent = "Elemento 4";
+  document.body.appendChild(nuevo2);
+
+  console.log("Se agregaron elementos 3 y 4...");
+
+  console.log("HTMLCollection después de agregar:", coleccionHTML); // se actualiza en vivo
+  console.log("NodeList después de agregar:", listaNodos); // NO se actualiza
+
+  // Comprobar recorrido final
+  console.log("HTMLCollection recorrido final:");
+  for (let i = 0; i < coleccionHTML.length; i++) {
+    console.log(coleccionHTML[i].textContent);
+  }
+
+  console.log("NodeList recorrido final:");
+  listaNodos.forEach(el => console.log(el.textContent));
+
+</script>
+
+</body>
+</html>

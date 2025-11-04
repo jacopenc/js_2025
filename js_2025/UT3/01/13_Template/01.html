@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejemplo Template Reutilizable</title>
+</head>
+<body>
+
+<h1>Tarjetas de estudiantes usando &lt;template&gt;</h1>
+
+<div id="contenedorTarjetas">
+  <!-- Las tarjetas se añadirán aquí -->
+</div>
+
+<!-- Template: no se renderiza hasta que se clone -->
+<template id="templateTarjeta">
+  <div class="tarjeta">
+    <h2 class="nombre"></h2>
+    <p class="edad"></p>
+    <p class="ciudad"></p>
+    <p class="curso"></p>
+  </div>
+</template>
+
+<script>
+  // Datos de ejemplo
+  const estudiantes = [
+    { id: 1, nombre: "Jose Acosta", edad: 20, ciudad: "Las Palmas de gran canaria", curso: "DEW" },
+    { id: 2, nombre: "Ana", edad: 22, ciudad: "Barcelona", curso: "Física" },
+    { id: 3, nombre: "Luis", edad: 21, ciudad: "Valencia", curso: "Química" }
+  ];
+
+  const contenedor = document.getElementById("contenedorTarjetas");
+  const template = document.getElementById("templateTarjeta");
+
+  // Crear tarjetas para cada estudiante
+  estudiantes.forEach(function(est) {
+    // Clonar el template
+    const clone = template.content.cloneNode(true);
+
+    // Rellenar los datos
+    const tarjeta = clone.querySelector(".tarjeta");
+    tarjeta.id = "tarjeta-" + est.id; // ID único para cada tarjeta
+    tarjeta.querySelector(".nombre").textContent = est.nombre;
+    tarjeta.querySelector(".edad").textContent = "Edad: " + est.edad + " años";
+    tarjeta.querySelector(".ciudad").textContent = "Ciudad: " + est.ciudad;
+    tarjeta.querySelector(".curso").textContent = "Curso: " + est.curso;
+
+    // Añadir la tarjeta al contenedor
+    contenedor.appendChild(clone);
+  });
+
+  // Acceder a una tarjeta específica por su ID
+  const tarjetaAna = document.getElementById("tarjeta-2");
+  console.log("Datos de Ana:", tarjetaAna.textContent);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabla Dinámica con Acción Eliminar</title>
+</head>
+<body>
+
+<div id="tablaContainer"></div>
+
+<script>
+  // Datos de ejemplo
+  const data = [
+    { ID: 1, Nombre: "Juan", Edad: 25, Ciudad: "Madrid" },
+    { ID: 2, Nombre: "Ana", Edad: 30, Ciudad: "Barcelona" },
+    { ID: 3, Nombre: "Luis", Edad: 28, Ciudad: "Valencia" }
+  ];
+
+  const tablaContainer = document.getElementById("tablaContainer");
+
+  // Crear la tabla
+  const tabla = document.createElement("table");
+  tablaContainer.appendChild(tabla);
+
+  // Crear encabezado
+  const filaEncabezado = tabla.insertRow();
+  const columnas = Object.keys(data[0]).concat("Acciones");
+  columnas.forEach(function(nombreCol) {
+    const th = document.createElement("th");
+    th.textContent = nombreCol;
+    filaEncabezado.appendChild(th);
+  });
+
+  // Crear filas con datos
+  data.forEach(function(item) {
+    const fila = tabla.insertRow();
+
+    // Insertar datos
+    Object.keys(item).forEach(function(col) {
+      const celda = fila.insertCell();
+      celda.textContent = item[col];
+    });
+
+    // Celda de acción
+    const celdaAccion = fila.insertCell();
+
+    // Crear acción Eliminar
+    const eliminar = document.createElement("span");
+    eliminar.textContent = "Eliminar";
+    eliminar.style.color = "red";
+    eliminar.style.cursor = "pointer";
+
+    // Saber el ID de la fila a eliminar
+    eliminar.onclick = function() {
+      const idFila = fila.cells[0].textContent; // Primera celda contiene ID
+      console.log("Se eliminará la fila con ID: " + idFila);
+      fila.remove();
+    };
+
+    celdaAccion.appendChild(eliminar);
+  });
+
+</script>
+
+</body>
+</html>

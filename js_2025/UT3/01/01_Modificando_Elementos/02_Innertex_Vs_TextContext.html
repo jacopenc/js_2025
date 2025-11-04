@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejemplo: innerText vs textContent</title>
+</head>
+<body>
+  <!-- Este div contiene un texto visible y un texto oculto con display:none -->
+  <div id="texto">
+    Hola <span style="display: none;">oculto</span> mundo
+  </div>
+
+  <script>
+    // Obtenemos la referencia al elemento con id="texto"
+    const div = document.getElementById("texto");
+
+    // textContent devuelve TODO el texto, incluso el oculto por CSS
+    console.log("textContent:", div.textContent);
+    // → Resultado: "Hola oculto mundo"
+
+    // innerText solo devuelve el texto visible en la página (omite el texto oculto)
+    console.log("innerText:", div.innerText);
+    // → Resultado: "Hola  mundo"
+  </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generar Tabla Dinámica Sin Funciones</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="tablaContainer"></div>
+
+    <script>
+        // Datos de ejemplo
+        const columns = ["ID", "NOMBRE", "EDAD", "CIUDAD"];
+        const data = [
+            [1, "Juan", 25, "Madrid"],
+            [2, "Ana", 30, "Barcelona"],
+            [3, "Luis", 28, "Valencia"]
+        ];
+
+        // Seleccionar el contenedor
+        const tablaContainer = document.getElementById("tablaContainer");
+
+        // Crear el elemento tabla
+        const tabla = document.createElement("table");
+
+        // -------------------------------
+        // Crear encabezado de la tabla
+        // -------------------------------
+        const thead = document.createElement("thead");
+        const filaEncabezado = document.createElement("tr");
+
+        columns.forEach(function(columna) {
+            const th = document.createElement("th");
+            th.textContent = columna;
+            filaEncabezado.appendChild(th);
+        });
+
+        thead.appendChild(filaEncabezado);
+        tabla.appendChild(thead);
+
+        // -------------------------------
+        // Crear cuerpo de la tabla
+        // -------------------------------
+        const tbody = document.createElement("tbody");
+
+        data.forEach(function(filaDatos) {
+            const fila = document.createElement("tr");
+
+            filaDatos.forEach(function(celdaDato) {
+                const td = document.createElement("td");
+                td.textContent = celdaDato;
+                fila.appendChild(td);
+            });
+
+            tbody.appendChild(fila);
+        });
+
+        tabla.appendChild(tbody);
+
+        // -------------------------------
+        // Añadir la tabla al contenedor
+        // -------------------------------
+        tablaContainer.appendChild(tabla);
+    </script>
+</body>
+
+</html>

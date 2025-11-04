@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkbox Dinámico con IDs</title>
+</head>
+<body>
+
+<h1>Checkboxes Dinámicos de Canarias</h1>
+
+<div id="checkboxContainer">
+  <!-- Los checkboxes se añadirán aquí -->
+</div>
+
+<script>
+  // Array de opciones con id y nombre
+  const opciones = [
+    { id: 1, nombre: "Las Palmas de Gran Canaria" },
+    { id: 2, nombre: "Santa Cruz de Tenerife" },
+    { id: 3, nombre: "La Laguna" },
+    { id: 4, nombre: "Puerto de la Cruz" }
+  ];
+
+  // Referencia al contenedor
+  const contenedor = document.getElementById("checkboxContainer");
+
+  // Crear los checkboxes
+  opciones.forEach(function(opcion) {
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.id = "chk-" + opcion.id;  // usar id del array
+    checkbox.value = opcion.nombre;
+
+    const label = document.createElement("label");
+    label.htmlFor = "chk-" + opcion.id;
+    label.textContent = opcion.nombre;
+
+    contenedor.appendChild(checkbox);
+    contenedor.appendChild(label);
+    contenedor.appendChild(document.createElement("br")); // salto de línea
+  });
+
+  // Añadir un checkbox extra no presente en el array
+  const checkboxExtra = document.createElement("input");
+  checkboxExtra.type = "checkbox";
+  checkboxExtra.id = "chk-0";
+  checkboxExtra.value = "Tenerife Sur";
+
+  const labelExtra = document.createElement("label");
+  labelExtra.htmlFor = "chk-0";
+  labelExtra.textContent = "Tenerife Sur";
+
+  contenedor.appendChild(checkboxExtra);
+  contenedor.appendChild(labelExtra);
+  contenedor.appendChild(document.createElement("br"));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejemplo DocumentFragment</title>
+</head>
+<body>
+
+<h1>Lista de frutas usando DocumentFragment</h1>
+
+<ul id="listaFrutas">
+  <!-- Las frutas se añadirán aquí -->
+</ul>
+
+<script>
+  // Array de frutas
+  const frutas = ["Manzana", "Plátano", "Naranja", "Fresa", "Kiwi"];
+
+  // Seleccionamos el contenedor de la lista
+  const lista = document.getElementById("listaFrutas");
+
+  // Creamos un fragmento de documento
+  const fragmento = document.createDocumentFragment();
+
+  // Recorremos el array y creamos elementos <li>
+  frutas.forEach(function(fruta) {
+    const li = document.createElement("li");
+    li.textContent = fruta;
+    fragmento.appendChild(li); // añadimos el <li> al fragmento
+  });
+
+  // Una sola operación: añadimos el fragmento completo al <ul>
+  lista.appendChild(fragmento);
+
+  // Ventaja: se inserta todo de golpe, evitando reflujo múltiple en el DOM
+</script>
+
+</body>
+</html>

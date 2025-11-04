@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Hermanos en el DOM</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    div, h1, p {
+      padding: 5px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+    }
+    .info {
+      background-color: #f0f8ff;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="contenedor">
+  <p>Primer párrafo del contenedor</p>
+  <h1 id="titulo">Título Principal</h1>
+  <p>Segundo párrafo del contenedor</p>
+  <p>Último párrafo del contenedor</p>
+</div>
+
+<div class="info" id="mostrar"></div>
+
+<script>
+  // Obtener referencia al título
+  const titulo = document.getElementById('titulo');
+
+  // Obtener el hermano anterior
+  const hermanoAnterior = titulo.previousElementSibling;
+
+  // Obtener el hermano siguiente
+  const hermanoSiguiente = titulo.nextElementSibling;
+
+  // Mostrar información en consola
+  console.log("Hermano anterior:", hermanoAnterior);
+  console.log("Hermano siguiente:", hermanoSiguiente);
+
+  // Mostrar información en pantalla para alumnado
+  const mostrar = document.getElementById('mostrar');
+  mostrar.innerHTML =
+    '<p><strong>Hermano anterior:</strong> ' + hermanoAnterior.tagName + ' - contenido: "' + hermanoAnterior.textContent + '"</p>' +
+    '<p><strong>Hermano siguiente:</strong> ' + hermanoSiguiente.tagName + ' - contenido: "' + hermanoSiguiente.textContent + '"</p>';
+</script>
+
+</body>
+</html>
