@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Ejemplo Burbujeo</title>
+  <style>
+    #contenedor {
+      border: 2px solid #333;
+      padding: 20px;
+      margin-bottom: 10px;
+    }
+
+    .item {
+      margin: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Lista de elementos</h2>
+
+  <div id="contenedor">
+    <button class="item">Elemento 1</button>
+    <button class="item">Elemento 2</button>
+  </div>
+
+  <button id="agregar">Agregar Elemento</button>
+
+  <script>
+
+    // -----------------------------
+    // Detección de clics globales
+    // -----------------------------
+    // Captura cualquier clic en la página
+    document.body.addEventListener('click', (e) => {
+      console.log('Clic en página:', e.target.tagName, '-', e.target.textContent);
+    });
+  </script>
+
+</body>
+
+</html>

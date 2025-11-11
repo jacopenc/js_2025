@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario sin action</title>
+</head>
+
+<body>
+
+  <h2>Formulario sin action</h2>
+
+  <form id="miFormulario">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required><br><br>
+
+    <button type="submit">Enviar</button>
+  </form>
+
+  <script>
+    const formulario = document.getElementById('miFormulario');
+
+    formulario.addEventListener('submit', (e) => {
+      // No usamos preventDefault(), así que la página se recargará ya que no hay action en el form
+      console.log('Se disparó el evento submit. La página se recargará después.');
+    });
+  </script>
+
+</body>
+
+</html>

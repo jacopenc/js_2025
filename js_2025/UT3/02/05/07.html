@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Vulnerabilidad en href y src</title>
+</head>
+<body>
+
+<h2>Inyección de atributos HTML</h2>
+
+<form>
+  <label for="link">Introduce URL:</label>
+  <input type="text" id="link" placeholder="https://ejemplo.com">
+  <button type="button" id="btnLink">Crear enlace</button>
+  <br><br>
+
+  <label for="img">Introduce URL de imagen:</label>
+  <input type="text" id="img" placeholder="https://ejemplo.com/imagen.jpg">
+  <button type="button" id="btnImg">Crear imagen</button>
+</form>
+
+<div id="result" style="margin-top:20px;"></div>
+
+<script>
+const btnLink = document.getElementById('btnLink');
+const btnImg = document.getElementById('btnImg');
+const result = document.getElementById('result');
+
+btnLink.addEventListener('click', () => {
+  const url = document.getElementById('link').value;
+
+  //no va a ejecutar alert hoy en día en la mayoría de los navegadores modernos.
+  //  Vulnerable: se inserta directamente en href
+  // Si un usuario pone "javascript:alert('XSS')" se ejecutará
+  result.innerHTML += `<p><a href="${url}" target="_blank">Enlace creado</a></p>`;
+});
+
+btnImg.addEventListener('click', () => {
+  const url = document.getElementById('img').value;
+
+  // Vulnerable: se inserta directamente en src
+  // Si un usuario pone "javascript:alert('XSS')" o una URL maliciosa
+  // podría ejecutar código o intentar robar datos en contextos antiguos
+  result.innerHTML += `<p><img src="${url}" alt="Imagen"></p>`;
+});
+</script>
+
+<!--
+Ejemplos de valores maliciosos que podrían ser introducidos:
+- Para href: javascript:alert('XSS')
+- Para src: javascript:alert('XSS')
+-->
+
+</body>
+</html>

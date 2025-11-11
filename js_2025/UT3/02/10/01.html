@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ejemplo de evento Change</title>
+<style>
+    body {
+        font-family: sans-serif;
+        text-align: center;
+        margin-top: 50px;
+    }
+    input, select, textarea {
+        padding: 10px;
+        font-size: 16px;
+        margin: 10px;
+        width: 200px;
+        border: 2px solid #333;
+        transition: border-color 0.3s, background-color 0.3s;
+    }
+    .mensaje {
+        margin-top: 20px;
+        font-weight: bold;
+        color: #333;
+    }
+</style>
+</head>
+<body>
+
+<h1>Evento Change</h1>
+
+<input type="text" id="nombre" placeholder="Nombre">
+<input type="number" id="edad" placeholder="Edad">
+<select id="pais">
+    <option value="">Selecciona un país</option>
+    <option value="es">España</option>
+    <option value="mx">México</option>
+    <option value="ar">Argentina</option>
+</select>
+<textarea id="comentario" placeholder="Comentario"></textarea>
+
+<div class="mensaje" id="mensaje">Cambia algún valor y sal del input</div>
+
+<script>
+var mensaje = document.getElementById('mensaje');
+
+// Función para mostrar el valor cambiado
+function changeHandler(e) {
+    mensaje.textContent = 'Cambio en: ' + e.target.id + ', nuevo valor: ' + e.target.value;
+}
+
+// Asignar evento change a todos los inputs, select y textarea
+document.getElementById('nombre').addEventListener('change', changeHandler);
+document.getElementById('edad').addEventListener('change', changeHandler);
+document.getElementById('pais').addEventListener('change', changeHandler);
+document.getElementById('comentario').addEventListener('change', changeHandler);
+</script>
+
+</body>
+</html>

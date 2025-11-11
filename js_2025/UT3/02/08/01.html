@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propiedades de Evento de Teclado</title>
+<style>
+    /* Estilos básicos */
+    body { 
+        font-family: sans-serif; 
+        text-align: center; 
+        margin-top: 50px; 
+    }
+    input { 
+        padding: 10px; 
+        font-size: 16px; 
+        width: 300px; 
+    }
+    #log { 
+        margin-top: 20px; 
+        font-family: monospace; 
+        white-space: pre-line; /* Para mostrar saltos de línea */
+        text-align: left; 
+        display: inline-block; 
+    }
+</style>
+</head>
+<body>
+
+<h1>Eventos de Teclado</h1>
+
+<!-- Caja de texto donde el usuario presiona teclas -->
+<input type="text" id="textInput" placeholder="Presiona cualquier tecla...">
+
+<!-- Div donde se mostrarán las propiedades del evento -->
+<div id="log">Propiedades del evento:</div>
+
+<script>
+// Seleccionamos el input y el div de log
+var input = document.getElementById('textInput');
+var log = document.getElementById('log');
+
+// Agregamos un listener para el evento "keydown"
+// Se ejecuta cada vez que se presiona una tecla
+input.addEventListener('keydown', function(e) {
+    // Actualizamos el contenido del div log con las propiedades del evento
+    log.textContent = 
+        "Propiedades del evento:\n" +
+        "-------------------------\n" +
+        "e.key: " + e.key + "  // La tecla que se presionó (ej. 'a', 'Enter')\n" +
+        "e.code: " + e.code + "  // Código físico de la tecla (ej. 'KeyA', 'Enter')\n" +
+        "Alt presionada (e.altKey): " + e.altKey + "  // true si Alt está presionado\n" +
+        "Ctrl presionada (e.ctrlKey): " + e.ctrlKey + "  // true si Ctrl está presionado\n" +
+        "Shift presionada (e.shiftKey): " + e.shiftKey + "  // true si Shift está presionado\n" +
+        "Meta presionada (Cmd o Win) (e.metaKey): " + e.metaKey + "  // true si Cmd (Mac) o Windows está presionada";
+});
+</script>
+
+</body>
+</html>

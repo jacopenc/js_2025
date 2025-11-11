@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Prevención de XSS</title>
+</head>
+<body>
+<h2>Formulario XSS: Vulnerable vs Seguro</h2>
+
+<form id="miFormulario">
+  <label for="nombre">Nombre:</label>
+  <input type="text" id="nombre" placeholder="Escribe tu nombre">
+  <button type="button" id="enviarVulnerable">Enviar Vulnerable</button>
+  <button type="button" id="enviarSeguro">Enviar Seguro</button>
+</form>
+
+<h3>Resultado Vulnerable:</h3>
+<div id="saludoVulnerable" style="border:1px solid red; padding:10px; margin-bottom:20px;"></div>
+
+<h3>Resultado Seguro:</h3>
+<div id="saludoSeguro" style="border:1px solid green; padding:10px;"></div>
+
+<script>
+// Vulnerable: inserta directamente HTML del usuario
+const btnVulnerable = document.getElementById('enviarVulnerable');
+btnVulnerable.addEventListener('click', () => {
+  const nombre = document.getElementById('nombre').value;
+  const divVuln = document.getElementById('saludoVulnerable');
+  
+  // Vulnerable a XSS
+  divVuln.innerHTML = `Hola, <b>${nombre}</b>! Bienvenido.`;
+});
+
+// Seguro: muestra el contenido como texto plano
+const btnSeguro = document.getElementById('enviarSeguro');
+btnSeguro.addEventListener('click', () => {
+  const nombre = document.getElementById('nombre').value;
+  const divSeguro = document.getElementById('saludoSeguro');
+  
+  // Seguro: textContent evita ejecución de HTML/JS
+  divSeguro.textContent = `Hola, ${nombre}! Bienvenido.`;
+});
+</script>
+
+<!-- Comentario HTML con ejemplo malicioso
+     <img src=x onerror=alert('XSS!')>
+-->
+
+</body>
+</html>

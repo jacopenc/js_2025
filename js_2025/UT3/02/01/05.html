@@ -1,0 +1,31 @@
+<div id="contenedor">
+  <button class="btn" data-accion="guardar">Guardar</button>
+  <button class="btn" data-accion="eliminar">Eliminar</button>
+  <button class="btn" data-accion="editar">Editar</button>
+</div>
+
+<script>
+  const contenedor = document.getElementById('contenedor');
+
+  contenedor.addEventListener('click', (e) => {
+    // Solo reaccionamos si es un botón
+    if (e.target && e.target.matches('button.btn')) {
+      const accion = e.target.dataset.accion;
+
+      // Ejecutamos la acción según el botón
+      switch (accion) {
+        case 'guardar':
+          console.log('Guardando...');
+          break;
+        case 'eliminar':
+          console.log('Eliminando...');
+          break;
+        case 'editar':
+          console.log('Editando...');
+          break;
+        default:
+          console.log('Acción desconocida');
+      }
+    }
+  });
+</script>

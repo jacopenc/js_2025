@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario Seguro con Submit</title>
+</head>
+<body>
+<h2>Formulario Seguro con Submit</h2>
+
+<form id="miFormulario" action="/procesar" method="POST">
+  <label for="nombre">Nombre:</label>
+  <input type="text" id="nombre" name="nombre" placeholder="Escribe tu nombre"><br><br>
+
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" placeholder="Escribe tu email"><br><br>
+
+  <label for="comentario">Comentario:</label>
+  <textarea id="comentario" name="comentario" placeholder="Escribe un comentario"></textarea><br><br>
+
+  <button type="submit">Enviar Seguro</button>
+</form>
+
+<h3>Valores Sanitizados (Solo JS):</h3>
+<div id="resultado" style="border:1px solid green; padding:10px;"></div>
+
+<!-- DOMPurify -->
+<script src="https://cdn.jsdelivr.net/npm/dompurify@2.4.0/dist/purify.min.js"></script>
+
+<script>
+const formulario = document.getElementById('miFormulario');
+const resultado = document.getElementById('resultado');
+
+formulario.addEventListener('submit', (e) => {
+  // Evitamos recarga para mostrar cómo queda sanitizado antes del envío
+  e.preventDefault();
+
+  // Recogemos todos los inputs y textarea automáticamente
+  const campos = formulario.querySelectorAll('input, textarea');
+  const valores = {};
+
+  campos.forEach(campo => {
+    // Sanitizamos antes de enviar
+    valores[campo.name] = DOMPurify.sanitize(campo.value);
+  });
+
+  // Mostramos en el DOM los valores sanitizados
+  let html = '';
+  for (const key in valores) {
+    html += `<p><b>${key}:</b> ${valores[key]}</p>`;
+  }
+  resultado.innerHTML = html;
+
+  // Aquí iría el envío real al servidor
+  // formulario.submit(); 
+});
+</script>
+
+</body>
+</html>

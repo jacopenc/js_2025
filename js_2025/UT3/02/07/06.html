@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deshabilitar Todo el Ratón</title>
+<style>
+    body {
+        font-family: sans-serif;
+        text-align: center;
+        padding: 50px;
+        user-select: none; /* evita selección de texto */
+    }
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 0, 0, 0.1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        pointer-events: none; /* overlay visual solo */
+        font-size: 2rem;
+        font-weight: bold;
+        color: red;
+    }
+</style>
+</head>
+<body>
+    <h1>Todo el ratón está deshabilitado</h1>
+    <div class="overlay">Ratón bloqueado</div>
+
+    <script>
+        // Lista de eventos de ratón que vamos a bloquear
+        const eventosRatón = [
+            'mousedown',
+            'mouseup',
+            'click',
+            'dblclick',
+            'contextmenu',
+            'mouseenter',
+            'mouseleave',
+            'wheel',
+            'mousemove'
+        ];
+
+        // Función que bloquea el evento
+        function bloquearEvento(e) {
+            e.preventDefault();   // evita acción predeterminada
+            e.stopPropagation();  // evita que se propague
+            console.log(`Evento bloqueado: ${e.type}`);
+        }
+
+        // Aplicar el bloqueo a todos los eventos listados
+        eventosRatón.forEach(evento => {
+            document.addEventListener(evento, bloquearEvento, { capture: true });
+        });
+    </script>
+</body>
+</html>

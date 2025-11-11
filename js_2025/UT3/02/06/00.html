@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Visualización de Eventos de Ratón</title>
+<style>
+  .area {
+    width: 200px;
+    height: 150px;
+    border: 2px solid #333;
+    margin: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    user-select: none;
+    font-family: sans-serif;
+    font-weight: bold;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .label {
+    margin-top: 5px;
+    font-size: 0.9em;
+    color: #333;
+  }
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+</style>
+</head>
+<body>
+
+<h2>Visualización de Eventos de Ratón</h2>
+<div class="container">
+  <div id="clickArea" class="area">Click
+    <div class="label">Evento: ninguno</div>
+  </div>
+
+  <div id="dblclickArea" class="area">Doble Click
+    <div class="label">Evento: ninguno</div>
+  </div>
+
+  <!-- Área combinada para mouseenter y mouseleave -->
+  <div id="enterLeaveArea" class="area">Mouse Enter / Mouse Leave
+    <div class="label">Evento: ninguno</div>
+  </div>
+
+  <div id="mousedownArea" class="area">Mouse Down
+    <div class="label">Evento: ninguno</div>
+  </div>
+
+  <div id="mouseupArea" class="area">Mouse Up
+    <div class="label">Evento: ninguno</div>
+  </div>
+
+  <div id="contextmenuArea" class="area">Click Derecho
+    <div class="label">Evento: ninguno</div>
+  </div>
+
+  <div id="wheelArea" class="area">Rueda del Ratón
+    <div class="label">Evento: ninguno</div>
+  </div>
+</div>
+
+<script>
+function cambiarColor(e) {
+  const area = e.currentTarget;
+  const label = area.querySelector('.label');
+  label.textContent = `Evento: ${e.type}`;
+
+  switch(e.type){
+    case 'click': area.style.background = '#ffcccc'; break;
+    case 'dblclick': area.style.background = '#ff99ff'; break;
+    case 'mouseenter': area.style.background = '#ffff99'; break;
+    case 'mouseleave': area.style.background = '#ffd1d1'; break;
+    case 'mousedown': area.style.background = '#99ccff'; break;
+    case 'mouseup': area.style.background = '#ccffff'; break;
+    case 'contextmenu': 
+      e.preventDefault(); 
+      area.style.background = '#ffcc99'; 
+      break;
+    case 'wheel': area.style.background = '#ccccff'; break;
+  }
+}
+
+// ----------------------------
+// Asignar eventos a cada área
+// ----------------------------
+document.getElementById('clickArea').addEventListener('click', cambiarColor);
+document.getElementById('dblclickArea').addEventListener('dblclick', cambiarColor);
+
+// Solo un área para mouseenter y mouseleave
+const enterLeaveArea = document.getElementById('enterLeaveArea');
+enterLeaveArea.addEventListener('mouseenter', cambiarColor);
+enterLeaveArea.addEventListener('mouseleave', cambiarColor);
+
+document.getElementById('mousedownArea').addEventListener('mousedown', cambiarColor);
+document.getElementById('mouseupArea').addEventListener('mouseup', cambiarColor);
+document.getElementById('contextmenuArea').addEventListener('contextmenu', cambiarColor);
+document.getElementById('wheelArea').addEventListener('wheel', cambiarColor);
+</script>
+
+</body>
+</html>

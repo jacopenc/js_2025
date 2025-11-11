@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+  <!-- Ejemplo de evento con addEventListener -->
+  <button id="btnSaludar">Saludar</button>
+
+  <script>
+    const boton = document.getElementById("btnSaludar");
+
+    // Forma moderna recomendada:
+    // - Mantiene el JavaScript separado del HTML (mejor organización).
+    // - Permite agregar múltiples eventos al mismo elemento.
+    // - Facilita el mantenimiento y la reutilización del código.
+    // - Es la forma estándar actual en JavaScript.
+
+    boton.addEventListener("click", function () {
+      alert("¡Hola desde JavaScript con addEventListener!");
+    });
+  </script>
+
+
+
+
+</body>
+
+</html>

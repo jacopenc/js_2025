@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Ejemplo stopPropagation</title>
+  <style>
+    #padre {
+      border: 2px solid blue;
+      padding: 20px;
+    }
+
+    #hijo {
+      padding: 10px;
+      background-color: lightgreen;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="padre">
+    PADRE (haz clic aquí)
+    <div id="hijo">HIJO (haz clic aquí)</div>
+  </div>
+
+  <script>
+    const padre = document.getElementById('padre');
+    const hijo = document.getElementById('hijo');
+
+    // Listener en el padre
+    padre.addEventListener('click', () => {
+      alert('Se disparó el evento del PADRE!');
+    });
+
+    // Listener en el hijo
+    hijo.addEventListener('click', (e) => {
+      alert('Se disparó el evento del HIJO!');
+
+      // Detener que el evento burbujee hacia el padre
+      e.stopPropagation();
+    });
+
+    /*
+      Qué pasa:
+  
+      1. Si haces clic en PADRE (fuera del hijo):
+         - Se dispara el alert del PADRE.
+      
+      2. Si haces clic en HIJO:
+         - Se dispara el alert del HIJO.
+         - Gracias a e.stopPropagation(), el alert del PADRE **no se dispara**.
+      
+      Uso típico:
+         - Cuando quieres que un evento en un hijo se maneje de forma independiente
+         - Sin afectar al padre ni a otros elementos del DOM
+         -Para todo lo demás, confía en el burbujeo y la delegación de eventos; es parte del comportamiento normal del DOM.
+    */
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Ejemplo burbujeo</title>
+</head>
+
+<body>
+
+  <h2>Haz clic en los botones:</h2>
+
+  <div id="contenedor" style="border: 2px solid #333; padding: 20px;">
+    <button>Botón 1</button>
+    <button>Botón 2</button>
+  </div>
+
+  <script>
+    const contenedor = document.getElementById('contenedor');
+
+    // Listener en el contenedor
+    contenedor.addEventListener('click', (e) => {
+      console.log('Se hizo clic en:', e.target.textContent);
+    });
+
+    // -----------------------------
+    // Ventajas del uso de burbujeo
+    // -----------------------------
+    // - Solo un listener en el div, no uno por botón.
+    // - Funciona aunque agregues más botones dinámicamente dentro del div.
+    // - Es simple, limpio y eficiente.
+  </script>
+
+</body>
+
+</html>

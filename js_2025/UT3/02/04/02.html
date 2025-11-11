@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario con validación</title>
+</head>
+
+<body>
+
+  <h2>Formulario con validación</h2>
+
+  <form id="miFormulario">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre"><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email"><br><br>
+
+    <button type="submit">Enviar</button>
+  </form>
+
+  <script>
+    const formulario = document.getElementById('miFormulario');
+
+    formulario.addEventListener('submit', (e) => {
+      e.preventDefault(); // Evita que el formulario se envíe y la página se recargue
+
+      // Obtenemos los valores
+      const nombre = document.getElementById('nombre').value.trim();
+      const email = document.getElementById('email').value.trim();
+
+      // Validamos que los campos no estén vacíos
+      if (!nombre || !email) {
+        alert('Por favor, completa nombre y email');
+        return; // Detiene la ejecución si hay campos vacíos
+      }
+
+      // Si todo está bien, hacemos lo que necesites
+
+
+    });
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Ejemplo preventDefault con checkbox</title>
+</head>
+
+<body>
+
+  <h2>Ejemplo de preventDefault</h2>
+
+  <!-- Checkbox que normalmente se marcaría al hacer clic -->
+  <label>
+    <input type="checkbox" id="miCheckbox">
+    Acepto los términos
+  </label>
+
+  <script>
+    // Obtenemos el checkbox
+    const checkbox = document.getElementById('miCheckbox');
+
+    // Agregamos un listener para el evento 'click'
+    checkbox.addEventListener('click', (e) => {
+      //Evita que el checkbox cambie su estado (marcado/desmarcado)
+      e.preventDefault();
+
+      // Mostramos un mensaje al usuario
+      alert('No puedes cambiar este checkbox por ahora');
+    });
+  </script>
+
+</body>
+
+</html>

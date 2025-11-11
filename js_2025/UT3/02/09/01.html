@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ejemplos de Focus y Blur</title>
+<style>
+    body {
+        font-family: sans-serif;
+        text-align: center;
+        margin-top: 50px;
+    }
+    input {
+        padding: 10px;
+        font-size: 16px;
+        margin: 10px;
+        width: 200px;
+        border: 2px solid #333;
+        transition: border-color 0.3s, background-color 0.3s;
+    }
+    input:focus {
+        border-color: #00f;
+        background-color: #e0f0ff;
+    }
+    .mensaje {
+        margin-top: 20px;
+        font-weight: bold;
+        color: #333;
+    }
+</style>
+</head>
+<body>
+
+<h1>Eventos Focus y Blur</h1>
+
+<input type="text" id="nombre" placeholder="Nombre">
+<input type="email" id="correo" placeholder="Correo">
+
+<div class="mensaje" id="mensaje">Haz clic en un input</div>
+
+<script>
+var nombreInput = document.getElementById('nombre');
+var correoInput = document.getElementById('correo');
+var mensaje = document.getElementById('mensaje');
+
+// Cuando el input recibe foco
+function focusHandler(e) {
+    mensaje.textContent = 'Foco en: ' + e.target.placeholder;
+}
+
+// Cuando el input pierde foco
+function blurHandler(e) {
+    mensaje.textContent = 'Perdiste foco del: ' + e.target.placeholder;
+}
+
+nombreInput.addEventListener('focus', focusHandler);
+nombreInput.addEventListener('blur', blurHandler);
+
+correoInput.addEventListener('focus', focusHandler);
+correoInput.addEventListener('blur', blurHandler);
+</script>
+
+</body>
+</html>
