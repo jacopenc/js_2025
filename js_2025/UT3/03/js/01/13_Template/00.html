@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejemplo Template</title>
+</head>
+<body>
+
+<h1>Lista de estudiantes usando &lt;template&gt;</h1>
+
+<ul id="listaEstudiantes">
+  <!-- Los elementos se añadirán aquí -->
+</ul>
+
+<!-- Template: no se renderiza hasta que se clone -->
+<template id="templateEstudiante">
+  <li>
+    <strong class="nombre"></strong> - <span class="edad"></span> años
+  </li>
+</template>
+
+<script>
+  // Datos de ejemplo
+  const estudiantes = [
+    { nombre: "José Acosta", edad: 20 },
+    { nombre: "Ana", edad: 22 },
+    { nombre: "Luis", edad: 21 }
+  ];
+
+  const lista = document.getElementById("listaEstudiantes");
+  const template = document.getElementById("templateEstudiante");
+
+  // Recorremos los estudiantes
+  estudiantes.forEach(function(est) {
+    // Clonamos el contenido del template
+    const clone = template.content.cloneNode(true);
+
+    // Rellenamos los datos en el clone
+    clone.querySelector(".nombre").textContent = est.nombre;
+    clone.querySelector(".edad").textContent = est.edad;
+
+    // Añadimos el clone al DOM
+    lista.appendChild(clone);
+  });
+</script>
+
+</body>
+</html>

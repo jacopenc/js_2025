@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mousedown y Mouseup</title>
+</head>
+<body>
+    <button id="btn">Mantén presionado y suelta</button>
+    <p id="status">Estado: Ninguno</p>
+
+    <script>
+        const button = document.getElementById('btn');
+        const status = document.getElementById('status');
+
+        button.addEventListener('mousedown', () => {
+            status.textContent = 'Estado: Botón presionado';
+        });
+
+        button.addEventListener('mouseup', () => {
+            status.textContent = 'Estado: Botón liberado';
+        });
+    </script>
+</body>
+</html>

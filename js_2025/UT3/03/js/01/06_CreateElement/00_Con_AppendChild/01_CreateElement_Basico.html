@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Crear elementos dinámicamente</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    div, p {
+      padding: 5px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+    }
+    .info {
+      background-color: #f0f8ff;
+      padding: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="info" id="contenedor">
+  <p>Contenido inicial dentro del contenedor</p>
+</div>
+
+<script>
+  // Crear un nuevo párrafo
+  const nuevoParrafo = document.createElement('p');
+
+  // Añadir texto al nuevo párrafo
+  nuevoParrafo.textContent = 'Párrafo creado dinámicamente';
+
+  // Añadir el párrafo al body
+  document.body.appendChild(nuevoParrafo);
+
+  // Crear otro párrafo dentro del contenedor existente
+  const contenedor = document.getElementById('contenedor');
+  const otroParrafo = document.createElement('p');
+  otroParrafo.textContent = 'Otro párrafo añadido al contenedor';
+  contenedor.appendChild(otroParrafo);
+
+  // Mostrar en consola
+  console.log("Nuevo párrafo añadido al body:", nuevoParrafo);
+  console.log("Otro párrafo añadido al contenedor:", otroParrafo);
+</script>
+
+</body>
+</html>

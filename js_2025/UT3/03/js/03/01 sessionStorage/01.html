@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Ejemplo sessionStorage</title>
+</head>
+<body>
+
+<h1>Guardar y recuperar con sessionStorage</h1>
+
+<input type="text" id="nombreInput" placeholder="Escribe tu nombre">
+<button onclick="guardarNombre()">Guardar</button>
+<button onclick="borrarNombre()">Borrar</button>
+
+<p>Nombre guardado: <span id="nombreGuardado">-</span></p>
+
+
+
+
+<script>
+
+
+// sessionStorage permite guardar datos en el navegador durante la sesión del usuario.
+// Los datos se mantienen mientras la pestaña esté abierta y se borran al cerrarla.
+// Se puede usar para recordar información temporal, como formularios o preferencias de la página.
+// Cada pestaña/ventana tiene su propio `sessionStorage`.
+// Los datos no se comparten entre pestañas** aunque sean de la misma página.
+
+// Ejemplo de uso: 
+    // sessionStorage.setItem("clave", "valor");  // Guardar dato
+    // var dato = sessionStorage.getItem("clave"); // Recuperar dato
+    // sessionStorage.removeItem("clave");         // Borrar dato
+
+
+window.onload = function() {
+    var nombre = sessionStorage.getItem("nombre");
+    if (nombre) {
+        document.getElementById("nombreGuardado").textContent = nombre;
+    }
+}
+
+// Guardar en sessionStorage
+function guardarNombre() {
+    var nombre = document.getElementById("nombreInput").value;
+    sessionStorage.setItem("nombre", nombre);
+    document.getElementById("nombreGuardado").textContent = nombre;
+}
+
+// Borrar del sessionStorage
+function borrarNombre() {
+    sessionStorage.removeItem("nombre");
+    document.getElementById("nombreGuardado").textContent = "-";
+}
+</script>
+
+</body>
+</html>

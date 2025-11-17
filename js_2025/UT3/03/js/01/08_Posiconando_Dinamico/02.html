@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejemplo getBoundingClientRect con comentarios</title>
+  <style>
+    #titulo {
+      font-size: 28px;
+      background-color: lightblue;
+      padding: 10px;
+      margin: 50px;
+      display: inline-block;
+    }
+    #info {
+      margin-top: 20px;
+      padding: 10px;
+      border: 2px dashed gray;
+      background-color: #f9f9f9;
+    }
+    #tooltip {
+      position: absolute;
+      background-color: yellow;
+      padding: 5px;
+      border: 2px solid orange;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<h1 id="titulo">Título de prueba</h1>
+<div id="info"></div>
+<div id="tooltip">Tooltip dinámico</div>
+
+<script>
+  // Obtener referencia al elemento
+  const titulo = document.getElementById('titulo');
+  const info = document.getElementById('info');
+  const tooltip = document.getElementById('tooltip');
+
+  // Obtener las dimensiones y posición del título
+  const posicion = titulo.getBoundingClientRect();
+
+  // Propiedades principales devueltas por getBoundingClientRect
+  const arriba = posicion.top;      // Distancia desde el borde superior de la ventana al elemento
+  const izquierda = posicion.left;  // Distancia desde el borde izquierdo de la ventana al elemento
+  const derecha = posicion.right;   // Distancia desde el borde izquierdo al borde derecho del elemento
+  const abajo = posicion.bottom;    // Distancia desde el borde superior al borde inferior del elemento
+  const ancho = posicion.width;     // Ancho total del elemento (incluye padding y borde)
+  const alto = posicion.height;     // Alto total del elemento (incluye padding y borde)
+
+  // Mostrar valores en el div de información
+  info.innerHTML = 
+    'Top (arriba): ' + arriba + 'px<br>' +
+    'Left (izquierda): ' + izquierda + 'px<br>' +
+    'Right (derecha): ' + derecha + 'px<br>' +
+    'Bottom (abajo): ' + abajo + 'px<br>' +
+    'Width (ancho): ' + ancho + 'px<br>' +
+    'Height (alto): ' + alto + 'px';
+
+  // -------------------------------
+  // Posicionar tooltip dinámicamente
+  // -------------------------------
+  // Colocar el tooltip justo debajo del título
+  tooltip.style.left = izquierda + 'px';          // Alineado horizontal con el título
+  tooltip.style.top = (arriba + alto + 5) + 'px'; // Debajo del título con margen de 5px
+</script>
+
+</body>
+</html>

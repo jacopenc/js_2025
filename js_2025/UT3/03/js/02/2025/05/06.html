@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Vulnerabilidad en atributos CSS</title>
+  <style>
+    #caja {
+      width: 100px;
+      height: 100px;
+      background: red;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Formulario vulnerable a inyección en estilo CSS</h2>
+
+<form>
+  <input type="text" id="color" placeholder="Color">
+  <button type="button" id="btnColor">Cambiar color</button>
+</form>
+
+<div id="caja"></div>
+
+<script>
+const btn = document.getElementById('btnColor');
+
+btn.addEventListener('click', () => {
+  const color = document.getElementById('color').value;
+
+  // Vulnerabilidad: el usuario controla un atributo del estilo directamente
+  // Esto permite que se escriban valores inesperados, por ejemplo:
+  // "red", "blue", "url(javascript:alert('XSS'))"
+  // En navegadores modernos esto ya no ejecuta scripts, pero conceptualmente
+  // sigue siendo un riesgo si se aplica en contextos inseguros.
+  document.getElementById('caja').style.background = color;
+
+  // Buena práctica: validar el color antes de aplicarlo
+  // o usar una lista blanca de valores permitidos.
+});
+</script>
+
+<!--
+Ejemplo de valor malicioso que podría ser introducido:
+url(javascript:alert('XSS'))
+-->
+
+</body>
+</html>

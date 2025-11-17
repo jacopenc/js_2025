@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Usuarios</title>
+</head>
+<body onload="listarUsuarios()">
+    <div id="busquedaDiv">
+        <h3>Búsqueda de Usuario</h3>
+        <form id="searchForm">
+            <label for="searchTerm">Buscar Usuario:</label>
+            <input type="text" id="searchTerm" name="searchTerm" required>
+            <button type="button" onclick="buscarUsuario()">Buscar</button>
+        </form>
+    </div>
+
+    <div id="nuevoUsuarioDiv">
+        <h3>Añadir Nuevo Usuario</h3>
+        <form id="addUserForm">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="edad">Edad:</label>
+            <input type="number" id="edad" name="edad" required>
+
+            <button type="button" onclick="registrarUsuario()">Añadir Usuario</button>
+        </form>
+    </div>
+
+    <div id="resultado"></div>
+
+    <script src="usuario.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

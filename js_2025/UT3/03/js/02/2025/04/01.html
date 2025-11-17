@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario con action</title>
+</head>
+
+<body>
+
+  <h2>Formulario con action</h2>
+
+  <!-- action apunta a otra URL, método GET enviará los datos en la URL -->
+  <form id="miFormulario" action="https://dew.org/get" method="get">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <button type="submit">Enviar</button>
+  </form>
+
+  <script>
+    const formulario = document.getElementById('miFormulario');
+
+    formulario.addEventListener('submit', (e) => {
+      // No usamos preventDefault(), así que el navegador enviará el formulario a la URL indicada
+      console.log('Se disparó el evento submit. Ahora el navegador enviará el formulario a action.');
+
+      /*
+      Diferencia importante:
+    
+        Sin action y sin preventDefault() → la página se recarga, pero sigue en la misma URL.
+    
+        Con action y sin preventDefault() → el navegador navega a la URL indicada y envía los datos, reemplazando la página actual.
+      
+      */
+    });
+  </script>
+
+</body>
+
+</html>

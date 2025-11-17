@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Ejemplo localStorage</title>
+</head>
+<body>
+
+<h1>Guardar y recuperar con localStorage</h1>
+
+<input type="text" id="nombreInput" placeholder="Escribe tu nombre">
+<button onclick="guardarNombre()">Guardar</button>
+<button onclick="borrarNombre()">Borrar</button>
+
+<p>Nombre guardado: <span id="nombreGuardado">-</span></p>
+
+<script>
+// localStorage permite guardar datos en el navegador de manera persistente.
+// Los datos se mantienen aunque cierres la pestaña o el navegador.
+// Se puede usar para recordar información como preferencias o configuraciones.
+// Todos los tabs de la misma página comparten el mismo localStorage.
+
+// Ejemplo de uso: 
+    // localStorage.setItem("clave", "valor");  // Guardar dato
+    // var dato = localStorage.getItem("clave"); // Recuperar dato
+    // localStorage.removeItem("clave");         // Borrar dato
+
+window.onload = function() {
+    var nombre = localStorage.getItem("nombre");
+    if (nombre) {
+        document.getElementById("nombreGuardado").textContent = nombre;
+    }
+}
+
+// Guardar en localStorage
+function guardarNombre() {
+    var nombre = document.getElementById("nombreInput").value;
+    localStorage.setItem("nombre", nombre);
+    document.getElementById("nombreGuardado").textContent = nombre;
+}
+
+// Borrar del localStorage
+function borrarNombre() {
+    localStorage.removeItem("nombre");
+    document.getElementById("nombreGuardado").textContent = "-";
+}
+</script>
+
+</body>
+</html>

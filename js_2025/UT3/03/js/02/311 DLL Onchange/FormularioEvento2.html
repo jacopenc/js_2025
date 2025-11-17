@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="div">
+        Select Fruit:
+        <select id="ddlFruits" onchange="GetSelectedTextValue(this)">
+            <option value=""></option>
+            <option value="1">Apple</option>
+            <option value="2">Mango</option>
+            <option value="3">Orange</option>
+        </select>
+    </div>
+    <script type="text/javascript">
+        function GetSelectedTextValue(ddlFruits) {
+            var selectedText = ddlFruits.options[ddlFruits.selectedIndex].innerHTML;
+            var selectedValue = ddlFruits.value;
+            alert("Selected Text: " + selectedText + " Value: " + selectedValue);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejemplos de selectores del DOM</title>
+  <style>
+    .parrafo { color: black; }
+    .highlight { background-color: yellow; }
+  </style>
+</head>
+<body>
+
+  <h1 id="titulo">Título original</h1>
+
+  <p class="parrafo">Primer párrafo original</p>
+  <p class="parrafo">Segundo párrafo original</p>
+  <p class="parrafo">Tercer párrafo original</p>
+
+  <input type="radio" name="opcion" value="1"> Opción 1
+  <input type="radio" name="opcion" value="2"> Opción 2
+  <br><br>
+
+  <input type="email" name="correo" placeholder="Correo 1">
+  <input type="email" name="correo" placeholder="Correo 2">
+
+  <ul>
+    <li>Elemento A</li>
+    <li>Elemento B</li>
+  </ul>
+
+  <script>
+    // ------------------------------------------------------------------
+    // getElementById
+    // DESCRIPCIÓN: Selecciona el primer elemento que coincide con un id único proporcionado.
+    // ELEMENTOS QUE PUEDE DEVOLVER: Un único elemento HTML (HTMLElement) o null si no se encuentra.
+    const titulo = document.getElementById('titulo');
+    titulo.textContent = 'Título cambiado mediante getElementById';
+
+    // ------------------------------------------------------------------
+    // getElementsByName
+    // DESCRIPCIÓN: Selecciona elementos con el atributo name, útil en formularios.
+    // ELEMENTOS QUE PUEDE DEVOLVER: Devuelve todos los elementos coincidentes como una NodeList.
+    const opciones = document.getElementsByName('opcion');
+    console.log(opciones); // NodeList de los radio buttons
+
+    // ------------------------------------------------------------------
+    // getElementsByClassName
+    // DESCRIPCIÓN: Selecciona todos los elementos que contienen una o más clases específicas.
+    // ELEMENTOS QUE PUEDE DEVOLVER: Una colección HTML con todos los elementos coincidentes.
+    const parrafosClase = document.getElementsByClassName('parrafo');
+    for (let parrafo of parrafosClase) {
+      parrafo.classList.add('highlight');
+    }
+
+    // ------------------------------------------------------------------
+    // getElementsByTagName
+    // DESCRIPCIÓN: Selecciona todos los elementos del documento que coinciden con una etiqueta HTML.
+    // ELEMENTOS QUE PUEDE DEVOLVER: Una colección HTML con todos los elementos coincidentes.
+    const lista = document.getElementsByTagName('li');
+    console.log('Elementos de la lista:');
+    for (let item of lista) {
+      console.log(item.textContent);
+    }
+
+    // ------------------------------------------------------------------
+    // querySelector y querySelectorAll son parte de la DOM API moderna.
+    // A diferencia de los métodos antiguos, usan selectores CSS (como en hojas de estilo).
+    // ------------------------------------------------------------------
+
+    // querySelector
+    // DESCRIPCIÓN: Selecciona el primer elemento que coincide con un selector CSS.
+    // ELEMENTOS QUE PUEDE DEVOLVER: Un único elemento HTML o null si no se encuentra.
+    const tituloQuery = document.querySelector('#titulo'); // Selecciona por ID
+    const parrafo = document.querySelector('.parrafo'); // Primer elemento con esa clase
+    const input = document.querySelector('input[name="correo"]'); // Primer input con name="correo"
+
+    tituloQuery.textContent = 'Nuevo título cambiado con querySelector';
+
+    parrafo.style.color = 'blue';
+    parrafo.style.fontWeight = 'bold';
+    parrafo.textContent = 'Este texto fue modificado mediante querySelector.';
+
+    input.value = 'correo@ejemplo.com';
+    input.style.border = '2px solid green';
+
+    // ------------------------------------------------------------------
+    // querySelectorAll
+    // DESCRIPCIÓN: Selecciona todos los elementos que coinciden con un selector CSS.
+    // ELEMENTOS QUE PUEDE DEVOLVER: Una NodeList (similar a un array).
+    const tituloAll = document.querySelector('#titulo'); // Selecciona por ID
+    const parrafos = document.querySelectorAll('.parrafo'); // Todos los elementos con clase "parrafo"
+    const inputs = document.querySelectorAll('input[name="correo"]'); // Todos los inputs con name="correo"
+
+    // Modificar el título
+    tituloAll.textContent = 'Nuevo título cambiado con querySelectorAll';
+
+    // Modificar todos los párrafos
+    parrafos.forEach(function(p, index) {
+      p.style.color = 'blue';
+      p.style.fontWeight = 'bold';
+      p.textContent = 'Párrafo ' + (index + 1) + ' modificado con querySelectorAll';
+    });
+
+    // Modificar todos los inputs
+    inputs.forEach(function(input, index) {
+      input.value = 'correo' + (index + 1) + '@ejemplo.com';
+      input.style.border = '2px solid green';
+      input.style.marginBottom = '5px';
+    });
+  </script>
+
+</body>
+</html>

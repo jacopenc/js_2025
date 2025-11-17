@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Hijos en el DOM</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    div, h1, p {
+      padding: 5px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+    }
+    .info {
+      background-color: #f0f8ff;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="contenedor">
+  <h1 id="titulo">Título Principal</h1>
+  <p>Primer párrafo</p>
+  <p>Segundo párrafo</p>
+  <p>Último párrafo</p>
+</div>
+
+<div class="info" id="mostrar"></div>
+
+<script>
+  // Obtener referencia al contenedor
+  const titulo = document.getElementById('titulo');
+  const padre = titulo.parentElement;
+
+  // Obtener todos los hijos del contenedor
+  const hijos = padre.children; // HTMLCollection
+
+  // Mostrar en consola
+  console.log("Todos los hijos del contenedor:", hijos);
+
+  // Mostrar en pantalla
+  let contenido = '<p><strong>Todos los hijos del contenedor:</strong></p><ul>';
+  for (let i = 0; i < hijos.length; i++) {
+    contenido += '<li>' + hijos[i].tagName + ' - contenido: "' + hijos[i].textContent + '"</li>';
+  }
+  contenido += '</ul>';
+
+  const mostrar = document.getElementById('mostrar');
+  mostrar.innerHTML = contenido;
+</script>
+
+</body>
+</html>

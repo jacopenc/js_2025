@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deshabilitar Movimiento del Ratón</title>
+</head>
+<body>
+    <div id="restrictedArea" style="width: 300px; height: 300px; background-color: lightcoral;">
+        No puedes mover el ratón aquí
+    </div>
+
+    <script>
+        const restrictedArea = document.getElementById('restrictedArea');
+
+        restrictedArea.addEventListener('mousemove', (event) => {
+            event.preventDefault();
+            alert('El movimiento del ratón está deshabilitado en esta área.');
+        });
+    </script>
+</body>
+</html>

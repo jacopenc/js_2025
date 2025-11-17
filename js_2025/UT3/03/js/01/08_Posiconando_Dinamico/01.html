@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Dimensiones y posición de un elemento</title>
+  <style>
+    #titulo {
+      font-size: 28px;
+      background-color: lightgreen;
+      padding: 15px;
+      margin: 40px;
+      display: inline-block;
+    }
+    #info {
+      margin-top: 20px;
+      padding: 10px;
+      border: 2px dashed gray;
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+
+<h1 id="titulo">Título de prueba</h1>
+<div id="info"></div>
+
+<script>
+  // Obtener referencia al título y al div de información
+  const titulo = document.getElementById('titulo');
+  const info = document.getElementById('info');
+
+  // Obtener dimensiones y posición
+  const posicion = titulo.getBoundingClientRect();
+  const ancho = posicion.width;   // ancho total
+  const alto = posicion.height;   // alto total
+  const arriba = posicion.top;    // distancia desde el borde superior de la ventana
+  const izquierda = posicion.left; // distancia desde el borde izquierdo
+
+  // Mostrar información en el div
+  info.innerHTML =
+    'Ancho: ' + ancho + 'px<br>' +
+    'Alto: ' + alto + 'px<br>' +
+    'Top (arriba): ' + arriba + 'px<br>' +
+    'Left (izquierda): ' + izquierda + 'px';
+</script>
+
+</body>
+</html>

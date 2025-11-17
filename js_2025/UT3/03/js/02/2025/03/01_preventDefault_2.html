@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Checkbox con validación</title>
+</head>
+
+<body>
+
+  <h2>Acepta los términos solo si lees el aviso</h2>
+
+  <p id="aviso">Debes leer el aviso antes de aceptar.Haz click sobre mí</p>
+
+  <label>
+    <input type="checkbox" id="miCheckbox">
+    Acepto los términos
+  </label>
+
+  <script>
+    // Obtenemos el checkbox y el aviso
+    const checkbox = document.getElementById('miCheckbox');
+    const aviso = document.getElementById('aviso');
+
+    // Simulamos que el usuario no ha leído el aviso
+    let leidoAviso = false;
+
+    // Agregamos listener al checkbox
+    checkbox.addEventListener('click', (e) => {
+      // Validamos si el usuario ha leído el aviso
+      if (!leidoAviso) {
+        e.preventDefault(); // Evita que el checkbox se marque
+        alert('Debes leer el aviso antes de aceptar los términos');
+      }
+    });
+
+    // Para permitir marcarlo, simulamos que el usuario lee el aviso
+    aviso.addEventListener('click', () => {
+      leidoAviso = true;
+      alert('¡Aviso leído! Ahora puedes aceptar los términos');
+    });
+  </script>
+
+</body>
+
+</html>

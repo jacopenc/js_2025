@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ejemplo sessionStorage con objetos</title>
+</head>
+<body>
+
+<h2>Ejemplo sessionStorage con objetos y arrays</h2>
+
+<button onclick="guardarDatos()">Guardar datos</button>
+<button onclick="cargarDatos()">Cargar datos</button>
+<pre id="resultado"></pre>
+
+<script>
+// Datos complejos: un array de objetos
+var usuarios = [
+    { nombre: "Ana", edad: 25, pais: "España" },
+    { nombre: "Luis", edad: 30, pais: "México" },
+    { nombre: "Carla", edad: 22, pais: "Argentina" }
+];
+
+// Guardar datos en sessionStorage (hay que convertirlos a string)
+function guardarDatos() {
+    sessionStorage.setItem("usuarios", JSON.stringify(usuarios));
+    alert("Datos guardados en sessionStorage");
+}
+
+// Cargar datos de sessionStorage y mostrarlos
+function cargarDatos() {
+    var datos = sessionStorage.getItem("usuarios");
+    if (datos) {
+        var usuariosRecuperados = JSON.parse(datos); // Convertimos de string a objeto/array
+        document.getElementById("resultado").textContent = JSON.stringify(usuariosRecuperados);
+
+    } else {
+        document.getElementById("resultado").textContent = "No hay datos guardados.";
+    }
+}
+</script>
+
+</body>
+</html>

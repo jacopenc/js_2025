@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Usuarios</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="login-container">
+            <div class="register">
+                <h2>Registrarse</h2>
+                <form action="">
+                    <div> <input type="text" id="nombre" placeholder="Nombre" class="nombre obligatorio"> </div>
+                    <div> <input type="text" id="email" placeholder="Correo" class="correo obligatorio "></div>
+                    <div> <input type="password" id="password" placeholder="Contraseña" class="pass obligatorio"></div>
+                    <input type="password" placeholder="Confirma contraseña" class="repass">
+                    <button type="button" onclick="registrarCliente()" class="submit">Añadir Usuario</button>
+                </form>
+            </div>
+
+        </div>
+
+        <script src="cliente.js"></script>
+        <script src="app.js"></script>
+</body>
+
+</html>

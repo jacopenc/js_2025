@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Various JavaScript Event Listeners</h2>
+<h3>Using addEventListener() method to add many events for single button</h3>
+<button id="btn" >Try me!</button>
+<p id="event"></p>
+<script>
+    var x = document.getElementById("btn");
+    x.addEventListener("mouseover", mouseHoverFunction);
+    x.addEventListener("click", onClickFunction);
+    x.addEventListener("mouseout", mouseOutFunction);
+    function mouseHoverFunction() {
+        document.getElementById("event").innerHTML += "Mouse Hovered!<br>";
+    }
+    function onClickFunction() {
+        document.getElementById("event").innerHTML += "Button Clicked!<br>";
+    }
+    function mouseOutFunction() {
+        document.getElementById("event").innerHTML += "Mouse Out!<br>";
+    }
+</script>
+</body>
+</html>

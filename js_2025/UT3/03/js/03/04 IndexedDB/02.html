@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>CRUD IndexedDB sencillo</title>
+</head>
+<body>
+
+<h1>CRUD IndexedDB</h1>
+
+<input type="text" id="nombre" placeholder="Nombre">
+<input type="number" id="edad" placeholder="Edad">
+<button onclick="agregarUsuario()">Agregar</button>
+<button onclick="mostrarUsuarios()">Mostrar todos</button>
+<pre id="resultado"></pre>
+
+<script>
+// ---------------------------
+// CONFIGURAR BASE DE DATOS
+// ---------------------------
+
+var db;
+
+var request = window.indexedDB.open("miBase2", 1);
+
+request.onupgradeneeded = function(event) {
+    db = event.target.result;
+    // Crear un object store llamado "usuarios" con clave primaria "id" autoIncrement
+    var objectStore = db.createObjectStore("usuarios", { keyPath: "id", autoIncrement: true });
+    objectStore.createIndex("nombre", "nombre", { unique: false });
+    objectStore.createIndex("edad", "edad", { unique: false });
+};
+
+request.onsuccess = function(event) {
+    db = event.target.result;
+    console.log("DB abierta correctamente");
+};
+
+request.onerror = function(event) {
+    console.error("Error al abrir DB", event.target.error);
+};
+
+
+// Crear / Agregar usuario
+function agregarUsuario() {
+    var nombre = document.getElementById("nombre").value;
+    var edad = parseInt(document.getElementById("edad").value, 10);
+
+    var tx = db.transaction("usuarios", "readwrite");
+    var store = tx.objectStore("usuarios");
+    store.add({ nombre: nombre, edad: edad });
+
+    tx.oncomplete = function() {
+        alert("Usuario agregado");
+        mostrarUsuarios();
+    };
+
+    tx.onerror = function(event) {
+        console.error("Error al agregar usuario", event.target.error);
+    };
+}
+
+// Leer / Mostrar todos los usuarios
+function mostrarUsuarios() {
+    var tx = db.transaction("usuarios", "readonly");
+    var store = tx.objectStore("usuarios");
+
+    var resultado = [];
+    var requestCursor = store.openCursor();
+
+    requestCursor.onsuccess = function(event) {
+        var cursor = event.target.result;
+        if(cursor) {
+            resultado.push(cursor.value);
+            cursor.continue();
+        } else {
+            document.getElementById("resultado").textContent = JSON.stringify(resultado);
+        }
+    };
+}
+
+// Actualizar usuario por id (ejemplo sencillo: actualiza el primer usuario encontrado)
+function actualizarUsuario(id, nuevoNombre, nuevaEdad) {
+    var tx = db.transaction("usuarios", "readwrite");
+    var store = tx.objectStore("usuarios");
+
+    var requestGet = store.get(id);
+    requestGet.onsuccess = function(event) {
+        var usuario = event.target.result;
+        if(usuario) {
+            usuario.nombre = nuevoNombre;
+            usuario.edad = nuevaEdad;
+            store.put(usuario);
+            alert("Usuario actualizado");
+            mostrarUsuarios();
+        } else {
+            alert("Usuario no encontrado");
+        }
+    };
+}
+
+// Eliminar usuario por id
+function eliminarUsuario(id) {
+    var tx = db.transaction("usuarios", "readwrite");
+    var store = tx.objectStore("usuarios");
+    store.delete(id);
+
+    tx.oncomplete = function() {
+        alert("Usuario eliminado");
+        mostrarUsuarios();
+    };
+}
+
+</script>
+
+</body>
+</html>

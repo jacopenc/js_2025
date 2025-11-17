@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario: Submit y Reset</title>
+</head>
+<body>
+
+<h2>Formulario con Submit y Reset</h2>
+
+<form id="miFormulario">
+  <label for="nombre">Nombre:</label>
+  <input type="text" id="nombre" name="nombre" required><br><br>
+
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" required><br><br>
+<!-- Recomendación
+Siempre es buena práctica especificar el type del botón: -->
+
+    <button type="submit">Enviar</button>
+    <button type="reset">Limpiar</button>
+    <button type="button">Solo botón</button>
+</form>
+
+<script>
+const formulario = document.getElementById('miFormulario');
+
+// Evento submit
+formulario.addEventListener('submit', (e) => {
+  e.preventDefault(); // Evitamos envío real para demo
+  const nombre = document.getElementById('nombre').value.trim();
+  const email = document.getElementById('email').value.trim();
+
+  if (!nombre || !email) {
+    alert('Por favor, completa todos los campos');
+    return;
+  }
+
+  alert(`Formulario enviado:\nNombre: ${nombre}\nEmail: ${email}`);
+});
+
+// Evento reset
+formulario.addEventListener('reset', () => {
+  alert('Formulario reiniciado');
+});
+</script>
+
+</body>
+</html>

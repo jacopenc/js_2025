@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejemplo cloneNode(true/false)</title>
+  <style>
+    .highlight {
+      background-color: yellow;
+      padding: 5px;
+      border: 2px solid red;
+      margin: 5px 0;
+    }
+    #contenedor p {
+      margin: 5px 0;
+      padding: 5px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Ejemplo cloneNode(true/false)</h1>
+
+<div id="contenedor">
+  <p id="original">Párrafo original con <span>contenido interno</span></p>
+</div>
+
+<script>
+  const contenedor = document.getElementById('contenedor');
+  const original = document.getElementById('original');
+
+  // -----------------------------
+  // cloneNode(false): clona SOLO el elemento sin sus hijos
+  // -----------------------------
+  const clonSinHijos = original.cloneNode(false);
+  clonSinHijos.textContent = 'Clon sin hijos (contenido interno eliminado)';
+  clonSinHijos.classList.add('highlight');
+  contenedor.appendChild(clonSinHijos);
+
+  // -----------------------------
+  // cloneNode(true): clona el elemento y TODOS sus hijos
+  // -----------------------------
+  const clonConHijos = original.cloneNode(true);
+  clonConHijos.classList.add('highlight');
+  clonConHijos.textContent = 'Clon con hijos (contenido interno conservado)';
+  contenedor.appendChild(clonConHijos);
+
+  console.log("Original:", original);
+  console.log("Clon sin hijos:", clonSinHijos);
+  console.log("Clon con hijos:", clonConHijos);
+
+  /**
+   * Diferencias clave:
+   * - cloneNode(false): solo clona el nodo padre, los hijos se pierden.
+   * - cloneNode(true): clona el nodo padre y todos sus hijos y contenido interno.
+   */
+</script>
+
+</body>
+</html>

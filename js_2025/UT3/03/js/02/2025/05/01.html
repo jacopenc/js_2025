@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejemplo Vulnerable XSS Funcional</title>
+</head>
+<body>
+<h2>Formulario vulnerable a XSS</h2>
+
+<form id="miFormulario">
+  <label for="nombre">Nombre:</label>
+  <input type="text" id="nombre" placeholder="Escribe tu nombre">
+  <button type="button" id="enviar">Enviar</button>
+</form>
+
+<div id="saludo" style="margin-top:20px; padding:10px; border:1px solid #ccc;"></div>
+
+<script>
+const enviar = document.getElementById('enviar');
+const saludo = document.getElementById('saludo');
+
+enviar.addEventListener('click', () => {
+  const nombre = document.getElementById('nombre').value;
+
+  // Vulnerable: inserta directamente contenido del usuario en innerHTML
+  //En el campo Nombre, introduce lo siguiente:
+  //   <img src=x onerror=alert('XSS!')> -->
+  saludo.innerHTML = `Hola, <b>${nombre}</b>! Bienvenido.`;
+});
+</script>
+</body>
+</html>

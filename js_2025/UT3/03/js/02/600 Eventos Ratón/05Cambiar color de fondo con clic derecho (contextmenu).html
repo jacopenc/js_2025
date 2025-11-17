@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clic Derecho</title>
+</head>
+<body>
+    <div id="box" style="width: 200px; height: 200px; background-color: lightcoral;">
+        Haz clic derecho aquí
+    </div>
+
+    <script>
+        const box = document.getElementById('box');
+
+        box.addEventListener('contextmenu', (event) => {
+            event.preventDefault(); // Evita el menú contextual predeterminado
+            box.style.backgroundColor = box.style.backgroundColor === 'lightcoral' ? 'lightblue' : 'lightcoral';
+            alert('¡Color cambiado con clic derecho!');
+        });
+    </script>
+</body>
+</html>

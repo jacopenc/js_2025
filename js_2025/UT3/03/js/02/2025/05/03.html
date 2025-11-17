@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Prevención de XSS con escape</title>
+</head>
+<body>
+<h2>Formulario Seguro con escape de HTML</h2>
+
+<form id="miFormulario">
+  <label for="nombre">Nombre:</label>
+  <input type="text" id="nombre" placeholder="Escribe tu nombre">
+  <button type="button" id="enviar">Enviar Seguro</button>
+</form>
+
+<h3>Resultado Seguro:</h3>
+<div id="saludoSeguro" style="border:1px solid green; padding:10px;"></div>
+
+<script>
+// Función para escapar caracteres especiales
+function escapeHTML(str) {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+const btnEnviar = document.getElementById('enviar');
+btnEnviar.addEventListener('click', () => {
+  const nombre = document.getElementById('nombre').value;
+  const divSeguro = document.getElementById('saludoSeguro');
+
+  // Escapamos caracteres especiales para evitar XSS
+  const nombreSeguro = escapeHTML(nombre);
+
+  // Podemos usar innerHTML porque el contenido está escapado
+  divSeguro.innerHTML = `Hola, <b>${nombreSeguro}</b>! Bienvenido.`;
+});
+</script>
+
+<!-- Comentario HTML con ejemplo malicioso
+     <img src=x onerror=alert('XSS!')>
+-->
+
+</body>
+</html>

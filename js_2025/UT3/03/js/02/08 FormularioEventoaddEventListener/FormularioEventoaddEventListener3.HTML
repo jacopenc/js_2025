@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>JavaScript Event Listeners Mouse hover and out</title>
+<h2>Mouse hover and out changing colors</h2>
+</head>
+<body>
+<button id="btn">Click Here</button>
+<script>
+    var btnHover = document.getElementById("btn");
+    function setHoverColor() {
+        btnHover.style.background = "orange";
+    }
+    function setNormalColor() {
+        btnHover.style.background = "";
+    }
+    btnHover.addEventListener("mouseover", setHoverColor);
+    btnHover.addEventListener("mouseout", setNormalColor);
+</script>
+</body>
+</html>

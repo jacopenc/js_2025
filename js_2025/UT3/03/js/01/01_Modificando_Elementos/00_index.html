@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Comparativa innerHTML, outerHTML e innerText</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .bloque {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 15px;
+    }
+    .titulo-bloque {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .destacado {
+      background-color: #f0f8ff;
+      border-left: 4px solid #00f;
+      padding: 5px;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Bloque original -->
+  <div class="bloque">
+    <div class="titulo-bloque">Contenido Original</div>
+    <div id="original">
+      <p>Este es el contenido inicial dentro del div.</p>
+    </div>
+    <h1 id="titulo-original">Título Original</h1>
+  </div>
+
+  <!-- Bloque innerHTML -->
+  <div class="bloque">
+    <div class="titulo-bloque">Resultado innerHTML</div>
+    <div id="contenido-innerHTML"></div>
+  </div>
+
+  <!-- Bloque outerHTML -->
+  <div class="bloque">
+    <div class="titulo-bloque">Resultado outerHTML</div>
+    <div id="contenido-outerHTML"></div>
+  </div>
+
+  <!-- Bloque innerText -->
+  <div class="bloque">
+    <div class="titulo-bloque">Resultado innerText</div>
+    <h1 id="titulo-innerText"></h1>
+  </div>
+
+  <script>
+    // ---------------------------
+    // innerHTML: reemplaza el contenido interno del div
+    const innerHTMLDiv = document.getElementById('contenido-innerHTML');
+    innerHTMLDiv.innerHTML = `
+      <p class="destacado">Contenido reemplazado con innerHTML.</p>
+      <ul>
+        <li>Elemento 1</li>
+        <li>Elemento 2</li>
+        <li>Elemento 3</li>
+      </ul>
+    `;
+
+    // ---------------------------
+    // outerHTML: reemplaza todo el contenedor
+    const outerHTMLDiv = document.getElementById('contenido-outerHTML');
+    outerHTMLDiv.outerHTML = `
+      <section id="contenido-outerHTML" class="destacado">
+        <h2>Sección reemplazada con outerHTML</h2>
+        <p>Ahora este es un elemento section en lugar de un div.</p>
+      </section>
+    `;
+
+    // ---------------------------
+    // innerText: reemplaza solo el texto visible del título
+    const tituloInnerText = document.getElementById('titulo-innerText');
+    tituloInnerText.innerText = 'Texto modificado con innerText. ¡HTML no funciona aquí!';
+  </script>
+
+</body>
+</html>

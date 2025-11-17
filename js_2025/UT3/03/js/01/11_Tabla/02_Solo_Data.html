@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tabla Dinámica Simple</title>
+</head>
+<body>
+
+<div id="tablaContainer"></div>
+
+<script>
+    // Datos de ejemplo
+    const data = [
+        { ID: 1, Nombre: "Juan", Edad: 25, Ciudad: "Madrid" },
+        { ID: 2, Nombre: "Ana", Edad: 30, Ciudad: "Barcelona" },
+        { ID: 3, Nombre: "Luis", Edad: 28, Ciudad: "Valencia" }
+    ];
+
+    // Contenedor donde se añadirá la tabla
+    const tablaContainer = document.getElementById("tablaContainer");
+
+    // Crear la tabla
+    const tabla = document.createElement("table");
+
+    // Crear encabezado
+    const thead = document.createElement("thead");
+    const filaEncabezado = document.createElement("tr");
+    const keys = Object.keys(data[0]);
+
+    keys.forEach(function(key) {
+        const th = document.createElement("th");
+        th.textContent = key;
+        filaEncabezado.appendChild(th);
+    });
+
+    thead.appendChild(filaEncabezado);
+    tabla.appendChild(thead);
+
+    // Crear cuerpo de la tabla
+    const tbody = document.createElement("tbody");
+
+    data.forEach(function(item) {
+        const fila = document.createElement("tr");
+
+        keys.forEach(function(key) {
+            const td = document.createElement("td");
+            td.textContent = item[key];
+            fila.appendChild(td);
+        });
+
+        tbody.appendChild(fila);
+    });
+
+    tabla.appendChild(tbody);
+
+    // Añadir la tabla al contenedor
+    tablaContainer.appendChild(tabla);
+</script>
+
+</body>
+</html>

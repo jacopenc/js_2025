@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejemplo de atributos data-* sin eventos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1 {
+      padding: 10px;
+      background-color: #f0f8ff;
+      border-left: 4px solid #00f;
+    }
+    .info {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- 
+  Qué es un atributo data-*:
+
+  Los atributos data-* son atributos personalizados de HTML5.
+  Te permiten almacenar información adicional en un elemento HTML
+  sin afectar su apariencia ni comportamiento por defecto.
+  Se escriben siempre con el prefijo "data-", seguido del nombre que tú quieras.
+-->
+
+<h1 id="titulo" 
+    data-info="Información adicional" 
+    data-autor="Juan Pérez" 
+    data-fecha="2025-11-02"
+    class="resaltado">
+  Título con atributos data-*
+</h1>
+
+<div class="info" id="mostrarDatos"></div>
+
+<script>
+  const titulo = document.getElementById('titulo');
+  const mostrar = document.getElementById('mostrarDatos');
+
+  // Mostrar data-* usando getAttribute
+  const info = titulo.getAttribute('data-info');
+  const autor = titulo.getAttribute('data-autor');
+  const fecha = titulo.getAttribute('data-fecha');
+
+  // Mostrar todos los atributos
+  const valorClase = titulo.getAttribute('class');
+  const existeClass = titulo.hasAttribute('class');
+
+
+// Obtener todos los nombres de atributos
+const atributos = titulo.getAttributeNames(); // Array de nombres de atributos
+
+// Recorrer usando un bucle for clásico
+for (let i = 0; i < atributos.length; i++) {
+  console.log("Nombre del atributo: " + atributos[i]);
+}
+
+// Recorrer usando for...of
+for (let attr of atributos) {
+  console.log("Nombre del atributo: " + attr);
+}
+
+// Recorrer usando forEach
+atributos.forEach(function(attr) {
+  console.log("Nombre del atributo: " + attr);
+});
+
+
+  // Mostrar los datos en el div 
+  mostrar.innerHTML = 
+    '<p><strong>Data-info:</strong> ' + info + '</p>' +
+    '<p><strong>Data-autor:</strong> ' + autor + '</p>' +
+    '<p><strong>Data-fecha:</strong> ' + fecha + '</p>' +
+    '<p><strong>Todos los atributos:</strong> ' + atributos.join(', ') + '</p>' +
+    '<p><strong>Valor de class:</strong> ' + valorClase + '</p>' +
+    '<p><strong>¿Existe atributo class?</strong> ' + (existeClass ? 'Sí' : 'No') + '</p>';
+
+  // También se puede usar dataset (sin interpolación)
+  console.log("Usando dataset:");
+  console.log("Info: " + titulo.dataset.info);
+  console.log("Autor: " + titulo.dataset.autor);
+  console.log("Fecha: " + titulo.dataset.fecha);
+</script>
+
+</body>
+</html>

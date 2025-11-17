@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>JavaScript Removing an Event Listener</title>
+</head>
+<body>
+<button id="btn">Click Here</button>
+<script>
+    function removeFunction() {
+        alert("Function will be removed here");
+    }
+    var btn = document.getElementById("btn");
+    btn.addEventListener("click", removeFunction);
+    btn.removeEventListener("click", removeFunction);
+</script>
+<p><strong>Note:</strong> Even though you try to click the button, no event will be fired as we have removed the click event using removeEventListener</p>
+</body>
+</html>

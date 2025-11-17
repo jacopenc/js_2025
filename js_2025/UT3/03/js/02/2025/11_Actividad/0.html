@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Formulario interactivo con eventos</title>
+<style>
+  body {
+    font-family: sans-serif;
+    background: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    margin-top: 50px;
+  }
+  form {
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    width: 320px;
+  }
+  input, select, button {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  input:focus {
+    border-color: #66aaff;
+    background: #eef7ff;
+  }
+  .error {
+    border-color: red;
+    background: #ffe6e6;
+  }
+  .mensaje {
+    font-size: 0.9em;
+    color: red;
+    margin-bottom: 10px;
+    min-height: 1em;
+  }
+</style>
+</head>
+<body>
+
+<form id="registroForm">
+  <h2>Formulario de registro</h2>
+
+  <label>Nombre:</label>
+  <input type="text" id="nombre" placeholder="Tu nombre">
+  <div id="msgNombre" class="mensaje"></div>
+
+  <label>Correo electrónico:</label>
+  <input type="email" id="correo" placeholder="ejemplo@correo.com">
+  <div id="msgCorreo" class="mensaje"></div>
+
+  <label>País:</label>
+  <select id="pais">
+    <option value="">Selecciona tu país</option>
+    <option value="España">España</option>
+    <option value="México">México</option>
+    <option value="Argentina">Argentina</option>
+  </select>
+  <div id="msgPais" class="mensaje"></div>
+
+  <button type="submit">Registrarse</button>
+<p><b>focus</b> → cambia el estilo al entrar en el campo.</p>
+<p><b>blur</b> → valida cuando se sale del campo.</p>
+<p><b>input</b> → valida mientras el usuario escribe.</p>
+<p><b>change</b> → detecta selección de país.</p>
+<p><b>submit</b> → comprueba todo antes de enviar.</p>
+
+</form>
+
+<script>
+const form = document.getElementById('registroForm');
+const nombre = document.getElementById('nombre');
+const correo = document.getElementById('correo');
+const pais = document.getElementById('pais');
+
+const msgNombre = document.getElementById('msgNombre');
+const msgCorreo = document.getElementById('msgCorreo');
+const msgPais = document.getElementById('msgPais');
+
+// 🔹 Evento focus: cuando el usuario entra en un campo
+[nombre, correo].forEach(campo => {
+  campo.addEventListener('focus', function() {
+    this.style.backgroundColor = '#eef7ff';
+  });
+});
+
+// 🔹 Evento blur: cuando el usuario sale del campo (validación)
+nombre.addEventListener('blur', function() {
+  if (this.value.trim().length < 3) {
+    msgNombre.textContent = "El nombre debe tener al menos 3 caracteres.";
+    this.classList.add('error');
+  } else {
+    msgNombre.textContent = "";
+    this.classList.remove('error');
+  }
+});
+
+// 🔹 Evento input: se ejecuta cada vez que se escribe algo
+correo.addEventListener('input', function() {
+  if (!this.value.includes('@')) {
+    msgCorreo.textContent = "Debe incluir '@' en el correo.";
+    this.classList.add('error');
+  } else {
+    msgCorreo.textContent = "";
+    this.classList.remove('error');
+  }
+});
+
+// 🔹 Evento change: detecta cambio en select
+pais.addEventListener('change', function() {
+  if (this.value === "") {
+    msgPais.textContent = "Selecciona un país válido.";
+  } else {
+    msgPais.textContent = "";
+  }
+});
+
+// 🔹 Evento submit: al enviar el formulario
+form.addEventListener('submit', function(e) {
+  e.preventDefault(); // Evita el envío real
+
+  if (
+    nombre.value.trim().length >= 3 &&
+    correo.value.includes('@') &&
+    pais.value !== ""
+  ) {
+    alert(" Registro exitoso. ¡Bienvenido, " + nombre.value + "!");
+    form.reset(); // Limpia el formulario
+  } else {
+    alert("Por favor, completa correctamente todos los campos.");
+  }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usar preventDefault</title>
+</head>
+<body>
+    <h1>Formulario con Validación Personalizada</h1>
+    <form id="myForm">
+        <label for="email">Correo Electrónico:</label>
+        <input type="email" id="email" name="email" placeholder="Introduce tu correo" required>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('myForm');
+
+        form.addEventListener('submit', (event) => {
+/*Si necesitas realizar validaciones personalizadas antes de enviar un formulario al servidor,
+ preventDefault te permite detener el envío automático y manejarlo manualmente.*/
+
+ /*Por qué usar preventDefault:
+Detienes el envío predeterminado para validar los datos primero.
+Puedes manejar errores del usuario sin recargar la página.
+Ofrece más control sobre el flujo de trabajo del formulario.*/
+
+
+            event.preventDefault(); // Evitar el envío predeterminado
+
+            const email = document.getElementById('email').value;
+
+            if (email === "") {
+                alert("Por favor, introduce un correo válido.");
+            } else {
+                console.log("Formulario enviado con éxito.");
+                // Aquí podrías realizar el envío manual del formulario
+                // por ejemplo, usando fetch() o XMLHttpRequest.
+            }
+        });
+    </script>
+</body>
+</html>

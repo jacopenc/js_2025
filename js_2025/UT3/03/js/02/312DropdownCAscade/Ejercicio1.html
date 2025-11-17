@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+  Género <select name="optone" id="dllGenero" size="1">
+    <option value="" selected="selected">Select type</option>
+  </select>
+  <br />
+  <br />
+  Cantante/grupo<select name="opttwo" id="dllCantante" size="1">
+    <option value="" selected="selected">Select field</option>
+  </select>
+  <script>
+    let typeObject = {
+      Pop: ["Michael Jackson  ", "Madonna"],
+      Rock: ["Queen", "Pink Floyd"],
+      Rap: ["50 Cent", " Tupac Shakur (2pac),"]
+    }
+    window.onload = function () {
+      var dllGenero = document.getElementById("dllGenero"),
+        dllCantante = document.getElementById("dllCantante")
+      for (var type in typeObject) {
+        dllGenero.options[dllGenero.options.length] = new Option(type, type);
+      }
+      dllGenero.onchange = function () {
+        dllCantante.length = 1; // remove all options bar first
+        if (this.selectedIndex < 1) 
+        {
+          return; // done  
+        }
+        var ft = typeObject[this.value];
+        for (var field in typeObject[this.value]) {
+          dllCantante.options[dllCantante.options.length] = new Option(ft[field], field);
+        }
+      }
+      dllGenero.onchange();
+    }
+  </script>
+
+</body>
+
+</html>

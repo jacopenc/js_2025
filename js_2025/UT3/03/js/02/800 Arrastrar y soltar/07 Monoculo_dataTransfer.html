@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrastrar y Soltar</title>
+    <style>
+        .container {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .place {
+            width: 200px;
+            height: 200px;
+        }
+
+        .drop-zone {
+            border: 2px dotted #777;
+            width: 128px;
+            height: 128px;
+            display: grid;
+            place-items: center;
+
+            & img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            &.selected {
+                border: 2px solid orangered;
+                background: #f9dfb7;
+            }
+        }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="place">
+            <img class="drag-item" id="item" src="monoculo.gif" alt="ManzDev Monóculo">
+        </div>
+        <div class="drop-zone"></div>
+    </div>
+
+    <script>
+
+
+
+        const dragItem = document.querySelector(".drag-item");
+        const dropZone = document.querySelector(".drop-zone");
+        const honkImage = document.createElement("img");
+        honkImage.src = "honk.gif";
+
+
+        /*
+        Método	Descripción
+        getData(type)	Obtiene el valor guardado con setData(). Tipos: text/plain o text/uri-list.
+        setData(type, value)	Guarda un valor en dataTransfer, pasándole el tipo y el valor a guardar.
+        clearData(type)	Elimina los datos guardados en el dataTransfer.
+        setDragImage(image, x, y)	Muestra una imagen traslúcida al arrastrar el elemento, desplazándola en x e y.
+        
+        */
+
+
+
+        dragItem.addEventListener("dragstart", (ev) => {
+            ev.dataTransfer.setData("text/plain", dragItem.id);
+            ev.dataTransfer.setDragImage(honkImage, 0, 0);
+        });
+
+        dropZone.addEventListener("dragover", (ev) => ev.preventDefault());
+
+        dropZone.addEventListener("drop", (ev) => {
+            const id = ev.dataTransfer.getData("text/plain");
+            const item = document.querySelector("#" + id);
+            dropZone.append(item);
+        });
+
+    </script>
+</body>
+
+</html>

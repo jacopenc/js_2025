@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> This is an example for mouse events </title>
+</head>
+
+<body>
+    <!-- code to show working of onclick handler -->
+    <button onclick="funHandler('onclick')" style="color:#FF0000"> Click here to generate mouse click event.
+    </button></br>
+
+    <button onmouseup="funHandler('onmouseup')" style="color:#FF0000"> Click here to generate mouse up event.
+    </button></br>
+
+    <button onmousedown="funHandler('onmousedown')" style="color:#FF0000"> Click here to generate mouse down event.
+    </button></br>
+
+
+    <p>Mouse over the button, and get mouse pointer coordinates. </p>
+    <button id="bid" onmouseover="funOver(event)" onmouseout="funOut(event)"> Move here to generate mouse move event.
+    </button>
+    <h3 id="hid"></h3>
+
+    <script>
+        function funHandler(mens) {
+            document.getElementById("divid").innerHTML = "The Mouse " + mens + " event is generated and it handled.";
+        }
+
+        function funOver(e) {
+            px = e.clientX;
+            py = e.clientY;
+            pxy = " x and y Coordinates = (" + px + "," + py + ")";
+            document.getElementById("hid").innerHTML = pxy
+        }
+        function funOut() {
+            document.getElementById("hid").innerHTML = "";
+        }
+
+
+    </script>
+    <div id="divid" style="color: #0900C4"></div>
+</body>
+
+</html>

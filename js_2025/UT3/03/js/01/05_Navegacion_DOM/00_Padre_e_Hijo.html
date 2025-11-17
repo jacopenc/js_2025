@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Navegación por el DOM</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    div, h1, p {
+      padding: 5px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+    }
+    .info {
+      background-color: #f0f8ff;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="contenedor">
+  <h1 id="titulo">Título Principal</h1>
+  <p>Primer párrafo del contenedor</p>
+  <p>Segundo párrafo del contenedor</p>
+  <p>Último párrafo del contenedor</p>
+</div>
+
+<div class="info" id="mostrar"></div>
+
+<script>
+  // Obtener referencia al título
+  const titulo = document.getElementById('titulo');
+
+  // Obtener el elemento padre
+  const padre = titulo.parentElement;
+
+  // Obtener el primer hijo del padre
+  const primerHijo = padre.firstElementChild;
+
+  // Obtener el último hijo del padre
+  const ultimoHijo = padre.lastElementChild;
+
+  // Mostrar información en consola
+  console.log("Elemento padre:", padre);
+  console.log("Primer hijo:", primerHijo);
+  console.log("Último hijo:", ultimoHijo);
+
+  // Mostrar información en pantalla para alumnado
+  const mostrar = document.getElementById('mostrar');
+  mostrar.innerHTML =
+    '<p><strong>Elemento padre:</strong> ' + padre.tagName + ' con id="' + padre.id + '"</p>' +
+    '<p><strong>Primer hijo:</strong> ' + primerHijo.tagName + ' - contenido: "' + primerHijo.textContent + '"</p>' +
+    '<p><strong>Último hijo:</strong> ' + ultimoHijo.tagName + ' - contenido: "' + ultimoHijo.textContent + '"</p>';
+</script>
+
+</body>
+</html>

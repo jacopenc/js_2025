@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movimiento del Ratón</title>
+</head>
+<body>
+    <h1>Mueve el ratón por la pantalla</h1>
+    <p id="coords">Posición del ratón: X: 0, Y: 0</p>
+
+    <script>
+        document.addEventListener('mousemove', (event) => {
+            const coords = document.getElementById('coords');
+            coords.textContent = `Posición del ratón: X: ${event.clientX}, Y: ${event.clientY}`;
+        });
+    </script>
+</body>
+</html>

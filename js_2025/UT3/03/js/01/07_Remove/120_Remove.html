@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejemplo de remove() y removeChild()</title>
+  <style>
+    .contenedor {
+      border: 2px solid #ccc;
+      padding: 10px;
+      margin-top: 20px;
+    }
+    .highlight {
+      background-color: yellow;
+      padding: 5px;
+      border: 2px solid red;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Ejemplo de <code>remove()</code> y <code>removeChild()</code></h1>
+
+  <div id="contenedor" class="contenedor">
+    <p id="parrafo1">Este es el primer párrafo.</p>
+    <p id="parrafo2">Este es el segundo párrafo.</p>
+    <p id="parrafo3">Este es el tercer párrafo.</p>
+  </div>
+
+  <script>
+    // Referencias a los elementos
+    const contenedor = document.getElementById('contenedor');
+    const parrafo1 = document.getElementById('parrafo1');
+    const parrafo2 = document.getElementById('parrafo2');
+
+    // -----------------------------
+    // Eliminar el primer párrafo usando remove()
+    // -----------------------------
+    parrafo1.remove();  // Elimina directamente el primer párrafo
+    console.log("El primer párrafo ha sido eliminado usando remove()");
+
+    // -----------------------------
+    // Eliminar el segundo párrafo usando removeChild()
+    // -----------------------------
+    contenedor.removeChild(parrafo2);  // Elimina el segundo párrafo mediante su contenedor
+    console.log("El segundo párrafo ha sido eliminado usando removeChild()");
+
+    // -----------------------------
+    // Queda un solo párrafo (parrafo3) en el contenedor
+    // -----------------------------
+  </script>
+
+</body>
+</html>

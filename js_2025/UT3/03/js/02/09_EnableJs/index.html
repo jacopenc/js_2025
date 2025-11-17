@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario con JavaScript</title>
+</head>
+<body>
+
+    <h1>Formulario de Registro</h1>
+    
+    <!-- Este mensaje solo será visible si JS está deshabilitado -->
+    <noscript>
+        <p style="color: red;">Para enviar este formulario, es necesario que JavaScript esté habilitado en su navegador.</p>
+    </noscript>
+
+    <!-- Formulario -->
+    <form id="registration-form" onsubmit="return validateForm()">
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="age">Edad:</label>
+        <input type="number" id="age" name="age" required><br><br>
+
+        <input type="submit" value="Enviar">
+    </form>
+
+    <!-- Mensaje que se mostrará si JS está habilitado y el formulario se envía correctamente -->
+    <p id="form-message" style="color: green; display: none;">Formulario enviado con éxito. ¡Gracias por registrarte!</p>
+
+    <script>
+        // Función para validar el formulario
+        function validateForm() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var age = document.getElementById("age").value;
+
+            // Verifica que todos los campos sean válidos
+            if (name == "" || email == "" || age == "") {
+                alert("Por favor, complete todos los campos.");
+                return false; // No se envía el formulario si hay campos vacíos
+            }
+
+            // Si todo es válido, se muestra un mensaje de éxito y se previene el envío real del formulario
+            document.getElementById("form-message").style.display = "block";
+            document.getElementById("registration-form").reset(); // Opcional: limpia el formulario
+            return false; // Evita que el formulario se envíe de verdad
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrastrar Múltiples Elementos</title>
+    <style>
+        .draggable {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            display: inline-block;
+            cursor: grab;
+        }
+
+        #dropZone {
+            width: 500px;
+            height: 300px;
+            background-color: lightgray;
+            border: 2px dashed #000;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="items">
+        <div class="draggable" id="item1" draggable="true" style="background-color: lightblue;">Elemento 1</div>
+        <div class="draggable" id="item2" draggable="true" style="background-color: lightcoral;">Elemento 2</div>
+        <div class="draggable" id="item3" draggable="true" style="background-color: lightgreen;">Elemento 3</div>
+    </div>
+    <div id="dropZone">Suelta aquí</div>
+
+    <script>
+        const draggables = document.querySelectorAll('.draggable');
+        const dropZone = document.getElementById('dropZone');
+
+        draggables.forEach(item => {
+            item.addEventListener('dragstart', (event) => {
+                event.dataTransfer.setData('text/plain', event.target.id);
+            });
+        });
+
+        dropZone.addEventListener('dragover', (event) => {
+            event.preventDefault();
+        });
+
+        dropZone.addEventListener('drop', (event) => {
+            event.preventDefault();
+            const id = event.dataTransfer.getData('text/plain');
+            const draggedElement = document.getElementById(id);
+            dropZone.appendChild(draggedElement);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabla Dinámica con insertRow e insertCell</title>
+</head>
+<body>
+
+<div id="tablaContainer"></div>
+
+<script>
+  // Datos de ejemplo
+  const data = [
+    { ID: 1, Nombre: "Juan", Edad: 25, Ciudad: "Madrid" },
+    { ID: 2, Nombre: "Ana", Edad: 30, Ciudad: "Barcelona" },
+    { ID: 3, Nombre: "Luis", Edad: 28, Ciudad: "Valencia" }
+  ];
+
+  // Crear la tabla y añadirla al contenedor
+  const tablaContainer = document.getElementById("tablaContainer");
+  const tabla = document.createElement("table");
+  tablaContainer.appendChild(tabla);
+
+  // -----------------------------
+  // Crear encabezado usando insertRow e insertCell
+  // -----------------------------
+  const filaEncabezado = tabla.insertRow(); // Primera fila de la tabla
+  const columnas = Object.keys(data[0]);     // ["ID", "Nombre", "Edad", "Ciudad"]
+  columnas.forEach(function(nombreCol) {
+    const th = document.createElement("th");
+    th.textContent = nombreCol;
+    filaEncabezado.appendChild(th);
+  });
+
+  // -----------------------------
+  // Crear las filas de datos usando insertRow e insertCell
+  // -----------------------------
+  data.forEach(function(item) {
+    const fila = tabla.insertRow(); // Nueva fila
+    columnas.forEach(function(col) {
+      const celda = fila.insertCell(); // Nueva celda
+      celda.textContent = item[col];   // Poner el valor correspondiente
+    });
+  });
+
+</script>
+
+</body>
+</html>

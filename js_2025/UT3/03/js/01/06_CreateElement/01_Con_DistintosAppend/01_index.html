@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Diferencias entre appendChild, append y prepend</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    #contenedor {
+      padding: 10px;
+      border: 2px solid #ccc;
+      background-color: #f9f9f9;
+      margin-bottom: 20px;
+    }
+    p {
+      padding: 5px;
+      margin: 5px 0;
+      border: 1px solid #aaa;
+      background-color: #e0f7fa;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Ejemplo de appendChild, append y prepend</h1>
+
+<div id="contenedor">
+  <p>Contenido inicial</p>
+</div>
+
+<script>
+  const contenedor = document.getElementById('contenedor');
+
+  // ------------------------------
+  // appendChild: añade un único nodo al final
+  // ------------------------------
+  const pAppendChild = document.createElement('p');
+  pAppendChild.textContent = 'Añadido con appendChild (al final)';
+  contenedor.appendChild(pAppendChild); // Se coloca al final del contenedor
+
+  // ------------------------------
+  //append: añade nodos o texto al final
+  // ------------------------------
+  const pAppend = document.createElement('p');
+  pAppend.textContent = 'Añadido con append';
+  contenedor.append(pAppend, ' (texto adicional con append)'); 
+  // append puede añadir varios nodos y texto directamente
+
+  // ------------------------------
+  //prepend: añade nodos o texto al inicio
+  // ------------------------------
+  const pPrepend = document.createElement('p');
+  pPrepend.textContent = 'Añadido con prepend (al inicio)';
+  contenedor.prepend(pPrepend); // Se coloca antes de todo el contenido existente
+
+  // ------------------------------
+  // Mostrar en consola los hijos del contenedor para comparar
+  // ------------------------------
+  console.log("Todos los hijos del contenedor:");
+  for (let i = 0; i < contenedor.children.length; i++) {
+    console.log(i + 1 + ": " + contenedor.children[i].textContent);
+  }
+
+  /**
+   * Diferencias clave:
+   * - appendChild: añade un único nodo al final, no acepta texto directo.
+   * - append: añade uno o varios nodos y/o texto al final.
+   * - prepend: añade uno o varios nodos y/o texto al inicio.
+   */
+</script>
+
+</body>
+</html>

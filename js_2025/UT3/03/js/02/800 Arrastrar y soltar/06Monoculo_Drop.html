@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrastrar y Soltar</title>
+    <style>
+        .container {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .drop-zone {
+            border: 2px dotted #777;
+            width: 128px;
+            height: 128px;
+            display: grid;
+            place-items: center;
+
+            &.selected {
+                border: 2px solid orangered;
+                background: #f9dfb7;
+            }
+        }
+
+        .badges {
+            display: flex;
+            gap: 2rem;
+
+            & div {
+                display: grid;
+                border: 1px solid #aaa;
+                padding: 1rem;
+                height: fit-content;
+
+                &.on {
+                    background: indigo;
+                    border-color: indigo;
+                    color: #fff;
+                }
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img class="drag-item" src="monoculo.gif" alt="ManzDev Monóculo" draggable="true">
+        <div class="drop-zone">Drop here</div>
+        <div class="badges">
+            <div>Enter</div>
+            <div>Leave</div>
+            <div>Over</div>
+            <div>Drop</div>
+        </div>
+    </div>
+
+    <script>
+
+        const dragItem = document.querySelector(".drag-item");
+        const dropZone = document.querySelector(".drop-zone");
+        const [enter, leave, over, drop] = document.querySelectorAll(".badges div");
+
+
+
+/*
+        Evento	Descripción
+        dragenter	Hemos entrado en una zona para soltar arrastrando el elemento.
+        dragleave	Hemos salido de una zona para soltar arrastrando el elemento.
+        dragover	Nos estamos moviendo en una zona para soltar. ⚠️ Se ejecuta continuamente.
+        drop	Hemos soltado el elemento en una zona para soltar.
+*/
+
+
+        const setBlink = (element) => {
+            element.classList.add("on");
+            setTimeout(() => element.classList.remove("on"), 200);
+        }
+
+        dropZone.addEventListener("dragenter", (ev) => {
+            dropZone.classList.add("selected");
+            setBlink(enter);
+        });
+
+        dropZone.addEventListener("dragleave", () => {
+            dropZone.classList.remove("selected");
+            setBlink(leave);
+        });
+
+        dropZone.addEventListener("dragover", (ev) => {
+            ev.preventDefault();
+            setBlink(over);
+        });
+
+        dropZone.addEventListener("drop", (ev) => {
+            setBlink(drop);
+        });
+
+    </script>
+</body>
+
+</html>

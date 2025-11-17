@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejemplo de Inyección</title>
+</head>
+<body>
+  <h1>Inyección de Código en un Textbox</h1>
+  
+  <form id="form">
+    <label for="userInput">Introduce un texto:</label><br>
+    <input type="text" id="userInput" placeholder="Escribe algo aquí">
+    <button type="submit">Enviar</button>
+  </form>
+  
+  <div id="output"></div>
+<!-- ESCRIBE EN TEXTO BOX EN TIEMPO DE EJECUCION 
+    <script>alert('Inyección exitosa');</script> 
+ -->
+  <script>
+
+
+    const form = document.getElementById('form');
+    const userInput = document.getElementById('userInput');
+    const output = document.getElementById('output');
+
+    // Procesar el envío del formulario
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = userInput.value;
+
+      // Inserción directa en el DOM sin sanitización (VULNERABLE) 
+      output.innerHTML = input;
+      console.log(input);
+    });
+  </script>
+</body>
+</html>

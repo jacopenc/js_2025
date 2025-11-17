@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Curso y Dirección</title>
+</head>
+<body id="body">
+    <h1>Formulario de Curso y Dirección</h1>
+    <form id="Form" action="#">
+        <div id="div">
+            <label for="curso">Curso:</label><br>
+            <input type="text" id="curso" name="curso" placeholder="Introduce el curso"><br><br>
+
+           
+        </div>
+    </form>
+
+    <script>
+        let div = document.getElementById("div");
+        let curso = document.getElementById("curso");
+       
+      
+        let form = document.getElementById("Form");
+        let body = document.getElementById("body");
+
+        div.addEventListener('click',(e)=> {
+           
+
+            console.log("div click")  
+            
+            console.log(e);
+            console.log(e.target);
+
+        });
+
+        curso.addEventListener('click',(e)=> {
+           
+            console.log("curso click")  
+            console.log(e);
+            console.log(e.target);          
+
+        });
+
+       
+        form.addEventListener('click',(e)=> {
+           
+            console.log("form click")    
+            console.log(e);
+            console.log(e.target);           
+
+        });
+
+        body.addEventListener('click',(e)=> {
+          
+            console.log("body click")  
+            console.log(e);
+            console.log(e.target);             
+
+        });
+
+    </script>
+
+
+</body>
+</html>

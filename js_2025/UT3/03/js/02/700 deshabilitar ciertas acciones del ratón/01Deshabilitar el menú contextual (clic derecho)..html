@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deshabilitar Clic Derecho</title>
+</head>
+<body>
+    <h1>Haz clic derecho para probar</h1>
+    <script>
+        document.addEventListener('contextmenu', (event) => {
+            event.preventDefault();
+            alert('El clic derecho está deshabilitado en esta página.');
+        });
+    </script>
+</body>
+</html>

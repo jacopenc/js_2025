@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Ejemplo Burbujeo</title>
+  <style>
+    #contenedor {
+      border: 2px solid #333;
+      padding: 20px;
+      margin-bottom: 10px;
+    }
+
+    .item {
+      margin: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Lista de elementos</h2>
+
+  <div id="contenedor">
+    <button class="item">Elemento 1</button>
+    <button class="item">Elemento 2</button>
+  </div>
+
+  <button id="agregar">Agregar Elemento</button>
+
+  <script>
+    const contenedor = document.getElementById('contenedor');
+    const btnAgregar = document.getElementById('agregar');
+    let contador = 3;
+
+    // -----------------------------
+    // Delegación de eventos
+    // -----------------------------
+    // Un solo listener en el contenedor
+    contenedor.addEventListener('click', (e) => {
+      if (e.target.classList.contains('item')) {
+        alert('Hiciste clic en: ' + e.target.textContent);
+      }
+    });
+
+    // -----------------------------
+    // Elementos dinámicos
+    // -----------------------------
+    // Agregar nuevos elementos sin necesidad de listeners individuales
+    btnAgregar.addEventListener('click', () => {
+      const nuevo = document.createElement('button');
+      nuevo.textContent = 'Elemento ' + contador;
+      nuevo.className = 'item';
+      contenedor.appendChild(nuevo);
+      contador++;
+    });
+
+    //SINO tendría que crear un addEventListener por cada button dinámico.....
+    /*
+              const boton = document.createElement('button');
+              boton.textContent = 'Elemento 3';
+  
+              // Listener individual para este botón
+              // Cada botón tendría que tener su propio listener si no usamos delegación
+              boton.addEventListener('click', () => {
+              alert('Hiciste clic en: ' + boton.textContent);
+              });
+  
+              contenedor.appendChild(boton);
+  */
+
+
+  </script>
+
+</body>
+
+</html>

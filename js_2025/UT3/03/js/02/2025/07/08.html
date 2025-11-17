@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deshabilitar Selección de Texto</title>
+    <style>
+        body {
+            user-select: none;
+            /* CSS para evitar selección */
+        }
+    </style>
+</head>
+
+<body>
+    <p class="no-select">Este texto no se puede seleccionar.</p>
+    <p>Este sí se puede seleccionar.</p>
+    <script>
+        document.querySelectorAll('.no-select').forEach(elem => {
+            elem.addEventListener('selectstart', e => {
+                e.preventDefault();
+                console.log('Selección bloqueada en elemento no-select');
+            });
+        });
+    </script>
+</body>
+
+</html>

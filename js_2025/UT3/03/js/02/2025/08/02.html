@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combinación de teclas</title>
+</head>
+<body>
+    <h1>Presiona Ctrl + C</h1>
+    <p id="message">Intenta usar la combinación de teclas.</p>
+
+    <script>
+        document.addEventListener('keydown', (event) => {
+            const message = document.getElementById('message');
+            if (event.ctrlKey && event.key === 'c') {
+                message.textContent = '¡Has presionado Ctrl + C!';
+            }
+        });
+    </script>
+</body>
+</html>

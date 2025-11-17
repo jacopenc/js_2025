@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>checkValidity Ejemplo</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Validación con checkValidity</h1>
+    <form id="formulario">
+        <label for="correo">Correo Electrónico:</label>
+        <input type="email" id="correo" name="correo" placeholder="Introduce tu correo" required>
+        <br><br>
+        <label for="edad">Edad (entre 18 y 65):</label>
+        <input type="number" id="edad" name="edad" min="18" max="65" required>
+        <br><br>
+        <button type="submit">Validar</button>
+    </form>
+
+    <div id="errores" class="error"></div>
+
+    <script>
+        const formulario = document.getElementById('formulario');
+        const erroresDiv = document.getElementById('errores');
+
+        formulario.addEventListener('submit', (event) => {
+            event.preventDefault(); // Evitar envío del formulario
+            erroresDiv.innerHTML = ""; // Limpiar errores previos
+
+            const correo = document.getElementById('correo');
+            const edad = document.getElementById('edad');
+
+
+            /*El método checkValidity en JavaScript es una función nativa disponible en elementos de formulario 
+            como <input> y <textarea>. Este método devuelve true si el elemento cumple 
+              todas las restricciones de validación especificadas (como required, type, min, max, etc.) 
+              y false si no las cumple.*/
+
+            // Verificar validez de los campos
+            if (!correo.checkValidity()) {
+                erroresDiv.innerHTML += `<p>Error: ${correo.validationMessage}</p>`;
+            }
+
+            if (!edad.checkValidity()) {
+                erroresDiv.innerHTML += `<p>Error: ${edad.validationMessage}</p>`;
+            }
+
+            // Si no hay errores, mensaje de éxito
+            if (correo.checkValidity() && edad.checkValidity()) {
+                erroresDiv.innerHTML = "Formulario válido y enviado.";
+                erroresDiv.style.color = "green";
+            }
+        });
+    </script>
+</body>
+</html>

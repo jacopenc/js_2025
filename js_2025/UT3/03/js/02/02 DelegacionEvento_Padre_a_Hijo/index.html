@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Curso y Dirección</title>
+</head>
+<body id="body">
+    <h1>Formulario de Curso y Dirección</h1>
+    <form id="Form" action="#">
+        <div id="div">
+            <label for="curso">Curso:</label><br>
+            <input type="text" id="curso" name="curso" placeholder="Introduce el curso"><br><br>
+
+            <label for="direccion">Dirección:</label><br>
+            <input type="text" id="direccion" name="direccion" placeholder="Introduce la dirección"><br><br>
+            <button id="btn" type="submit">Enviar</button>
+        </div>
+    </form>
+
+    <script>
+        let form = document.querySelector("form");
+
+        // Delegamos los eventos focus y blur en el formulario
+        form.addEventListener('focus', (e) => {
+            e.target.style.backgroundColor = "yellow"; // Cambiamos el color de fondo
+            console.log("Elemento enfocado:");
+            console.log(e.target);
+        }, true); // Escuchamos en la fase de captura
+
+        form.addEventListener('blur', (e) => {
+            e.target.style.backgroundColor = ""; // Restauramos el color de fondo
+            console.log("Elemento desenfocado:");
+            console.log(e.target);
+        }, true); // Escuchamos en la fase de captura
+    </script>
+</body>
+</html>

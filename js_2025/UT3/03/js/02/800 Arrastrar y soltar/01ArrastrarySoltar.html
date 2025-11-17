@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrastrar y Soltar</title>
+    <style>
+        #dragItem {
+            width: 100px;
+            height: 100px;
+            background-color: lightblue;
+            cursor: grab;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="dragItem" draggable="true"></div>
+
+    <script>
+        const dragItem = document.getElementById('dragItem');
+
+        dragItem.addEventListener('dragstart', (event) => {
+           // dragstart	Evento que se dispara cuando empiezas a arrastrar el elemento.
+            // Guardar la posición inicial
+            event.dataTransfer.setData('text/plain', event.target.id);
+            console.log("dragstart")
+        });
+
+        document.addEventListener('dragover', (event) => {
+            //dragover	Nos estamos moviendo en una zona para soltar. ⚠️ Se ejecuta continuamente.
+            event.preventDefault(); // Necesario para permitir el "drop"
+            console.log("dragover")
+        });
+
+        document.addEventListener('drop', (event) => {
+            //drop	Hemos soltado el elemento en una zona para soltar.
+            event.preventDefault();
+            // Mover el elemento a la posición del ratón
+            const x = event.clientX - dragItem.offsetWidth / 2;
+            const y = event.clientY - dragItem.offsetHeight / 2;
+            dragItem.style.left = `${x}px`;
+            dragItem.style.top = `${y}px`;
+            console.log("drop")
+        });
+    </script>
+</body>
+</html>

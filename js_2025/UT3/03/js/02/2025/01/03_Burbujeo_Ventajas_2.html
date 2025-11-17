@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Delegación de eventos</title>
+  <style>
+    #contenedor button {
+      margin: 5px;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Delegación de eventos</h2>
+
+  <div id="contenedor">
+    <button class="btn">Botón 1</button>
+    <button class="btn">Botón 2</button>
+  </div>
+
+  <script>
+    const contenedor = document.getElementById('contenedor');
+
+    // -----------------------------
+    // Delegación: listener en el padre
+    // -----------------------------
+    contenedor.addEventListener('click', (e) => {
+      // Filtramos para que solo se actúe sobre los botones
+      if (e.target && e.target.matches('button.btn')) {
+        alert('Hiciste clic en: ' + e.target.textContent);
+      }
+    });
+
+    // -----------------------------
+    // Agregar un botón dinámico
+    // -----------------------------
+    const nuevoBoton = document.createElement('button');
+    nuevoBoton.textContent = 'Botón 3';
+    nuevoBoton.classList.add('btn');
+
+    // No necesitamos agregar un listener individual
+    contenedor.appendChild(nuevoBoton);
+
+    /*
+       Ventajas de la delegación:
+      - Solo un listener en el contenedor, no uno por botón.
+      - Funciona aunque agregues más botones dinámicamente.
+      - Más limpio y fácil de mantener.
+    */
+  </script>
+
+</body>
+
+</html>

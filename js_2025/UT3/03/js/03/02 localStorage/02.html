@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ejemplo localStorage con objetos</title>
+</head>
+<body>
+
+<h2>Ejemplo localStorage con objetos y arrays</h2>
+
+<button onclick="guardarDatos()">Guardar datos</button>
+<button onclick="cargarDatos()">Cargar datos</button>
+<pre id="resultado"></pre>
+
+<script>
+// Datos complejos: un array de objetos
+var usuarios = [
+    { nombre: "Ana", edad: 25, pais: "España" },
+    { nombre: "Luis", edad: 30, pais: "México" },
+    { nombre: "Carla", edad: 22, pais: "Argentina" }
+];
+
+// Guardar datos en localStorage (hay que convertirlos a string)
+function guardarDatos() {
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+    alert("Datos guardados en localStorage");
+}
+
+// Cargar datos de localStorage y mostrarlos
+function cargarDatos() {
+    var datos = localStorage.getItem("usuarios");
+    if (datos) {
+        var usuariosRecuperados = JSON.parse(datos); // Convertimos de string a objeto/array
+        document.getElementById("resultado").textContent = JSON.stringify(usuariosRecuperados, null, 2);
+    } else {
+        document.getElementById("resultado").textContent = "No hay datos guardados.";
+    }
+}
+</script>
+<!-- 
+Cómo ver el contenido de localStorage sin código:
+
+--- 
+
+Chrome / Edge / Brave:
+
+1. Abre la página web que quieres inspeccionar.
+2. Presiona F12 o Ctrl+Shift+I (Cmd+Option+I en Mac) para abrir las DevTools.
+3. Ve a la pestaña Application (Aplicación).
+4. En el menú de la izquierda, busca Storage → Local Storage → [tu dominio].
+5. Ahí verás todas las claves y valores guardados en localStorage.
+
+--- 
+
+Firefox:
+
+1. Abre la página web.
+2. Presiona F12 para abrir las Developer Tools.
+3. Ve a la pestaña Almacenamiento (Storage).
+4. Expande Local Storage → [tu dominio] para ver los datos.
+
+--- 
+
+Safari:
+
+1. Habilita el menú de desarrollo en Preferencias → Avanzado → Mostrar menú Desarrollo.
+2. Abre la página, luego ve a Desarrollo → Mostrar Inspector Web → Almacenamiento → Local Storage.
+
+--- 
+
+Ahí puedes ver, editar o borrar los datos directamente sin tocar tu código.
+-->
+
+</body>
+</html>

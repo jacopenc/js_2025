@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propiedad Bubbles</title>
+    <style>
+        .parent {
+            border: 2px solid blue;
+            padding: 20px;
+        }
+        .child {
+            border: 2px solid red;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="parent" id="parent">
+        Parent Div
+        <div class="child" id="child">
+            Child Div
+        </div>
+    </div>
+
+    <script>
+        // Seleccionamos los elementos
+        const parent = document.getElementById('parent');
+        const child = document.getElementById('child');
+
+        // Manejador para el elemento padre
+        parent.addEventListener('click', (event) => {
+            console.log("Evento en el elemento PARENT");
+            console.log(`Evento burbujea: ${event.bubbles}`);
+            //. Si bubbles es true, el evento subirá desde el elemento objetivo a través de sus ancestros en el DOM.
+        });
+
+        // Manejador para el elemento hijo
+        child.addEventListener('click', (event) => {
+            console.log("Evento en el elemento CHILD");
+            console.log(`Evento burbujea: ${event.bubbles}`);
+            //. Si bubbles es true, el evento subirá desde el elemento objetivo a través de sus ancestros en el DOM.
+        });
+    </script>
+</body>
+</html>

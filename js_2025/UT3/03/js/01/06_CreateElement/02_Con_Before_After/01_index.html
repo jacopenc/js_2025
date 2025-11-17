@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insertar elementos antes y después</title>
+  <style>
+    .highlight {
+      background-color: yellow;
+      padding: 5px;
+      border: 2px solid red;
+      margin: 5px 0;
+    }
+    #contenedor p {
+      margin: 5px 0;
+      padding: 5px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="contenedor">
+    <p id="parrafo1">Primer párrafo</p>
+    <p id="parrafo2">Segundo párrafo</p>
+    <p id="parrafo3">Tercer párrafo</p>
+  </div>
+
+  <script>
+    // Referencias a los elementos existentes
+    const contenedor = document.getElementById('contenedor');
+    const parrafo1 = document.getElementById('parrafo1');
+    const parrafo2 = document.getElementById('parrafo2');
+    const parrafo3 = document.getElementById('parrafo3');
+
+    // Crear nuevos párrafos
+    const nuevoAntes = document.createElement('p');
+    nuevoAntes.textContent = 'Nuevo párrafo insertado antes del primer párrafo';
+    nuevoAntes.classList.add('highlight');
+
+    const nuevoDespues = document.createElement('p');
+    nuevoDespues.textContent = 'Nuevo párrafo insertado después del segundo párrafo';
+    nuevoDespues.classList.add('highlight');
+
+    // -----------------------------
+    // Insertar antes del primer párrafo
+    // -----------------------------
+    contenedor.insertBefore(nuevoAntes, parrafo1);
+
+    // -----------------------------
+    // Insertar después del segundo párrafo
+    // -----------------------------
+    parrafo2.after(nuevoDespues);
+
+    // -----------------------------
+    // Insertar un párrafo al final del contenedor
+    // -----------------------------
+    const nuevoFinal = document.createElement('p');
+    nuevoFinal.textContent = 'Nuevo párrafo al final del contenedor';
+    nuevoFinal.classList.add('highlight');
+    contenedor.appendChild(nuevoFinal);
+
+    console.log("Elementos insertados correctamente:");
+    console.log(contenedor);
+  </script>
+
+</body>
+</html>

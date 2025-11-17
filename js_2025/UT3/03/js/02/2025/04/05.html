@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario con Submit y Reset</title>
+</head>
+<body>
+
+<h2>Formulario con botones manejados desde JS</h2>
+
+<form id="miFormulario">
+  <label for="nombre">Nombre:</label>
+  <input type="text" id="nombre" name="nombre" required><br><br>
+
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" required><br><br>
+
+  <!-- Botón de submit controlado por JS -->
+  <button type="button" id="submitBtn">Enviar</button>
+  <!-- Botón de reset controlado por JS -->
+  <button type="button" id="resetBtn">Limpiar</button>
+</form>
+
+<script>
+const formulario = document.getElementById('miFormulario');
+const submitBtn = document.getElementById('submitBtn');
+const resetBtn = document.getElementById('resetBtn');
+
+// Manejar el envío manualmente NO ES BUENA 
+//No respeta preventDefault()
+submitBtn.addEventListener('click', () => {
+  const nombre = document.getElementById('nombre').value.trim();
+  const email = document.getElementById('email').value.trim();
+
+  if (!nombre || !email) {
+    alert('Por favor, completa todos los campos');
+    return;
+  }
+
+  // Disparamos el submit real del formulario
+  formulario.submit();
+});
+
+// Manejar el reset usando form.reset()
+resetBtn.addEventListener('click', () => {
+  formulario.reset(); // Limpia todos los campos al valor inicial
+  alert('Formulario reiniciado');
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<html>
+
+<head>
+    <script type="text/javascript">
+
+        image01 = new Image()
+
+        image01.src = "http://i877.photobucket.com/albums/ab336/cesarkrall/Divulgacion/logonotplusplus.png"
+
+        image02 = new Image()
+
+        image02.src = "http://i877.photobucket.com/albums/ab336/cesarkrall/Divulgacion/DV00405A_1.jpg"
+
+        function rollover(imagename, newsrc) {
+
+            document.images[imagename].src = newsrc.src
+
+        }
+
+    </script>
+</head>
+
+<body style="text-align:center; margin:50px;">
+
+    <p> Pasa el mouse sobre la imagen </p>
+
+    <a href="#" onmouseover="rollover('example', image02)" onmouseout="rollover('example', image01)">
+
+        <img src="http://i877.photobucket.com/albums/ab336/cesarkrall/Divulgacion/logonotplusplus.png" name="example">
+
+    </a>
+
+</body>
+
+</html>

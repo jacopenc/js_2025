@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Crear elementos dinámicamente</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    div, p, ul, li, h2 {
+      padding: 5px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+    }
+    .info {
+      background-color: #f0f8ff;
+      padding: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="info" id="contenedor">
+  <p>Contenido inicial dentro del contenedor</p>
+</div>
+
+<script>
+  // --- Crear un nuevo párrafo y añadirlo al body ---
+  const nuevoParrafo = document.createElement('p');
+  nuevoParrafo.textContent = 'Párrafo creado dinámicamente en el body';
+  document.body.appendChild(nuevoParrafo);
+
+  // --- Crear un nuevo título h2 y añadirlo al contenedor ---
+  const nuevoTitulo = document.createElement('h2');
+  nuevoTitulo.textContent = 'Título creado dinámicamente';
+  const contenedor = document.getElementById('contenedor');
+  contenedor.appendChild(nuevoTitulo);
+
+  // --- Crear una lista ul con elementos li ---
+  const nuevaLista = document.createElement('ul');
+
+  const item1 = document.createElement('li');
+  item1.textContent = 'Elemento 1 de la lista';
+
+  const item2 = document.createElement('li');
+  item2.textContent = 'Elemento 2 de la lista';
+
+  const item3 = document.createElement('li');
+  item3.textContent = 'Elemento 3 de la lista';
+
+  // Añadir los items a la lista
+  nuevaLista.appendChild(item1);
+  nuevaLista.appendChild(item2);
+  nuevaLista.appendChild(item3);
+
+  // Añadir la lista al contenedor
+  contenedor.appendChild(nuevaLista);
+
+  // --- Crear un enlace dinámico ---
+  const nuevoEnlace = document.createElement('a');
+  nuevoEnlace.textContent = 'Ir a OpenAI';
+  nuevoEnlace.href = 'https://www.openai.com';
+  nuevoEnlace.target = '_blank';
+  document.body.appendChild(nuevoEnlace);
+
+  // --- Crear un input dinámicamente ---
+  const nuevoInput = document.createElement('input');
+  nuevoInput.type = 'text';
+  nuevoInput.placeholder = 'Escribe algo...';
+  document.body.appendChild(nuevoInput);
+
+  // --- Mostrar en consola todos los elementos creados ---
+  console.log("Nuevo párrafo:", nuevoParrafo);
+  console.log("Nuevo título:", nuevoTitulo);
+  console.log("Nueva lista:", nuevaLista);
+  console.log("Nuevo enlace:", nuevoEnlace);
+  console.log("Nuevo input:", nuevoInput);
+
+</script>
+
+</body>
+</html>

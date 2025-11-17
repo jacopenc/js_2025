@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario Seguro con DOMPurify</title>
+</head>
+<body>
+<h2>Formulario Seguro con DOMPurify</h2>
+
+<form id="miFormulario">
+  <label for="nombre">Nombre:</label>
+  <input type="text" id="nombre" placeholder="Escribe tu nombre">
+  <button type="button" id="enviar">Enviar</button>
+</form>
+
+<h3>Resultado Seguro:</h3>
+<div id="saludo" style="border:1px solid green; padding:10px;"></div>
+
+<!-- Incluimos DOMPurify desde CDN -->
+<script src="https://cdn.jsdelivr.net/npm/dompurify@2.4.0/dist/purify.min.js"></script>
+
+<script>
+const btnEnviar = document.getElementById('enviar');
+const saludo = document.getElementById('saludo');
+
+btnEnviar.addEventListener('click', () => {
+  const nombre = document.getElementById('nombre').value;
+
+  // Sanitiza el HTML del usuario, eliminando scripts maliciosos
+  const nombreSeguro = DOMPurify.sanitize(nombre);
+
+  // Usamos innerHTML porque el contenido ya está seguro
+  saludo.innerHTML = `Hola, <b>${nombreSeguro}</b>! Bienvenido.`;
+});
+</script>
+
+<!-- Comentario HTML con ejemplo malicioso
+     <img src=x onerror=alert('XSS!')>
+-->
+
+</body>
+</html>

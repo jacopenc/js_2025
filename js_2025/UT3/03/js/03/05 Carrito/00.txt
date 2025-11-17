@@ -1,0 +1,48 @@
+carrito de compras, 
+la elección del almacenamiento depende de cuánto tiempo quieres que dure y qué tipo de datos vas a guardar
+
+
+
+`sessionStorage`
+
+Duración: Solo mientras la pestaña esté abierta.
+ Ventaja: Muy fácil de usar.
+ Desventaja: Si el usuario cierra la pestaña o navegador, se pierde todo.
+ Útil para: Carritos temporales en una sola sesión.
+
+
+
+ `localStorage`
+
+ Duración: Persistente, aunque cierres el navegador.
+ Ventaja: Simple, perfecto para guardar productos añadidos al carrito y recordarlos después.
+ Desventaja: Solo datos simples (strings, arrays/objetos via JSON).
+ Útil para: Carritos que el usuario puede retomar luego.
+
+
+
+Cookies
+
+ Duración: Definida por ti, pero muy pequeñas (4 KB aprox.).
+ Ventaja: Se envían al servidor automáticamente en cada petición.
+ Desventaja: Tamaño limitado, poco eficiente para muchos productos.
+ Útil para: Pequeños datos que necesitas en el servidor, no para carritos grandes.
+
+
+
+`IndexedDB`
+
+ Duración: Persistente y muy grande, puede guardar objetos complejos.
+ Ventaja: Ideal para carritos con muchos detalles, cantidades, historial, etc.
+ Desventaja: Es más complejo que `localStorage`.
+ Útil para: Aplicaciones grandes o si quieres manejar muchas funcionalidades offline.
+
+
+
+Recomendación:
+
+ Proyectos pequeños/simple: `localStorage` + JSON es suficiente.
+ Proyectos grandes / offline / muchos productos: `IndexedDB`.
+ Temporal solo en sesión: `sessionStorage`.
+
+

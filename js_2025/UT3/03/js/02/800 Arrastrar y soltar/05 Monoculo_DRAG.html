@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrastrar y Soltar</title>
+  <style>
+    .container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .badges {
+      display: flex;
+      gap: 2rem;
+
+      & div {
+        display: grid;
+        border: 1px solid #aaa;
+        padding: 1rem;
+        height: fit-content;
+
+        &.on {
+          background: orangered;
+          border-color: orangered;
+          color: #fff;
+        }
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <img class="drag-item" src="monoculo.gif" alt="ManzDev Monóculo">
+    <div class="badges">
+      <div>Start</div>
+      <div>Move</div>
+      <div>End</div>
+    </div>
+  </div>
+
+  <script>
+
+    /*
+    dragstart	Evento que se dispara cuando empiezas a arrastrar el elemento.
+    dragend	Evento que se dispara cuando terminas de arrastrar el elemento.
+    drag	Evento que se dispara continuamente mientras arrastras el elemento. ⚠️ Se ejecuta continuamente.
+    */
+    const dragItem = document.querySelector(".drag-item");
+    const [start, move, end] = document.querySelectorAll(".badges div");
+
+    const setBlink = (element) => {
+      element.classList.add("on");
+      setTimeout(() => element.classList.remove("on"), 200);
+    }
+
+    dragItem.addEventListener("dragstart", () => setBlink(start));
+    dragItem.addEventListener("dragend", () => setBlink(end));
+    dragItem.addEventListener("drag", () => setBlink(move));
+
+  </script>
+</body>
+
+</html>

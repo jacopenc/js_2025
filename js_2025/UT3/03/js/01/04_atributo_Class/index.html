@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejemplo de classList sin botones</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1 {
+      padding: 10px;
+      background-color: #f0f8ff;
+      border-left: 4px solid #00f;
+      margin-bottom: 10px;
+    }
+    .resaltado {
+      background-color: yellow;
+      font-weight: bold;
+    }
+    .oculto {
+      display: none;
+    }
+    .nuevo-estilo {
+      color: red;
+      font-style: italic;
+    }
+    .info {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h1 id="titulo" class="titulo-inicial">Ejemplo de classList</h1>
+
+<div class="info" id="mostrarClases"></div>
+
+<script>
+  const titulo = document.getElementById('titulo');
+  const mostrar = document.getElementById('mostrarClases');
+
+  // ----------------------------------------------------
+  // classList.add: añade una clase
+  titulo.classList.add('resaltado');
+
+  // classList.remove: quita una clase
+  titulo.classList.remove('titulo-inicial');
+
+ /*
+  classList.toggle('clase') alternará la clase en el elemento:
+
+  - Si el elemento no tiene la clase, toggle la añade.
+  - Si el elemento ya tiene la clase, toggle la quita.
+  - Además, devuelve un booleano:
+      true  -> si la clase se añadió
+      false -> si la clase se quitó
+*/
+
+   // Primera alternancia: añade la clase "oculto"
+  const resultado1 = titulo.classList.toggle('oculto'); // true si se añadió
+
+ // Segunda alternancia: quita la clase "oculto"
+  const resultado2 = titulo.classList.toggle('oculto'); // false si se quitó
+
+  // classList.contains: comprueba si el elemento tiene una clase true/false
+  const tieneResaltado = titulo.classList.contains('resaltado'); //true/false
+
+  // classList.replace: reemplaza una clase por otra
+  titulo.classList.replace('resaltado', 'nuevo-estilo');
+
+  // classList.length: número de clases que tiene el elemento
+  const numeroClases = titulo.classList.length;
+
+  // ----------------------------------------------------
+  // Mostrar información en pantalla
+  mostrar.innerHTML =
+    '<p>Clases actuales del elemento: ' + titulo.className + '</p>' +
+    '<p>¿Tiene la clase "resaltado"? ' + (tieneResaltado ? 'Sí' : 'No') + '</p>' +
+    '<p>Número de clases del elemento: ' + numeroClases + '</p>';
+
+  // ----------------------------------------------------
+  // Mostrar todas las clases individualmente usando for...of
+  mostrar.innerHTML += '<p>Lista de clases:</p><ul>';
+  for (let clase of titulo.classList) {
+    mostrar.innerHTML += '<li>' + clase + '</li>';
+  }
+  mostrar.innerHTML += '</ul>';
+</script>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detectar eventos de teclado</title>
+</head>
+<body>
+    <h1>Presiona y suelta una tecla</h1>
+    <p id="keydown">Tecla presionada: Ninguna</p>
+    <p id="keyup">Tecla liberada: Ninguna</p>
+
+    <script>
+        document.addEventListener('keydown', (event) => {
+            document.getElementById('keydown').textContent = `Tecla presionada: ${event.key}`;
+        });
+
+        document.addEventListener('keyup', (event) => {
+            document.getElementById('keyup').textContent = `Tecla liberada: ${event.key}`;
+        });
+    </script>
+</body>
+</html>

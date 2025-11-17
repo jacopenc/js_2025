@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validación en Tiempo Real</title>
+    <style>
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Validación con checkValidity (Tiempo Real)</h1>
+    <form>
+        <label for="telefono">Número de Teléfono:</label>
+        <input type="tel" id="telefono" name="telefono" placeholder="Ej: 123-456-7890" pattern="^\d{3}-\d{3}-\d{4}$" required>
+        <span id="telefonoError" class="error"></span>
+        <br><br>
+
+        <label for="contraseña">Contraseña (al menos 8 caracteres):</label>
+        <input type="password" id="contraseña" name="contraseña" minlength="8" required>
+        <span id="contraseñaError" class="error"></span>
+        <br><br>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script>
+        const telefono = document.getElementById('telefono');
+        const telefonoError = document.getElementById('telefonoError');
+
+        const contraseña = document.getElementById('contraseña');
+        const contraseñaError = document.getElementById('contraseñaError');
+
+        // Validar teléfono en tiempo real
+        telefono.addEventListener('input', () => {
+            if (!telefono.checkValidity()) {
+                telefonoError.textContent = telefono.validationMessage;
+            } else {
+                telefonoError.textContent = "";
+            }
+        });
+
+        // Validar contraseña en tiempo real
+        contraseña.addEventListener('input', () => {
+            if (!contraseña.checkValidity()) {
+                contraseñaError.textContent = contraseña.validationMessage;
+            } else {
+                contraseñaError.textContent = "";
+            }
+        });
+    </script>
+</body>
+</html>

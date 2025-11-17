@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Dinámico</title>
+</head>
+<body>
+
+<h1>Ejemplo de Select Dinámico</h1>
+
+<!-- Contenedor donde se insertará el select -->
+<div id="selectContainer"></div>
+
+<script>
+  // Array con las opciones
+  const opciones = ["Las Palmas de Gran Canaria", "Santa Cruz de Tenerife", "Arrecife"];
+
+  // Crear el elemento select
+  const select = document.createElement("select");
+
+  // Recorrer el array y crear las opciones
+  opciones.forEach(function(opcion) {
+    const option = document.createElement("option");
+    option.value = opcion; // valor del option
+    option.textContent = opcion; // texto visible
+    select.appendChild(option);
+  });
+
+  // Añadir el select al contenedor
+  const container = document.getElementById("selectContainer");
+  container.appendChild(select);
+</script>
+
+</body>
+</html>

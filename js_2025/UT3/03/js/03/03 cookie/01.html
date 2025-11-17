@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Ejemplo Cookies</title>
+</head>
+<body>
+
+<h1>Guardar y recuperar con cookies</h1>
+
+<input type="text" id="nombreInput" placeholder="Escribe tu nombre">
+<button onclick="guardarNombre()">Guardar</button>
+<button onclick="borrarNombre()">Borrar</button>
+
+<p>Nombre guardado: <span id="nombreGuardado">-</span></p>
+
+<script>
+// Guardar cookie (7 días de expiración)
+function guardarNombre() {
+    var nombre = document.getElementById("nombreInput").value;
+    var fechaExpiracion = new Date();
+    fechaExpiracion.setDate(fechaExpiracion.getDate() + 7);
+    document.cookie = "nombre=" + nombre + "; expires=" + fechaExpiracion.toUTCString() + "; path=/";
+    document.getElementById("nombreGuardado").textContent = nombre;
+}
+
+// Leer cookie por nombre
+function obtenerCookie(nombre) {
+    var cookies = document.cookie.split("; ");
+    for (var i = 0; i < cookies.length; i++) {
+        var partes = cookies[i].split("=");
+        if (partes[0] === nombre) {
+            return partes[1];
+        }
+    }
+    return null;
+}
+
+// Borrar cookie
+function borrarNombre() {
+    document.cookie = "nombre=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.getElementById("nombreGuardado").textContent = "-";
+}
+
+// Al cargar la página, mostrar nombre si existe
+window.onload = function() {
+    var nombre = obtenerCookie("nombre");
+    if (nombre) {
+        document.getElementById("nombreGuardado").textContent = nombre;
+    }
+}
+</script>
+
+</body>
+</html>

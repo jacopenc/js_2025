@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zona de Soltar</title>
+    <style>
+        #dragItem {
+            width: 100px;
+            height: 100px;
+            background-color: lightblue;
+            cursor: grab;
+        }
+
+        #dropZone {
+            width: 300px;
+            height: 200px;
+            background-color: lightgray;
+            margin-top: 20px;
+            border: 2px dashed #000;
+        }
+    </style>
+</head>
+<body>
+    <div id="dragItem" draggable="true">Arrastra esto</div>
+    <div id="dropZone">Suelta aquí</div>
+
+    <script>
+        const dragItem = document.getElementById('dragItem');
+        const dropZone = document.getElementById('dropZone');
+
+        dragItem.addEventListener('dragstart', (event) => {
+            console.log("dragstart")
+            event.dataTransfer.setData('text/plain', event.target.id);
+        });
+
+        dropZone.addEventListener('dragover', (event) => {
+            console.log("dragover")
+            event.preventDefault(); // Permite que el elemento sea soltado
+        });
+
+        dropZone.addEventListener('drop', (event) => {
+            console.log("drop")
+            event.preventDefault();
+            const id = event.dataTransfer.getData('text/plain');
+            const draggedElement = document.getElementById(id);
+            dropZone.appendChild(draggedElement);
+            alert('Elemento soltado en la zona.');
+        });
+    </script>
+</body>
+</html>

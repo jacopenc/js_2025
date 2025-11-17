@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No usar preventDefault</title>
+</head>
+
+<body>
+
+    <script>
+        /*1) Validaciones de Tipo de Dato
+            Verifica que los datos sean del tipo esperado, como números, cadenas, booleanos, etc.*/
+        const input = "123";
+        if (typeof input === "string") {
+            console.log("Es un string");
+        }
+
+        /*
+        2) Validaciones de Estructura
+            Comprueba si un dato cumple con un formato o estructura específica.
+        */
+
+        const username = "user123";
+        if (username.length >= 3 && username.length <= 15) {
+            console.log("Longitud válida");
+        }
+
+        const email = "example@mail.com";
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (emailRegex.test(email)) {
+            console.log("Email válido");
+        }
+        const date = new Date("2024-01-01");
+        if (!isNaN(date.getTime())) {
+            console.log("Fecha válida");
+        }
+        /*3 Validaciones de Rango
+        Asegura que los valores se encuentren dentro de un intervalo específico.*/
+        const age = 25;
+        if (age >= 18 && age <= 60) {
+            console.log("Edad válida");
+        }
+        const currentDate = new Date();
+        const selectedDate = new Date("2024-12-01");
+        if (selectedDate > currentDate) {
+            console.log("Fecha en el futuro");
+        }
+        /*4. Validaciones de Datos Requeridos
+        Verifica si un campo tiene un valor (que no esté vacío o nulo).*/
+        const name = "John";
+        if (name.trim() !== "") {
+            console.log("Campo no está vacío");
+        }
+        const form = { name: "John", email: "" };
+        if (form.name && form.email) {
+            console.log("Todos los campos están llenos");
+        } else {
+            console.log("Faltan campos por completar");
+        }
+
+        /*5Validaciones de Relación de Datos
+        Comprueba dependencias entre valores.*/
+        const password = "123456";
+        const confirmPassword = "123456";
+        if (password === confirmPassword) {
+            console.log("Las contraseñas coinciden");
+        }
+        const startDate = new Date("2024-01-01");
+        const endDate = new Date("2024-12-31");
+        if (startDate < endDate) {
+            console.log("Fechas válidas");
+        }
+        /*6. Validaciones de Seguridad
+        Protégete de posibles ataques o valores maliciosos.*/
+
+        const input2 = "<script>alert('hack');</script>";
+    const sanitizedInput = input2.replace(/<[^>]*>?/gm, "");
+        console.log(sanitizedInput); // Salida segura
+
+        const username = "user!@";
+        const usernameRegex = /^[a-zA-Z0-9_]+$/;
+        if (usernameRegex.test(username)) {
+        console.log("Username válido");
+        }
+
+
+        </script>
+</body>
+
+</html>

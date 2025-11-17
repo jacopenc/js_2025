@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejemplos directos: textContent, value, style, className, attributes y hidden</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .resaltado {
+      background-color: yellow;
+      font-weight: bold;
+    }
+    p, h1, input {
+      margin-bottom: 10px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="titulo">Título Original</h1>
+  <p id="parrafo">Este es un párrafo de ejemplo.</p>
+  <input type="text" id="entrada" placeholder="Escribe algo aquí">
+
+  <script>
+    // Obtener referencias a los elementos
+    const titulo = document.getElementById('titulo');
+    const parrafo = document.getElementById('parrafo');
+    const entrada = document.getElementById('entrada');
+
+    // ---------------------------
+    // Modificar el texto usando textContent
+    parrafo.textContent = 'Texto modificado con textContent.';
+
+    // ---------------------------
+    // Modificar el valor del input usando value
+    entrada.value = 'Nuevo valor del input.';
+
+    // ---------------------------
+    // Modificar estilos directamente usando style
+    titulo.style.color = 'blue';
+    titulo.style.backgroundColor = 'lightgray';
+    titulo.style.padding = '10px';
+
+    // ---------------------------
+    // Modificar clases usando className
+    parrafo.className = 'resaltado';
+
+    // ---------------------------
+ // Modificar varios atributos usando setAttribute
+titulo.setAttribute('title', 'Título modificado dinámicamente.');
+titulo.setAttribute('id', 'nuevo-titulo'); // Cambiamos el id
+titulo.setAttribute('lang', 'es'); // Cambiamos el idioma
+
+
+    // ---------------------------
+    // Ocultar o mostrar un elemento usando hidden
+    // Aquí lo mostramos oculto como ejemplo
+    parrafo.hidden = false; // si quisieras ocultarlo: true
+  </script>
+
+</body>
+</html>

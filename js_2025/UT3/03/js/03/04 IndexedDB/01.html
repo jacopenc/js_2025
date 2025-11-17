@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>IndexedDB Sencillo</title>
+</head>
+<body>
+
+<h2>IndexedDB: Guardar y mostrar nombres</h2>
+
+<input id="nombre" placeholder="Escribe tu nombre">
+<button onclick="guardar()">Guardar</button>
+<button onclick="mostrar()">Mostrar nombres</button>
+
+<ul id="lista"></ul>
+
+<script>
+/*
+¿Qué es IndexedDB?
+   - Es una base de datos que se guarda en el navegador del usuario.
+   - Permite almacenar grandes cantidades de datos estructurados (objetos, arrays, etc.).
+   - Los datos se mantienen incluso si se cierra el navegador (persistente).
+
+Características principales:
+   - Asíncrona: Las operaciones no bloquean la página.
+   - Estructurada: Almacena objetos complejos, no solo texto.
+   - Basada en transacciones: Para garantizar integridad de datos.
+   - Permite índices: Puedes buscar datos rápidamente por campos específicos.
+   - Orientada a objetos: No usa SQL, sino "object stores" (similares a tablas).
+
+Conceptos clave:
+   - Database (DB): La base de datos completa.
+   - Object Store: Equivalente a una "tabla", guarda objetos.
+   - Transaction: Operación que garantiza consistencia de datos.
+   - KeyPath: Campo que funciona como clave única de cada objeto.
+   - Cursor: Permite recorrer registros de un object store.
+
+Ventajas sobre otras opciones de almacenamiento:
+   - Más potente que localStorage o sessionStorage porque maneja grandes cantidades de datos.
+   - Permite búsquedas y almacenamiento estructurado.
+   - Persistente entre sesiones del navegador.
+*/
+
+
+
+
+var db;
+
+// Abrir o crear base de datos
+var request = indexedDB.open("MiBase", 1); // el 1 es la versión.P.E si agregas una tabla nueva lo subes al 2.
+
+request.onupgradeneeded = upgradeNeeded;// este evento se dispara al crear o cambiar versión de DB
+request.onsuccess = successDB;//cuando se ha abierto bien
+request.onerror = errorDB;// se lanza si hay error al abrir
+
+function upgradeNeeded(event) {
+    //crea object stores(son como tablas) o cambios de estructuras
+    db = event.target.result;
+    db.createObjectStore("usuarios", { keyPath: "id", autoIncrement: true });// se crea primary key
+}
+
+function successDB(event) {
+    db = event.target.result;
+}
+
+function errorDB(event) {
+    alert("Error al abrir la base de datos");
+}
+
+// Guardar un nombre
+function guardar() {
+    var nombre = document.getElementById("nombre").value;
+    if (!nombre) return;
+
+    var tx = db.transaction("usuarios", "readwrite"); 
+    //Cuando  creas con readwrite perimite leer y escribir
+    //add(value[, key]) agrega un nuevo registro.
+    //put(value[, key]) agrega o actualiza un registro.
+    //delete(key) elimina un registro por su clave.
+    //clear() elimina todos los registros del object store.
+    var store = tx.objectStore("usuarios");
+    var requestAdd = store.add({ nombre: nombre });
+    requestAdd.onsuccess = addSuccess;
+    requestAdd.onerror = addError;
+}
+
+function addSuccess() {
+    alert("Nombre guardado");
+    document.getElementById("nombre").value = "";
+}
+
+function addError() {
+    alert("Error al guardar nombre");
+}
+
+// Mostrar todos los nombres
+function mostrar() {
+    var tx = db.transaction("usuarios", "readonly");
+    //Cuando  creas con readonly perimite SOLO leer
+    //get(key) obtener un registro por su clave.
+    //getAll() obtener todos los registros de un object store.
+    //openCursor()recorrer todos los registros.
+    var store = tx.objectStore("usuarios");
+    var requestAll = store.getAll();
+    requestAll.onsuccess = mostrarLista;
+    requestAll.onerror = mostrarError;
+}
+
+function mostrarLista(event) {
+    var lista = document.getElementById("lista");
+    lista.innerHTML = "";
+    var usuarios = event.target.result;
+    for (var i = 0; i < usuarios.length; i++) {
+        var li = document.createElement("li");
+        li.textContent = usuarios[i].nombre;
+        lista.appendChild(li);
+    }
+}
+
+
+function eliminarBaseDeDatos(nombreDB) {
+    var eliminarRequest = indexedDB.deleteDatabase(nombreDB);
+
+    eliminarRequest.onsuccess = function() {
+        alert("Base de datos '" + nombreDB + "' eliminada correctamente");
+    };
+
+    eliminarRequest.onerror = function() {
+        alert("Error al eliminar la base de datos '" + nombreDB + "'");
+    };
+
+    eliminarRequest.onblocked = function() {
+        alert("No se puede eliminar la base de datos '" + nombreDB + "' porque todavía está abierta en otra pestaña");
+    };
+}
+
+/* Eliminar desde navegador
+
+    Chrome / Edge / Brave:
+
+    DevTools con F12 o Ctrl+Shift+I (Cmd+Option+I en Mac).
+    pestaña Application → IndexedDB.
+    clic derecho sobre la DB y elige Delete o Clear.
+*/
+
+
+
+
+
+
+function mostrarError() {
+    alert("Error al recuperar nombres");
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+  <!-- Ejemplo de evento onclick directamente en HTML. llamado en linea -->
+
+  <button onclick="alert('¡Hola!')">Haz clic aquí</button>
+
+  <button onclick="saludar()">Saludar</button>
+
+  <script>
+    function saludar() {
+      alert("¡Hola desde JavaScript!");
+    }
+
+    // Desventajas del uso en línea:
+    // - Se mezcla HTML con JavaScript, lo que rompe la separación de responsabilidades.
+    // - Solo puedes tener una acción por evento (si luego lo cambias por JS, se sobrescribe).
+    // - Es más difícil mantener o depurar el código si crece.
+
+
+
+  </script>
+
+
+
+</body>
+
+</html>

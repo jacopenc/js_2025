@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrada y Salida</title>
+</head>
+<body>
+    <div id="box" style="width: 200px; height: 200px; background-color: lightblue;">
+        Pasa el ratón por aquí
+    </div>
+    <p id="status">Estado: Fuera</p>
+
+    <script>
+        const box = document.getElementById('box');
+        const status = document.getElementById('status');
+
+        box.addEventListener('mouseenter', () => {
+            status.textContent = 'Estado: Dentro';
+            box.style.backgroundColor = 'lightgreen';
+        });
+
+        box.addEventListener('mouseleave', () => {
+            status.textContent = 'Estado: Fuera';
+            box.style.backgroundColor = 'lightblue';
+        });
+    </script>
+</body>
+</html>

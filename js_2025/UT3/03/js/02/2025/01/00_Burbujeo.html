@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Ejemplo stopPropagation</title>
+  <style>
+    #padre {
+      border: 2px solid blue;
+      padding: 20px;
+    }
+
+    #hijo {
+      padding: 10px;
+      background-color: lightgreen;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="padre">
+    PADRE (haz clic aquí)
+    <div id="hijo">HIJO (haz clic aquí)</div>
+  </div>
+
+
+  <script>
+    // Burbujeo
+    const padre = document.getElementById('padre');
+    const hijo = document.getElementById('hijo');
+
+    // Listener en el padre
+    padre.addEventListener('click', () => {
+      alert('Se disparó el evento del PADRE!');
+    });
+
+    // Listener en el hijo
+    hijo.addEventListener('click', (e) => {
+      alert('Se disparó el evento del HIJO!');
+
+
+    });
+
+
+  </script>
+
+</body>
+
+</html>

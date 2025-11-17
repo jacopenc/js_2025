@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrito con sessionStorage</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+    if (!sessionStorage.getItem('productos')) {
+        var productos = [
+            { id: 1, nombre: 'Papas', precio: 1 },
+            { id: 2, nombre: 'Cliper de fresa', precio: 1.2 },
+            { id: 3, nombre: 'Chorizo Teror', precio: 2.1 },
+            { id: 4, nombre: 'Queso', precio: 0.6 }
+        ];
+        sessionStorage.setItem('productos', JSON.stringify(productos));
+    } else {
+        var productos = JSON.parse(sessionStorage.getItem('productos'));
+    }
+
+    var carrito = [];
+    var moneda = '€';
+    var DOMitems = document.querySelector('#items');
+    var DOMcarrito = document.querySelector('#carrito');
+    var DOMtotal = document.querySelector('#total');
+    var DOMbotonVaciar = document.querySelector('#boton-vaciar');
+
+    function productosPintar() {
+        DOMitems.textContent = '';
+        for (var i = 0; i < productos.length; i++) {
+            var info = productos[i];
+
+            var miNodo = document.createElement('div');
+            miNodo.classList.add('card', 'col-sm-3', 'mb-3', 'text-center', 'p-2');
+
+            var miNodoTitle = document.createElement('h5');
+            miNodoTitle.classList.add('card-title');
+            miNodoTitle.textContent = info.nombre;
+
+            var miNodoIcon = document.createElement('i');
+            miNodoIcon.classList.add('bi', 'bi-box-seam', 'mb-2');
+            miNodoIcon.style.fontSize = '2rem';
+
+            var miNodoPrecio = document.createElement('p');
+            miNodoPrecio.textContent = info.precio + moneda;
+
+            var miNodoBoton = document.createElement('button');
+            miNodoBoton.classList.add('btn', 'btn-primary');
+            miNodoBoton.textContent = '+';
+            miNodoBoton.setAttribute('data-id', info.id);
+            miNodoBoton.addEventListener('click', productoAddCarrito);
+
+            miNodo.appendChild(miNodoIcon);
+            miNodo.appendChild(miNodoTitle);
+            miNodo.appendChild(miNodoPrecio);
+            miNodo.appendChild(miNodoBoton);
+
+            DOMitems.appendChild(miNodo);
+        }
+    }
+
+    function productoAddCarrito(event) {
+        carrito.push(event.target.getAttribute('data-id'));
+        carritoPintar();
+    }
+
+    function carritoPintar() {
+        DOMcarrito.textContent = '';
+
+        var carritoSinDuplicados = [];
+        for (var i = 0; i < carrito.length; i++) {
+            if (carritoSinDuplicados.indexOf(carrito[i]) === -1) {
+                carritoSinDuplicados.push(carrito[i]);
+            }
+        }
+
+        for (var i = 0; i < carritoSinDuplicados.length; i++) {
+            var item = carritoSinDuplicados[i];
+
+            var miItem;
+            for (var j = 0; j < productos.length; j++) {
+                if (productos[j].id == item) {
+                    miItem = productos[j];
+                    break;
+                }
+            }
+
+            var cantidad = 0;
+            for (var k = 0; k < carrito.length; k++) {
+                if (carrito[k] == item) cantidad++;
+            }
+
+            var miNodo = document.createElement('li');
+            miNodo.classList.add('list-group-item');
+            miNodo.textContent = cantidad + ' x ' + miItem.nombre + ' - ' + miItem.precio + moneda;
+
+            var miBoton = document.createElement('button');
+            miBoton.classList.add('btn', 'btn-danger', 'ml-2');
+            miBoton.textContent = 'X';
+            miBoton.setAttribute('data-id', item);
+            miBoton.addEventListener('click', carritoDeleteProducto);
+
+            miNodo.appendChild(miBoton);
+            DOMcarrito.appendChild(miNodo);
+        }
+
+        var total = 0;
+        for (var i = 0; i < carrito.length; i++) {
+            for (var j = 0; j < productos.length; j++) {
+                if (productos[j].id == carrito[i]) {
+                    total += productos[j].precio;
+                    break;
+                }
+            }
+        }
+        DOMtotal.textContent = total.toFixed(2);
+    }
+
+    function carritoDeleteProducto(event) {
+        var id = event.target.getAttribute('data-id');
+        carrito = carrito.filter(function(item) {
+            return item != id;
+        });
+        carritoPintar();
+    }
+
+    function carritoDelete() {
+        carrito = [];
+        carritoPintar();
+    }
+
+    DOMbotonVaciar.addEventListener('click', carritoDelete);
+
+    productosPintar();
+    carritoPintar();
+});
+</script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div id="items" class="col-sm-9 row"></div>
+        <div class="col-sm-3">
+            <h2>Carrito</h2>
+            <ul id="carrito" class="list-group mb-2"></ul>
+            <p>Total: <span id="total"></span>€</p>
+            <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
