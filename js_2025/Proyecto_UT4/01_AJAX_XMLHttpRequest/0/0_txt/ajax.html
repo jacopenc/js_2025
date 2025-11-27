@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejemplos de AJAX: Asíncrono, Síncrono y Fetch</title>
+
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    button { margin: 8px 0; padding: 10px; cursor: pointer; }
+    #resultado { margin-top: 15px; padding: 10px; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+
+  <h1>Demostración de AJAX</h1>
+  <p>Presiona los botones para ver los diferentes tipos de llamados AJAX.</p>
+
+  <button onclick="ajaxAsincrono()">AJAX Asíncrono</button><br>
+  <button onclick="ajaxSincrono()">AJAX Síncrono (bloquea)</button><br>
+  <button onclick="ajaxConFetch()">AJAX con Fetch (moderno)</button>
+
+  <div id="resultado">Aquí aparecerá la respuesta...</div>
+
+  <script>
+/*
+| Concepto       | Significa                                                                                    
+| -------------- | ----------------------------------------------------------------------------------------------
+| Asincronía     | Poder ejecutar tareas sin bloquear la ejecución del código.                                   
+| AJAX           | Técnica para pedir datos al servidor sin recargar la página, generalmente usando asincronía. 
+
+ Resumen de tipos de AJAX y fetch:
+
+     Tipo               | ¿Bloquea la página? | ¿Se usa hoy?        
+     ------------------ | ------------------- | -------------------
+     AJAX asíncrono     | No                  |Sí, recomendado  
+     AJAX síncrono      | Sí                  | Obsoleto         
+     fetch()            | No                  | Estándar moderno 
+*/
+
+// -----------------------------
+// AJAX SÍNCRONO (NO RECOMENDADO)
+// -----------------------------
+    function ajaxSincrono() {
+      const xhttp = new XMLHttpRequest();
+
+      //Esto congela la página hasta que el servidor responda
+      xhttp.open("GET", "ajax_info.txt", false); // false → síncrono
+      xhttp.send();
+
+      document.getElementById("resultado").innerHTML =
+        "Respuesta síncrona:<br>" + xhttp.responseText;
+
+      console.log("Esto se ejecuta DESPUÉS de recibir la respuesta (bloqueado)");
+    }
+
+// -----------------------------
+// AJAX ASÍNCRONO (RECOMENDADO)
+// -----------------------------
+    function ajaxAsincrono() {
+      const xhttp = new XMLHttpRequest();
+    //Procesas la respuesta cuando llegue:
+      xhttp.onload = function() {
+        document.getElementById("resultado").innerHTML =
+          "Respuesta asíncrona:<br>" + this.responseText;
+      };
+
+      xhttp.open("GET", "archivo.txt", true); // true → asíncrono
+      xhttp.send();
+
+      console.log("Esto se ejecuta inmediatamente (asíncrono)");
+    }
+
+// -----------------------------
+// AJAX MODERNO CON FETCH (SIEMPRE ASÍNCRONO)
+// -----------------------------
+function ajaxConFetch() {
+  // fetch() realiza una petición HTTP al archivo "archivo.txt"
+  // fetch() devuelve una Promesa (Promise), que se resuelve cuando llega la respuesta
+  fetch("archivo.txt")
+    
+    // Primer .then(): recibe el objeto 'response' de la petición
+    .then(response => response.text())  
+    // response.text() también devuelve una Promesa que se resuelve con el contenido del archivo como texto
+
+    // Segundo .then(): recibe los datos ya convertidos a texto
+    .then(data => {
+      // Actualizamos el contenido del elemento con id="resultado"
+      // Mostramos "Respuesta con fetch:" seguido del texto recibido
+      document.getElementById("resultado").innerHTML =
+        "Respuesta con fetch:<br>" + data;
+    });
+
+  // Este console.log se ejecuta inmediatamente, antes de que lleguen los datos
+  // Demuestra que fetch() es asíncrono y no bloquea la página
+  console.log("Esto también se ejecuta inmediatamente (fetch)");
+}
+
+
+  </script>
+
+</body>
+</html>

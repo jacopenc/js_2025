@@ -1,0 +1,10 @@
+/*
+Características principales:
+
+Característica         | Promise.all                                        | Promise.allSettled
+---------------------- | ------------------------------------------------- | -----------------------------------------------
+Todas deben resolverse | Sí                                                | No
+Una falla              | Rechaza toda la operación                         | Solo marca esa como rechazada
+Resultado              | Array de valores de las promesas                 | Array de objetos {status, value/reason}
+Uso típico             | Cuando necesitas todos los resultados para continuar | Cuando quieres información completa, incluso con errores
+*/

@@ -1,0 +1,93 @@
+<html>
+<body>
+  <script language="javascript" type="text/javascript">
+
+    // Función principal que realiza la solicitud AJAX
+    function send_with_ajax() {
+      // Creamos un objeto XMLHttpRequest
+      var xhr = new XMLHttpRequest();
+
+      // Asignamos una función que se ejecuta cuando la solicitud se completa correctamente
+      xhr.onload = reqListener;
+
+      // Agregamos listeners para distintos eventos de la solicitud
+
+      // Evento 'progress': se ejecuta mientras se transfieren datos
+      xhr.addEventListener("progress", updateProgress, false);
+
+      // Evento 'load': se ejecuta cuando la transferencia se completa correctamente
+      xhr.addEventListener("load", transferComplete, false);
+
+      // Evento 'error': se ejecuta si ocurre un error durante la transferencia
+      xhr.addEventListener("error", transferFailed, false);
+
+      // Evento 'abort': se ejecuta si el usuario cancela la transferencia
+      xhr.addEventListener("abort", transferCanceled, false);
+
+      // Configuramos la solicitud HTTP
+      // 'GET' → tipo de solicitud
+      // "ajax_info.txt" → archivo que queremos obtener
+      // true → la solicitud será asíncrona
+      xhr.open('GET', "ajax_info.txt", true);
+
+      // Si se necesitara autenticación básica, se puede descomentar la siguiente línea:
+      // xhr.setRequestHeader("Authorization", "Basic YWRtaW46QWRtaW4xMjM");
+
+      // Enviamos la solicitud al servidor
+      xhr.send(null);
+
+      // Evento 'readystatechange': se dispara cada vez que cambia el estado de la solicitud
+      xhr.onreadystatechange = function () {
+        // Cuando readyState = DONE (4), significa que la respuesta está completa
+        if (xhr.readyState === xhr.DONE) {
+          // Mostramos información del estado, el código HTTP y la respuesta
+          alert("Estado: " + xhr.readyState +
+                ", Código HTTP: " + xhr.status +
+                ", Respuesta: " + xhr.responseText);
+        } else {
+          // Aquí podrías manejar otros estados, por ejemplo errores parciales
+        }
+      }
+    }
+
+    // Función que maneja la respuesta cuando la solicitud termina correctamente
+    function reqListener() {
+      console.log(this.responseText); // Muestra la respuesta en la consola
+    }
+
+    // Función que actualiza el progreso de la transferencia
+    function updateProgress(oEvent) {
+      if (oEvent.lengthComputable) {
+        // Calcula el porcentaje completado
+        var percentComplete = (oEvent.loaded / oEvent.total) * 100;
+        alert("La transferencia está al " + percentComplete + "%");
+      } else {
+        // No se puede calcular el progreso porque no se conoce el tamaño total
+        alert("Progreso de la transferencia desconocido");
+      }
+    }
+
+    // Función que se ejecuta cuando la transferencia termina correctamente
+    function transferComplete(evt) {
+      alert("La transferencia se completó correctamente.");
+    }
+
+    // Función que se ejecuta si ocurre un error durante la transferencia
+    function transferFailed(evt) {
+      alert("Ocurrió un error durante la transferencia del archivo.");
+    }
+
+    // Función que se ejecuta si el usuario cancela la transferencia
+    function transferCanceled(evt) {
+      alert("La transferencia ha sido cancelada por el usuario.");
+    }
+
+  </script>
+
+  <!-- Botón que inicia la petición AJAX -->
+  <button onClick="send_with_ajax()">Obtener Contenido</button><br />
+
+  <!-- Etiqueta donde se podría mostrar el resultado o mensajes adicionales -->
+  <label id="resultados"></label>
+</body>
+</html>

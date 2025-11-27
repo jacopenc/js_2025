@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>DELETE AJAX Simulado</title>
+</head>
+<body>
+    <button onclick="sendWithAjax()">Eliminar Post 101</button>
+    <br>
+    <div id="resultados"></div>
+
+    <script>
+        function sendWithAjax() {
+            var apiUrl = 'https://jsonplaceholder.typicode.com/posts';
+            var resultados = document.getElementById("resultados");
+
+            var xhr = new XMLHttpRequest();
+
+            // Seguimiento de los cambios de estado
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    // La petición terminó
+                    if (xhr.status === 200 || xhr.status === 204) {
+                        console.log('DELETE simulado realizado. ResponseText:', xhr.responseText);
+                        if (xhr.responseText) {
+                            resultados.innerHTML = '<pre>' + xhr.responseText + '</pre>';
+                        } else {
+                            resultados.textContent = 'Post 101 eliminado correctamente (simulado).';
+                        }
+                    } else {
+                        console.error('Error en la solicitud DELETE. Status:', xhr.status);
+                        resultados.textContent = 'Ocurrió un error al eliminar el post.';
+                    }
+                } else {
+                    // Mientras la petición aún no termina
+                    console.log('Estado de la petición (readyState):', xhr.readyState);
+                }
+            };
+
+            // Inicializamos la solicitud DELETE
+            xhr.open('DELETE', apiUrl + '/101', true);
+            xhr.send();
+        }
+    </script>
+</body>
+</html>

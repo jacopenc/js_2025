@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Fetch Example</title>
+</head>
+<body>
+
+    <button onclick="send_with_ajax()">Iniciar sesión</button><br>
+    <div id="resultados">Aquí se mostrará la respuesta del servidor.</div>
+
+    <script>
+        function send_with_ajax() {
+            var resultados = document.getElementById("resultados");
+            resultados.textContent = 'Enviando solicitud de login...';
+
+            fetch('https://dummyjson.com/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    username: 'kminchelle',
+                    password: '0lelplR'
+                })
+            })
+            .then(function(res) {
+                if (!res.ok) {
+                    throw new Error('Error en la solicitud. Status: ' + res.status);
+                }
+                return res.json();
+            })
+            .then(function(result) {
+                // Mostramos los resultados de forma legible usando <pre>
+                resultados.innerHTML = '<pre>' + JSON.stringify(result, null, 2) + '</pre>';
+                console.log('Respuesta del servidor:', result);
+            })
+            .catch(function(error) {
+                resultados.textContent = 'Ocurrió un error: ' + error.message;
+                console.error('Error al hacer login:', error);
+            });
+        }
+    </script>
+
+</body>
+</html>

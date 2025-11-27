@@ -1,0 +1,24 @@
+{
+    "records": {
+      "record": [
+        {
+          "from": "John Doe",
+          "to": "Everyone",
+          "title": "Keep this record",
+          "description": "This is the first of many XML records"
+        },
+        {
+          "from": "Gabriel J",
+          "to": "Jhon Doe",
+          "title": "Important message",
+          "description": "Please read this message"
+        },
+        {
+          "from": "John Doe",
+          "to": "Gabriel J",
+          "title": "Re: Important message",
+          "description": "Yes, I have read it!"
+        }
+      ]
+    }
+  }

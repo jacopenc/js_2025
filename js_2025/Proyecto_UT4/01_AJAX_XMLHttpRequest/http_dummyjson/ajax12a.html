@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejemplo AJAX con XMLHttpRequest</title>
+</head>
+
+<body>
+    <!-- Botón que llama a la función para obtener datos de la API -->
+    <button onclick="sendWithAjax()">Obtener Productos</button>
+    <br />
+    <!-- Contenedor donde se mostrarán los resultados -->
+    <div id="resultados"></div>
+
+    <script>
+        // Función que obtiene datos de la API usando XMLHttpRequest
+        function sendWithAjax() {
+            var apiUrl = 'https://dummyjson.com/products'; // URL de la API
+            var resultados = document.getElementById("resultados");
+
+            var xhr = new XMLHttpRequest(); // Creamos el objeto XMLHttpRequest
+
+            // Se ejecuta cuando cambia el estado de la petición
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) { // 4 significa que la respuesta está completa
+                    if (xhr.status === 200) { // 200 significa que todo salió bien
+                        var data = JSON.parse(xhr.responseText); // Convertimos la respuesta a JSON
+                        console.log(data); // Mostramos los datos en la consola
+
+                        // Mostramos los datos de forma legible en la página
+                        resultados.innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+                    } else {
+                        console.error('Error en la solicitud: ' + xhr.status);
+                        resultados.textContent = 'Ocurrió un error al obtener los datos.';
+                    }
+                }
+            };
+
+            // Inicializamos la solicitud
+            xhr.open('GET', apiUrl, true);
+            // Enviamos la solicitud
+            xhr.send();
+        }
+    </script>
+</body>
+
+</html>

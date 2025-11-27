@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>AJAX con XML - José Acosta</title>
+  <style>
+    table { border-collapse: collapse; width: 80%; margin-top: 20px; }
+    th, td { border: 1px solid #000; padding: 8px; text-align: left; }
+    th { background-color: #f2f2f2; }
+  </style>
+</head>
+<body>
+  <h1>Registros XML</h1>
+  <button id="btnCargar">Cargar registros</button>
+  
+  <table id="tablaRegistros">
+    <thead>
+      <tr>
+        <th>De</th>
+        <th>Para</th>
+        <th>Título</th>
+        <th>Descripción</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    // Referencias al botón y a la tabla
+    var btnCargar = document.getElementById('btnCargar');
+    var tbody = document.querySelector('#tablaRegistros tbody');
+
+    btnCargar.addEventListener('click', function() {
+      tbody.innerHTML = ''; // Limpiamos la tabla antes de cargar
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'registros.xml', true); // Archivo XML externo
+
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          var xml = xhr.responseXML; // Obtenemos el XML
+          var registros = xml.getElementsByTagName('record'); 
+
+          for (var i = 0; i < registros.length; i++) {
+            var fila = document.createElement('tr');
+
+            var de = registros[i].getElementsByTagName('from')[0].textContent;
+            var para = registros[i].getElementsByTagName('to')[0].textContent;
+            var titulo = registros[i].getElementsByTagName('title')[0].textContent;
+            var descripcion = registros[i].getElementsByTagName('description')[0].textContent;
+
+            fila.appendChild(crearCelda(de));
+            fila.appendChild(crearCelda(para));
+            fila.appendChild(crearCelda(titulo));
+            fila.appendChild(crearCelda(descripcion));
+
+            tbody.appendChild(fila);
+          }
+        } else {
+          alert('Error al cargar el XML: ' + xhr.status);
+        }
+      };
+
+      xhr.onerror = function() {
+        alert('Error en la petición AJAX.');
+      };
+
+      xhr.send();
+
+      function crearCelda(texto) {
+        var td = document.createElement('td');
+        td.textContent = texto;
+        return td;
+      }
+    });
+  </script>
+</body>
+</html>

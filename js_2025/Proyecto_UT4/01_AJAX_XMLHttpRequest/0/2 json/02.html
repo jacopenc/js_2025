@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX: Mostrar Estados y Status</title>
+    <style>
+        #resultados {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+            width: 500px;
+            height: 200px;
+            overflow-y: auto;
+            font-family: monospace;
+        }
+        button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>AJAX Demo: Mostrar readyState y status</h1>
+
+<button onclick="mostrarEstados()">Cargar Datos</button>
+
+<div id="resultados"></div>
+
+<script>
+function mostrarEstados() {
+    var xhr = new XMLHttpRequest();
+    var resultados = document.getElementById("resultados");
+    resultados.innerHTML = ""; // Limpiamos el div
+
+    xhr.open("GET", "datos.json", true); // Archivo JSON a cargar
+
+    xhr.onreadystatechange = function() {
+        var mensaje = "";
+
+        switch(xhr.readyState) {
+            case 0:
+                mensaje = "UNSENT: Objeto creado, no se ha llamado a open()";
+                break;
+            case 1:
+                mensaje = "OPENED: open() llamado, listo para enviar";
+                break;
+            case 2:
+                mensaje = "HEADERS_RECEIVED: send() llamado y cabeceras recibidas";
+                break;
+            case 3:
+                mensaje = "LOADING: recibiendo datos parciales";
+                break;
+            case 4:
+                mensaje = "DONE: La respuesta ha terminado. ";
+
+                // Revisamos el status HTTP
+                switch(xhr.status) {
+                    case 200:
+                        mensaje += "OK - Datos recibidos correctamente: " + xhr.responseText;
+                        break;
+                    case 201:
+                        mensaje += "CREATED - Recurso creado";
+                        break;
+                    case 204:
+                        mensaje += "NO CONTENT - Respuesta vacía";
+                        break;
+                    case 301:
+                        mensaje += "MOVED PERMANENTLY - Recurso movido permanentemente";
+                        break;
+                    case 302:
+                        mensaje += "FOUND - Recurso temporalmente en otra ubicación";
+                        break;
+                    case 400:
+                        mensaje += "BAD REQUEST - Solicitud incorrecta";
+                        break;
+                    case 401:
+                        mensaje += "UNAUTHORIZED - No autorizado";
+                        break;
+                    case 403:
+                        mensaje += "FORBIDDEN - Prohibido";
+                        break;
+                    case 404:
+                        mensaje += "NOT FOUND - Recurso no encontrado";
+                        break;
+                    case 500:
+                        mensaje += "INTERNAL SERVER ERROR - Error en el servidor";
+                        break;
+                    case 503:
+                        mensaje += "SERVICE UNAVAILABLE - Servicio no disponible";
+                        break;
+                    default:
+                        mensaje += "Código HTTP desconocido: " + xhr.status;
+                }
+                break;
+        }
+
+        // Mostramos el mensaje en el div y agregamos un salto de línea
+        resultados.innerHTML += mensaje + "<br>";
+    };
+
+    xhr.send();
+}
+</script>
+
+</body>
+</html>

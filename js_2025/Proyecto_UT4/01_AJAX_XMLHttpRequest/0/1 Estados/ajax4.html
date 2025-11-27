@@ -1,0 +1,85 @@
+<html>
+<body>
+    <script language="javascript" type="text/javascript">
+
+        // Creamos un objeto XMLHttpRequest compatible con cualquier navegador.
+        // Esto nos permite usar AJAX de manera transparente, sin preocuparnos por el navegador.
+        var xhr = crearXMLHttpRequest();
+
+        // Función que crea y retorna un objeto XMLHttpRequest compatible con todos los navegadores
+        function crearXMLHttpRequest() {
+            var xhr = null;
+
+            // Comprobamos si el navegador soporta XMLHttpRequest o ActiveXObject (IE antiguo)
+            if (window.XMLHttpRequest || window.ActiveXObject) {
+
+                if (window.ActiveXObject) { // Para navegadores IE antiguos
+                    try {
+                        // Intentamos crear el objeto estándar para IE moderno (Msxml2.XMLHTTP)
+                        xhr = new ActiveXObject("Msxml2.XMLHTTP");
+                    } catch (exception) {
+                        // Si falla, usamos la versión más antigua (Microsoft.XMLHTTP)
+                        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+
+                } else { // Para Firefox, Chrome, Safari y otros navegadores modernos
+                    xhr = new XMLHttpRequest();
+                }
+
+            } else {
+                // Si el navegador no soporta solicitudes XMLHTTP
+                alert("¡Tu navegador no soporta solicitudes XMLHTTP!");
+            }
+
+            return xhr; // Retorna el objeto creado (o null si no se pudo)
+        }
+
+        // Función que realiza la petición AJAX
+        function send_with_ajax() {
+            // Configura la solicitud HTTP:
+            // "GET" → tipo de solicitud
+            // "ajax_info.txt" → archivo a solicitar (debe estar en el mismo servidor)
+            // true → la solicitud será asíncrona
+            xhr.open("GET", "ajax_info.txt", true);
+
+            // Envía la solicitud al servidor. Null porque no enviamos datos en GET
+            xhr.send(null);
+
+            // Evento que se ejecuta cuando la solicitud ha finalizado correctamente
+            // Se asigna la función 'procesar' para manejar la respuesta
+            xhr.onload = procesar;
+        }
+
+        // Función que procesa la respuesta del servidor
+        function procesar() {
+            var resultados = document.getElementById("resultados");
+
+            // Comprobamos si la petición ha finalizado completamente
+            if (xhr.readyState === xhr.DONE) {
+                /*
+                                                                                                                           |
+                    | 0 | `UNSENT`          | No inicializado: el objeto `XMLHttpRequest` se creó, pero **no se ha llamado a `open()`** todavía.                     |
+                    | 1 | `OPENED`          | Abierto: se ha llamado a `open()`, pero **no se ha enviado la solicitud (`send()`)** todavía.                          |
+                    | 2 | `HEADERS_RECEIVED`| Cabeceras recibidas: se ha llamado a `send()` y el servidor ha enviado **las cabeceras**, pero no los datos completos. |
+                    | 3 | `LOADING`         | Cargando: se están recibiendo datos **parciales**, `responseText` puede contener información incompleta.               |
+                    | 4 | `DONE`            | Completado: **la respuesta del servidor se ha recibido completamente**, lista para procesar.                           |
+
+                */
+                
+                // Mostramos la respuesta completa del servidor en la etiqueta 'resultados'
+                resultados.innerHTML = xhr.responseText + " (Estado: " + xhr.DONE + ")";
+            } else {
+                // Mientras se espera la respuesta, se muestra un mensaje de carga
+                resultados.innerHTML = 'Cargando...';
+            }
+        }
+
+    </script>
+
+    <!-- Botón que inicia la petición AJAX -->
+    <button onClick="send_with_ajax()">Obtener Contenido</button><br />
+
+    <!-- Etiqueta donde se mostrará la respuesta del servidor -->
+    <label id="resultados"></label>
+</body>
+</html>

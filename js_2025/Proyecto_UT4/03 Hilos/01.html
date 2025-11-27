@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Worker Sencillo</title>
+</head>
+<body>
+<h1>Web Worker Demo</h1>
+<button id="start">Iniciar cálculo</button>
+<p id="resultado"></p>
+
+<script>
+
+/*
+Regla práctica
+
+  tareas que consumen mucho tiempo
+
+  Si tu código bloquea la página → Worker.
+
+  Si tu código es rápido o ya es asíncrono → no hace falta Worker.
+
+*/
+
+  // Crear el Worker
+  var worker = new Worker('worker.js');
+
+  // Función independiente para manejar los mensajes del Worker
+  function manejarMensaje(e) {
+    document.getElementById('resultado').textContent = e.data;
+  }
+
+  // Asignar la función al evento onmessage
+  worker.onmessage = manejarMensaje;
+
+  // Enviar mensaje al Worker al hacer click
+  document.getElementById('start').onclick = function() {
+    worker.postMessage('start');
+  };
+
+  // Código que sigue corriendo
+  setInterval(function() {
+    console.log('Hilo principal activo');
+  }, 1000);
+</script>
+</body>
+</html>

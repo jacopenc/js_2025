@@ -1,0 +1,61 @@
+<html>
+<body>
+    <script language="javascript" type="text/javascript">
+
+        // Función para crear un objeto XMLHttpRequest de manera compatible con todos los navegadores
+        function crearXMLHttpRequest() {
+            var xhr = null;
+
+            // Comprobamos si el navegador soporta XMLHttpRequest o ActiveXObject (IE antiguo)
+            if (window.XMLHttpRequest || window.ActiveXObject) {
+                
+                if (window.ActiveXObject) { // Para navegadores IE antiguos
+                    try {
+                        // Intenta crear el objeto estándar para IE moderno (MSXML2)
+                        xhr = new ActiveXObject("Msxml2.XMLHTTP");
+                    } catch (exception) {
+                        // Si falla, usa la versión más antigua (Microsoft.XMLHTTP)
+                        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                } else { // Para Firefox, Chrome, Safari y otros navegadores modernos
+                    xhr = new XMLHttpRequest();
+                }
+
+            } else {
+                // Si el navegador no soporta solicitudes XMLHTTP
+                alert("¡Tu navegador no soporta solicitudes XMLHTTP!");
+            }
+
+            // Retorna el objeto creado (o null si no se pudo)
+            return xhr;
+        }
+
+        // Función principal que realiza la petición AJAX
+        function send_with_ajax() {
+            // Usamos la función crearXMLHttpRequest() para obtener un objeto compatible con el navegador
+            var xhr = crearXMLHttpRequest();
+
+            // Configura la solicitud HTTP:
+            // "GET" tipo de solicitud
+            // "ajax_info.txt" archivo que se va a solicitar (debe estar en el mismo servidor)
+            // true → la solicitud será asíncrona
+            xhr.open("GET", "ajax_info.txt", true);
+
+            // Envía la solicitud al servidor. Null porque no enviamos datos en GET
+            xhr.send(null);
+
+            // Evento que se ejecuta cuando la petición termina correctamente
+            xhr.onload = function () {
+                // Coloca el texto recibido del servidor dentro del textarea con id="textArea"
+                document.getElementById("textArea").value = xhr.responseText;
+            };
+        }
+    </script>
+
+    <!-- Botón que llama a la función AJAX -->
+    <button onClick="send_with_ajax()">Obtener Contenido</button><br />
+
+    <!-- Área de texto donde se mostrará la respuesta del servidor -->
+    <textarea id="textArea" cols="40" rows="5"></textarea>
+</body>
+</html>

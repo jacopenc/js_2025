@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise.all Example</title>
+    <style>
+        #output {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Promise.all Example</h1>
+    <p>The results of the promises will appear below:</p>
+    <div id="output"></div>
+
+    <script>
+        // Crear algunas promesas simples
+        const p1 = Promise.resolve(10); // Se resuelve inmediatamente con el valor 10
+        const p2 = Promise.resolve(20); // Se resuelve inmediatamente con el valor 20
+        const p3 = new Promise((resolve, reject) => {
+            setTimeout(() => resolve(30), 1000); // Se resuelve después de 1 segundo
+        });
+        const p4 = new Promise((resolve, reject) => {
+            setTimeout(() => reject('Error in p4'), 1500); // Se rechaza después de 1.5 segundos
+        });
+        const p5 = new Promise((resolve, reject) => {
+            setTimeout(() => resolve(50), 500); // Se resuelve después de 0.5 segundos
+        });
+
+        // Obtener referencia al div de salida
+        const outputDiv = document.getElementById('output');
+
+        // Usar Promise.all
+        //Se resuelve cuando todas las promesas del array se resuelven, devolviendo un array con sus valores en el mismo orden.
+        //Se rechaza inmediatamente si alguna promesa falla, pasando como motivo del rechazo el error de esa promesa.
+        Promise.all([p1, p2, p3, p4, p5])
+        .then(
+            values => {
+                outputDiv.innerHTML = `<strong>All promises resolved:</strong> ${JSON.stringify(values)}`;
+            },
+            reason => {
+                outputDiv.innerHTML = `<strong>One of the promises failed:</strong> ${reason}`;
+            }
+        );
+    </script>
+</body>
+</html>
+

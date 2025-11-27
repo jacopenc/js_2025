@@ -1,0 +1,30 @@
+/*
+Resumen de AJAX con XMLHttpRequest:
+
+xhr.onreadystatechange (método clásico)
+- Se ejecuta cada vez que cambia el estado de la petición (readyState 0 a 4).
+- Los estados son:
+    0: No inicializado (UNSENT)
+    1: Conectado (OPENED)
+    2: Cabeceras recibidas (HEADERS_RECEIVED)
+    3: Cargando (LOADING)
+    4: Completado (DONE)
+- Se suele usar:
+    xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+        console.log(xhr.responseText);
+    }
+};
+  para procesar la respuesta solo cuando la petición terminó correctamente.
+
+xhr.onload (método moderno)
+- Solo se ejecuta cuando la petición termina exitosamente (readyState === 4).
+- No hace falta comprobar readyState.
+- Solo verificar xhr.status para asegurarse de que la respuesta sea correcta.
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                console.log(xhr.responseText);
+            }
+        };
+*/

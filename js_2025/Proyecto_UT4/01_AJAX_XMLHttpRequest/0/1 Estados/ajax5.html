@@ -1,0 +1,58 @@
+<html>
+<body>
+    <script language="javascript" type="text/javascript">
+
+        function send_with_ajax() {
+            /* 
+                Valores de readyState de XMLHttpRequest:
+                0 → UNSENT      : No inicializado (objeto creado, pero no se ha invocado open)
+                1 → OPENED      : Se ha llamado a open, pero no se ha enviado la solicitud (send)
+                2 → HEADERS_RECEIVED : Se ha enviado send y se han recibido las cabeceras del servidor
+                3 → LOADING     : Se están recibiendo los datos (responseText puede estar incompleto)
+                4 → DONE        : La respuesta del servidor se ha recibido completamente
+            */
+
+            var resultados = document.getElementById("resultados");
+
+            // Creamos el objeto XMLHttpRequest
+            const xhr = new XMLHttpRequest();
+
+            // Estado inicial, aún no se ha llamado a open → readyState = 0
+            resultados.innerHTML = "UNSENT " + xhr.readyState;
+            // console.log('UNSENT', xhr.readyState); // readyState será 0
+
+            // Configuramos la solicitud HTTP
+            // 'GET' → tipo de solicitud
+            // "ajax_info.txt" → archivo a solicitar
+            // true → solicitud asíncrona
+            xhr.open('GET', "ajax_info.txt", true);
+
+            // Estado después de llamar a open → readyState = 1
+            resultados.innerHTML = resultados.innerHTML + " OPENED " + xhr.readyState;
+
+            // Evento que se ejecuta mientras se reciben datos del servidor
+            xhr.onprogress = () => {
+                // Durante la descarga parcial, readyState = 3
+                resultados.innerHTML = resultados.innerHTML + " LOADING " + xhr.readyState;
+            };
+
+            // Evento que se ejecuta cuando la petición termina completamente
+            xhr.onload = () => {
+                // readyState = 4 → la respuesta se ha recibido completamente
+                console.log('DONE', xhr.readyState);
+                resultados.innerHTML = resultados.innerHTML + " DONE " + xhr.readyState;
+            };
+
+            // Enviamos la solicitud al servidor
+            xhr.send(null);
+        }
+
+    </script>
+
+    <!-- Botón que ejecuta la función AJAX -->
+    <button onClick="send_with_ajax()">Obtener Contenido</button><br />
+
+    <!-- Etiqueta donde se mostrará el estado y la respuesta del servidor -->
+    <label id="resultados"></label>
+</body>
+</html>

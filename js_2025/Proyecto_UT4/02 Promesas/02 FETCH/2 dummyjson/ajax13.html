@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Fetch con Token Bearer</title>
+</head>
+<body>
+
+    <button onclick="send_with_ajax()">Obtener Productos</button><br>
+    <div id="resultados">Aquí se mostrarán los resultados.</div>
+
+    <script>
+        function send_with_ajax() {
+            var resultados = document.getElementById("resultados");
+            resultados.textContent = 'Obteniendo productos...';
+
+            fetch('https://dummyjson.com/auth/products', {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInVzZXJuYW1lIjoia21pbmNoZWxsZSIsImVtYWlsIjoia21pbmNoZWxsZUBxcS5jb20iLCJmaXJzdE5hbWUiOiJKZWFubmUiLCJsYXN0TmFtZSI6IkhhbHZvcnNvbiIsImdlbmRlciI6ImZlbWFsZSIsImltYWdlIjoiaHR0cHM6Ly9yb2JvaGFzaC5vcmcvYXV0cXVpYXV0LnBuZyIsImlhdCI6MTY3NDk0Mzc1MSwiZXhwIjoxNjc0OTQ3MzUxfQ.LUseUE-4Tn0-3kcKfFMKrkhTnwU2OgllRAUIFQTCaY0',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(function(res) {
+                if (!res.ok) {
+                    throw new Error('Error en la solicitud. Status: ' + res.status);
+                }
+                return res.json();
+            })
+            .then(function(data) {
+                // Mostramos los resultados de forma legible usando <pre>
+                resultados.innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+                console.log('Productos obtenidos:', data);
+            })
+            .catch(function(error) {
+                resultados.textContent = 'Ocurrió un error: ' + error.message;
+                console.error('Error al obtener productos:', error);
+            });
+        }
+    </script>
+
+</body>
+</html>

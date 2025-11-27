@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>AJAX con onload - José Acosta</title>
+</head>
+<body>
+  <h1>Registros JSON</h1>
+  <button id="btnCargar">Cargar registros</button>
+  <pre id="output"></pre>
+
+  <script>
+    /*
+    AJAX usando xhr.onload - José Acosta
+    - xhr.onload se ejecuta solo cuando la petición termina correctamente.
+    - No hace falta comprobar readyState.
+    - Solo verificar xhr.status para procesar la respuesta.
+    */
+
+    var output = document.getElementById('output');
+
+    document.getElementById('btnCargar').addEventListener('click', function() {
+      output.textContent = "Cargando registros...\n";
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'datos.json', true); // archivo JSON externo
+
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          // Parseamos el JSON
+          var data = JSON.parse(xhr.responseText);
+
+          // Recorremos los registros y los mostramos
+          data.records.record.forEach(function(r) {
+            output.textContent += "De: " + r.from + "\n";
+            output.textContent += "Para: " + r.to + "\n";
+            output.textContent += "Título: " + r.title + "\n";
+            output.textContent += "Descripción: " + r.description + "\n";
+            output.textContent += "------------------------\n";
+          });
+        } else {
+          output.textContent += "Error al cargar los registros: " + xhr.status + "\n";
+        }
+      };
+
+      xhr.send();
+    });
+  </script>
+</body>
+</html>

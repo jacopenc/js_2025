@@ -1,0 +1,20 @@
+<records>
+    <record>
+        <from>John Doe</from>
+        <to>Everyone</to>
+        <title>Keep this record</title>
+        <description>This is the first of many XML records</description>
+    </record>
+    <record>
+        <from>Gabriel J</from>
+        <to>Jhon Doe</to>
+        <title>Important message</title>
+        <description>Please read this message</description>
+    </record>
+    <record>
+        <from>John Doe</from>
+        <to>Gabriel J</to>
+        <title>Re: Important message</title>
+        <description>Yes, I have read it!</description>
+    </record>
+</records>

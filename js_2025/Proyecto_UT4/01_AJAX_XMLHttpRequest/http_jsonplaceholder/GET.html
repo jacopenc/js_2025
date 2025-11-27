@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>AJAX con XMLHttpRequest Mejorado</title>
+</head>
+<body>
+
+  <!-- Botón para obtener los posts -->
+  <button onclick="send_with_ajax()">Obtener Posts</button>
+  <br>
+  <!-- Contenedor donde se mostrarán los resultados -->
+  <div id="resultados"></div>
+
+  <script>
+    function send_with_ajax() {
+      // Creamos un objeto XMLHttpRequest
+      var xhr = new XMLHttpRequest();
+      var resultados = document.getElementById("resultados");
+
+      // Escuchamos los cambios de estado de la petición
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) { // 4 = operación completada
+          if (xhr.status === 200) { // 200 = OK
+            try {
+              // Parseamos la respuesta JSON
+              var data = JSON.parse(xhr.responseText);
+
+              // Mostramos los datos en la página de forma legible
+              resultados.innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+
+              // Mostramos la misma información en consola
+              console.log('Respuesta del servidor:', data);
+            } catch (error) {
+              console.error('Error al parsear JSON:', error);
+              resultados.textContent = 'Error al procesar los datos del servidor.';
+            }
+          } else {
+            console.error('Error en la solicitud. Status:', xhr.status);
+            resultados.textContent = 'Ocurrió un error al obtener los posts.';
+          }
+        } else {
+          // Mostramos el progreso de la petición
+          console.log('Estado de la petición (readyState):', xhr.readyState);
+        }
+      };
+
+      // Inicializamos la petición GET
+      xhr.open('GET', 'https://jsonplaceholder.typicode.com/posts', true);
+
+      // Enviamos la petición
+      xhr.send();
+    }
+  </script>
+
+</body>
+</html>

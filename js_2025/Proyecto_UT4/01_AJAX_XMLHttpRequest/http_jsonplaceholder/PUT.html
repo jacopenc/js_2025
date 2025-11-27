@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>PUT AJAX Mejorado</title>
+</head>
+<body>
+
+    <!-- Botón para actualizar el post -->
+    <button onclick="send_with_ajax()">Actualizar Post 1</button>
+    <br>
+    <!-- Contenedor donde se mostrarán los resultados -->
+    <div id="resultados"></div>
+
+    <script>
+        function send_with_ajax() {
+            var apiUrl = 'https://jsonplaceholder.typicode.com/posts';
+            var resultados = document.getElementById("resultados");
+
+            // Datos a actualizar
+            var data = JSON.stringify({
+                id: 1,
+                title: 'foo',
+                body: 'bar',
+                userId: 1,
+            });
+
+            var xhr = new XMLHttpRequest();
+
+            // Evento cuando la petición carga correctamente
+            xhr.onload = function() {
+                if (xhr.status === 200) { // 200 = OK
+                    try {
+                        var post = JSON.parse(xhr.responseText);
+                        console.log('Respuesta del servidor:', post);
+
+                        // Mostramos la respuesta de forma legible
+                        resultados.innerHTML = '<pre>' + JSON.stringify(post, null, 2) + '</pre>';
+                    } catch (error) {
+                        console.error('Error al parsear JSON:', error);
+                        resultados.textContent = 'Error al procesar la respuesta del servidor.';
+                    }
+                } else {
+                    console.error('Error en la solicitud. Status:', xhr.status);
+                    resultados.textContent = 'Ocurrió un error al actualizar el post.';
+                }
+            };
+
+            // Evento si ocurre un error de red
+            xhr.onerror = function() {
+                console.error('Ocurrió un error en la conexión.');
+                resultados.textContent = 'Ocurrió un error, no se pudo procesar la solicitud.';
+            };
+
+            // Inicializamos la solicitud PUT
+            xhr.open('PUT', apiUrl + '/1', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            // Enviamos los datos
+            xhr.send(data);
+        }
+    </script>
+
+</body>
+</html>
