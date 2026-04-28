@@ -1,0 +1,5 @@
+function crearUsuario(email) {
+  return { email };
+}
+
+module.exports = { crearUsuario };
